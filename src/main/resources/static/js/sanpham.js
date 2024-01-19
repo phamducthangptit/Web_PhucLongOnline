@@ -72,7 +72,7 @@ $(document).ready(function(){
 
     function HienThiTenVaAnh(data){
         var imgElement = document.getElementById("anh-san-pham");
-        imgElement.src = "/img-sanpham/" + data.hinhAnh;
+        imgElement.src = "/img/sanpham/" + data.hinhAnh;
 
         var tenSP = document.getElementById("ten-san-pham");
         tenSP.innerText  = data.tenSanPham;
@@ -216,7 +216,7 @@ function HienThiDanhSachSanPham(data){
         var cardHTML = '<div class="col-md-4">';
         cardHTML += '<div class="card mb-4 product-wap rounded-0">';
         cardHTML += '<div class="card rounded-0">';
-        cardHTML += '<img class="card-img rounded-0 img-fluid" src="/img-sanpham/' + sanPham.hinhAnh + '">';
+        cardHTML += '<img class="card-img rounded-0 img-fluid" src="/img/sanpham/' + sanPham.hinhAnh + '">';
         cardHTML += '<div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">';
         cardHTML += '<ul class="list-unstyled">';
         cardHTML += '<li><a data-product-id="' + sanPham.idSanPham + '" class="addCart btn btn-success text-white mt-2"><i class="fas fa-cart-plus"></i></a></li>';
@@ -245,7 +245,7 @@ function HienThiDanhSachSanPhamTheoLoai(data, loaiSanPham){
         var cardHTML = '<div class="col-md-4">';
             cardHTML += '<div class="card mb-4 product-wap rounded-0">';
             cardHTML += '<div class="card rounded-0">';
-            cardHTML += '<img class="card-img rounded-0 img-fluid" src="/img-sanpham/' + sanPham.hinhAnh + '">';
+            cardHTML += '<img class="card-img rounded-0 img-fluid" src="/img/sanpham/' + sanPham.hinhAnh + '">';
             cardHTML += '<div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">';
             cardHTML += '<ul class="list-unstyled">';
             cardHTML += '<li><a data-product-id="' + sanPham.idSanPham + '" class="addCart btn btn-success text-white mt-2"><i class="fas fa-cart-plus"></i></a></li>';

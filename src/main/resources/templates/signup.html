@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>SIGNUP</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" th:href="@{/img/apple-icon.png}">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/templatemo.css}">
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+
+    <!-- Load map styles -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <!--
+    
+TemplateMo 559 Zay Shop
+
+https://templatemo.com/tm-559-zay-shop
+
+-->
+</head>
+
+<body>
+
+
+
+
+
+
+    <!-- Modal -->
+
+
+    <!-- Start Contact -->
+    <div class="container py-5">
+        <div class="row py-5">
+            <div><h1>ĐĂNG KÝ</h1></div>
+            <div class="col-md-9 m-auto" role="form">
+                <div class="row">
+                    <div class="form-group col-md-6 mb-3">
+                        <label>Họ</label>
+                        <input type="text" class="form-control mt-1" id="firstname" name="firstname"
+                            placeholder="Nguyen Van*">
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label>Tên</label>
+                        <input type="text" class="form-control mt-1" id="lastname" name="lastname" placeholder="A*">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="inputsubject">Giới tính</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="male" value="nam" checked>
+                            <label class="form-check-label" for="male">
+                                Nam
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="female" value="nu">
+                            <label class="form-check-label" for="female">
+                                Nữ
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="inputmessage">Địa chỉ</label>
+                        <input type="text" class="form-control mt-1" id="address" name="address"
+                            placeholder="97 Man Thiện*">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="inputsubject">Số điện thoại</label>
+                        <input type="tel" class="form-control mt-1" id="sdt" name="sdt" placeholder="0917683801*">
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="inputmessage">Email</label>
+                        <input type="email" class="form-control mt-1" id="email" name="email"
+                            placeholder="example@gmail.com*">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-md-6 mt-2">
+                        <label>Mật khẩu</label>
+                        <input type="password" class="form-control mt-2" id="password" name="password"
+                            placeholder="********">
+                    </div>
+                    <div class="col col-md-6 text-end mt-4">
+                        <button type="submit" class="btn btn-success btn-lg px-3" id="signup">Đăng kí</button>
+                    </div>
+                </div>
+                <div id="notification"></div>
+            </div>
+        </div>
+    </div>
+    <!-- End Contact -->
+
+
+
+
+    <!-- Start Script -->
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:src="@{/js/jquery-migrate-1.2.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/templatemo.js}"></script>
+    <script th:src="@{/js/custom.js}"></script>
+    <script th:src="@{/js/signup.js}"></script>
+    <!-- End Script -->
+</body>
+<div class="modal" id="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+            </div>
+            <div class="modal-body">
+                <p>Vui lòng nhập mã code từ email của bạn</p>
+                <input type="text" id="code">
+                <p id="notificationModal"></p>
+            </div>
+            <div class="modal-footer">
+                <button id="closeModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="submitCode" type="button" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>

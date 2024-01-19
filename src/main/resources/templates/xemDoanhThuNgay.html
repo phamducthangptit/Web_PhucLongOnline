@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Phúc Long Online</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" th:href="@{/img/logo.png}">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/logo.png}">
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/templatemo.css}">
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap}">
+    <link rel="stylesheet" th:href="@{/css/fontawesome.min.css}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.8/xlsx.full.min.js"></script>
+
+</head>
+
+<body>
+<div th:insert="~{header.html}"></div>
+<div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="w-100 pt-1 mb-5 text-right">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="" method="get" class="modal-content modal-body border-0 p-0">
+            <div class="input-group mb-2">
+                <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+                <button type="submit" class="input-group-text bg-success text-light">
+                    <i class="fa fa-fw fa-search text-white"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Start Content Page -->
+<main><form method="post" th:action="@{/xemDoanhThuNgay}" enctype="multipart/form-data">
+    <section class="bg-light">
+        <div class="container pd-5">
+            <div class="card">
+                <div class="card-body">
+                    <div class="container py-5">
+                <h2>Doanh Thu Theo Ngày</h2>
+
+
+                <label for="ngayXem"><strong>Chọn Ngày:</strong></label>
+                <input type="date" id="ngayXem" name="ngayXem" th:value="${ngayDangXem}" placeholder="dd/mm/yyyy" pattern="\d{2}/\d{2}/\d{4}" required>
+                <a class="btn btn-success" onclick="xemDoanhThuNgay()">Xem</a>
+                <a class="btn btn-success" style="Float:right" onclick="xuatExcelNgay()">Xuất Excel</a>
+
+
+
+                <script>
+
+                    // Hàm kiểm tra nếu ngày đã được chọn là trong tương lai
+                    function xemDoanhThuNgay() {
+                      var selectedDate = new Date(document.getElementById('ngayXem').value);
+                      var today = new Date();
+
+                      // Đặt thời gian trong ngày được chọn là 00:00:00 để so sánh ngày không bị ảnh hưởng bởi giờ phút giây
+                      selectedDate.setHours(0, 0, 0, 0);
+                      today.setHours(0, 0, 0, 0);
+
+                      if (selectedDate > today) {
+                        alert("Bạn không thể chọn ngày trong tương lai.");
+                        // Bạn có thể thực hiện các xử lý khác tùy thuộc vào yêu cầu của bạn
+                      } else {
+                        var formattedSelectedDate = selectedDate.getFullYear() + '-' + String(selectedDate.getMonth() + 1).padStart(2, '0') + '-' + String(selectedDate.getDate()).padStart(2, '0');
+                        var link = document.querySelector('.btn-success'); // Chọn button có class là 'btn-success', bạn có thể thay đổi selector tùy thuộc vào cấu trúc HTML của bạn
+                        link.href = 'xemDoanhThuNgay?ngayXem=' + formattedSelectedDate;
+                      }
+                    }
+                    function xuatExcelNgay() {
+                      var selectedDate = new Date(document.getElementById('ngayXem').value);
+                      var today = new Date();
+
+                      // Đặt thời gian trong ngày được chọn là 00:00:00 để so sánh ngày không bị ảnh hưởng bởi giờ phút giây
+                      selectedDate.setHours(0, 0, 0, 0);
+                      today.setHours(0, 0, 0, 0);
+
+                      if (selectedDate > today) {
+                        alert("Bạn không thể chọn ngày trong tương lai.");
+                        // Bạn có thể thực hiện các xử lý khác tùy thuộc vào yêu cầu của bạn
+                      } else {
+                       exportToExcel() ;
+                      }
+                    }
+                </script>
+
+                <p> </p>
+
+                <!-- HTML cho bảng hiển thị dữ liệu -->
+                <table class="table table-light table-striped table-hover bordered-dark" style="text-align: center;">
+                    <thead>
+                    <tr>
+                        <th colspan="5">Doanh thu ngày: <span th:text="${#dates.format(ngayDangXem, 'dd-MM-yyyy')}"></span></th>
+                    </tr>
+                    <tr>
+                        <th>Id Hóa Đơn</th>
+                        <th>Khách Hàng Mua</th>
+                        <th>Ngày Lập</th>
+                        <th>Địa chỉ nhận hàng</th>
+                        <th>Tổng Hóa Đơn</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="hoaDon : ${hoaDonList}">
+                        <td th:text="${hoaDon.idHoaDon}"></td>
+                        <td th:text="${hoaDon.donHang.taiKhoan.tenDangNhap}"></td>
+                        <td th:text="${#dates.format(hoaDon.ngayLap, 'dd-MM-yyyy')}"></td>
+                        <td th:text="${hoaDon.diaChi}"></td>
+                        <td th:text="${hoaDon.tongHoaDon + 'đ'}"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">Tổng Doanh Thu Ngày: </td>
+                        <td th:text="${tongDoanhThuNgay + 'đ'}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <script>
+                    function exportToExcel() {
+
+
+                        const table = document.querySelector('.table');
+
+                        const ws = XLSX.utils.table_to_sheet(table);
+                        const wb = XLSX.utils.book_new();
+                        XLSX.utils.book_append_sheet(wb, ws, 'DoanhThuNgay');
+                        XLSX.writeFile(wb, 'DoanhThuNgay.xlsx');
+                    }
+                </script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+</main>
+
+<div th:insert="~{footer.html}"></div>
+
+<!-- Start Script -->
+<script src="assets/js/jquery-1.11.0.min.js"></script>
+<script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/templatemo.js"></script>
+<script src="assets/js/custom.js"></script>
+<!-- End Script -->
+</body>
+
+</html>

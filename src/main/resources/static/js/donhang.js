@@ -47,7 +47,7 @@ function hienThiDanhSachSanPhamTrongDonHang(data){
             cardHTML += '<td class="col-md-2">';
             cardHTML += '<div class="card mb-2 product-wap rounded-0">';
             cardHTML += '<div class="card rounded-0">';
-            cardHTML += '<img class="card-img rounded-0 img-fluid" src="/img-sanpham/' + sanPham.hinhAnh + '">';
+            cardHTML += '<img class="card-img rounded-0 img-fluid" src="/img/sanpham/' + sanPham.hinhAnh + '">';
             cardHTML += '</div>';
             cardHTML += '</div>';
             cardHTML += '</td>';
