@@ -1,30 +1,27 @@
 package com.example.PhucLongOnline.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
+
+import java.util.List;
+
 
 @Entity
 @Table(name="size")
 public class Size {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idsize")
+    @Column(name= "idsize")
     private int idSize;
 
-    @Column(name="tensize")
+    @Column(name = "tensize")
     private String tenSize;
 
-    public Size() {
-    }
+    @OneToMany(mappedBy = "size")
+    private List<CT_SanPham_Size> ctSanPhamSizes;
 
-    public Size(int idSize, String tenSize) {
-        this.idSize = idSize;
-        this.tenSize = tenSize;
-    }
 
     public int getIdSize() {
         return idSize;
@@ -41,4 +38,13 @@ public class Size {
     public void setTenSize(String tenSize) {
         this.tenSize = tenSize;
     }
+
+    public List<CT_SanPham_Size> getCtSanPhamSizes() {
+        return ctSanPhamSizes;
+    }
+
+    public void setCtSanPhamSizes(List<CT_SanPham_Size> ctSanPhamSizes) {
+        this.ctSanPhamSizes = ctSanPhamSizes;
+    }
+
 }

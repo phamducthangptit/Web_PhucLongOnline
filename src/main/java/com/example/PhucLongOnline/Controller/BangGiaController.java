@@ -133,7 +133,7 @@ public class BangGiaController {
         try{
             BangGia bangGia=bangGiaRepository.getById(id);
             List<CT_SanPham_Size> ctList=ctSanPhamSizeRepository.findAll();
-            if (bangGia.getCtBangGiaList().size() ==0){
+            if (bangGia.getCtBangGias().size() ==0){
                 for (CT_SanPham_Size x: ctList){
                     CT_BangGia temp=new CT_BangGia();
                     temp.setCtSanPhamSize(x);
@@ -143,7 +143,7 @@ public class BangGiaController {
                 }
             }
             bangGia=bangGiaRepository.getById(id);
-            List<CT_BangGia> list=bangGia.getCtBangGiaList();
+            List<CT_BangGia> list=bangGia.getCtBangGias();
             CT_BangGia ctBangGia=new CT_BangGia();
             ctBangGia.setBangGia(bangGia);
             model.addAttribute("list", list);
@@ -167,7 +167,7 @@ public class BangGiaController {
             System.out.println("Save thành công");
             model.addAttribute("message", "Lưu thành công");
             BangGia bangGia=bangGiaRepository.getById(id);
-            List<CT_BangGia> list=bangGia.getCtBangGiaList();
+            List<CT_BangGia> list=bangGia.getCtBangGias();
             model.addAttribute("list", list);
             model.addAttribute("btnStatus", "btnAdd");
             model.addAttribute("id", id);
@@ -186,7 +186,7 @@ public class BangGiaController {
         try{
             CT_BangGia ctBangGia=ctBangGiaRepository.getById(idBG);
             BangGia bangGia=bangGiaRepository.getById(id);
-            List<CT_BangGia> list=bangGia.getCtBangGiaList();
+            List<CT_BangGia> list=bangGia.getCtBangGias();
             List<CT_SanPham_Size> ctList=ctSanPhamSizeRepository.findAll();
             model.addAttribute("list", list);
             model.addAttribute("ctList", ctList);

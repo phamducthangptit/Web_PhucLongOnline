@@ -1,44 +1,42 @@
 package com.example.PhucLongOnline.Model;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name="congthuc")
+@Table(name = "congthuc")
 public class CongThuc {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idcongthuc")
+    @Column(name= "idcongthuc")
     private int idCongThuc;
 
-    @ManyToOne
-	@JoinColumn(name="idsanphamsize")
-    private CT_SanPham_Size ctSanPhamSize;
+    @Column(name = "soluong")
+    private Double soLuong;
 
-    @ManyToOne
-	@JoinColumn(name="idnguyenlieu")
-    private NguyenLieu nguyenLieu;
-
-    @Column(name="soluong")
-    private float soLuong;
-
-    @Column(name="donvi")
+    @Column(name = "donvi")
     private String donVi;
 
-    public CongThuc(){}
+    @ManyToOne()
+    @JoinColumn(name = "idnguyenlieu")
+    private NguyenLieu nguyenLieu;
 
-    public CongThuc(int idCongThuc, CT_SanPham_Size ctSanPhamSize, NguyenLieu nguyenLieu, float soLuong, String donVi) {
+    @ManyToOne()
+    @JoinColumn(name = "idsanphamsize")
+    private CT_SanPham_Size ctSanPhamSize;
+
+    public int getIdCongThuc() {
+        return idCongThuc;
+    }
+
+    public void setIdCongThuc(int idCongThuc) {
         this.idCongThuc = idCongThuc;
-        this.ctSanPhamSize = ctSanPhamSize;
-        this.nguyenLieu = nguyenLieu;
+    }
+
+    public Double getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(Double soLuong) {
         this.soLuong = soLuong;
-        this.donVi = donVi;
     }
 
     public String getDonVi() {
@@ -49,13 +47,6 @@ public class CongThuc {
         this.donVi = donVi;
     }
 
-    public float getSoLuong() {
-        return soLuong;
-    }
-
-    public void setSoLuong(float soLuong) {
-        this.soLuong = soLuong;
-    }
 
     public NguyenLieu getNguyenLieu() {
         return nguyenLieu;
@@ -73,12 +64,4 @@ public class CongThuc {
         this.ctSanPhamSize = ctSanPhamSize;
     }
 
-    public int getIdCongThuc() {
-        return idCongThuc;
-    }
-
-    public void setIdCongThuc(int idCongThuc) {
-        this.idCongThuc = idCongThuc;
-    }
-    
 }

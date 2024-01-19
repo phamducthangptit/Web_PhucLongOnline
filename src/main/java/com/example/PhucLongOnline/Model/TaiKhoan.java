@@ -1,54 +1,44 @@
 package com.example.PhucLongOnline.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
+
 @Table(name="taikhoan")
+
 public class TaiKhoan {
     @Id
-    @Column(name="tendangnhap")
+    @Column(name = "tendangnhap")
     private String tenDangNhap;
-    
-    @Column(name="matkhau")
+
+
+    @Column(name = "matkhau")
     private String matKhau;
 
-    @Column(name="trangthai")
+    @Column(name = "trangthai")
     private int trangThai;
 
-    @ManyToOne
-	@JoinColumn(name="idquyen")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idquyen")
     private Quyen quyen;
 
-    public TaiKhoan(){
-        
-    }
+    @OneToOne(mappedBy = "taiKhoan")
+    private NhanVien nhanVien;
 
-    public TaiKhoan(String tenDangNhap, String matKhau, int trangThai, Quyen quyen) {
-        this.tenDangNhap = tenDangNhap;
-        this.matKhau = matKhau;
-        this.trangThai = trangThai;
-        this.quyen = quyen;
-    }
+    @OneToOne(mappedBy = "taiKhoan")
+    private KhachHang khachHang;
 
-    public Quyen getQuyen() {
-        return quyen;
-    }
+    @OneToMany(mappedBy = "taiKhoan")
+    private List<DonHang> donHangs;
 
-    public void setQuyen(Quyen quyen) {
-        this.quyen = quyen;
-    }
+    @OneToMany(mappedBy = "taiKhoan")
+    private List<GioHang> gioHangs;
+    public TaiKhoan()
+    {
 
-    public int getTrangThai() {
-        return trangThai;
-    }
-
-    public void setTrangThai(int trangThai) {
-        this.trangThai = trangThai;
     }
 
     public String getTenDangNhap() {
@@ -67,5 +57,52 @@ public class TaiKhoan {
         this.matKhau = matKhau;
     }
 
-    
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    public Quyen getQuyen() {
+        return quyen;
+    }
+
+    public void setQuyen(Quyen quyen) {
+        this.quyen = quyen;
+    }
+
+    public NhanVien getNhanVien() {
+        return nhanVien;
+    }
+
+    public void setNhanVien(NhanVien nhanVien) {
+        this.nhanVien = nhanVien;
+    }
+
+    public KhachHang getKhachHang() {
+        return khachHang;
+    }
+
+    public void setKhachHang(KhachHang khachHang) {
+        this.khachHang = khachHang;
+    }
+
+    public List<DonHang> getDonHangs() {
+        return donHangs;
+    }
+
+    public void setDonHangs(List<DonHang> donHangs) {
+        this.donHangs = donHangs;
+    }
+
+    public List<GioHang> getGioHangs() {
+        return gioHangs;
+    }
+
+    public void setGioHangs(List<GioHang> gioHangs) {
+        this.gioHangs = gioHangs;
+    }
+
 }

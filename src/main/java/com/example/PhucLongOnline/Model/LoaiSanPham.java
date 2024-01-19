@@ -1,30 +1,25 @@
 package com.example.PhucLongOnline.Model;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+
+import jakarta.persistence.*;
+
+import java.util.List;
+
 
 @Entity
 @Table(name="loaisanpham")
 public class LoaiSanPham {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idloaisanpham")
+    @Column(name= "idloaisanpham")
     private int idLoaiSanPham;
 
-    @Column(name="tenloai")
+    @Column( name = "tenloai")
     private String tenLoai;
 
-    public LoaiSanPham(){
-        
-    }
-    
-    public LoaiSanPham(int idLoaiSanPham, String tenLoai) {
-        this.idLoaiSanPham = idLoaiSanPham;
-        this.tenLoai = tenLoai;
-    }
+    @OneToMany(mappedBy = "loaiSanPham")
+    private List<SanPham> sanPhams;
+
 
     public int getIdLoaiSanPham() {
         return idLoaiSanPham;
@@ -43,5 +38,13 @@ public class LoaiSanPham {
         this.tenLoai = tenLoai;
     }
 
-    
+
+    public List<SanPham> getSanPhams() {
+        return sanPhams;
+    }
+
+    public void setSanPhams(List<SanPham> sanPhams) {
+        this.sanPhams = sanPhams;
+    }
+
 }

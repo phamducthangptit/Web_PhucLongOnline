@@ -1,27 +1,32 @@
 package com.example.PhucLongOnline.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
-@Table(name="nhacungcap")
+@Table(name = "nhacungcap")
 public class NhaCungCap {
     @Id
-    @Column(name="manhacungcap")
+    @Column(name = "manhacungcap")
     private String maNhaCungCap;
-    
-    @Column(name="tennhacungcap")
+
+    @Column(name = "tennhacungcap")
     private String tenNhaCungCap;
 
-    public NhaCungCap(){
-        
+    @OneToMany(mappedBy = "nhaCungCap")
+    private List<CT_NguyenLieu> ctNguyenLieus;
+
+    @OneToMany(mappedBy = "nhaCungCap")
+    private List<CT_DonDatHang> ctDonDatHangs;
+
+    public String getMaNhaCungCap() {
+        return maNhaCungCap;
     }
 
-    public NhaCungCap(String maNhaCungCap, String tenNhaCungCap) {
+    public void setMaNhaCungCap(String maNhaCungCap) {
         this.maNhaCungCap = maNhaCungCap;
-        this.tenNhaCungCap = tenNhaCungCap;
     }
 
     public String getTenNhaCungCap() {
@@ -32,12 +37,13 @@ public class NhaCungCap {
         this.tenNhaCungCap = tenNhaCungCap;
     }
 
-    public String getMaNhaCungCap() {
-        return maNhaCungCap;
+
+    public List<CT_NguyenLieu> getCtNguyenLieus() {
+        return ctNguyenLieus;
     }
 
-    public void setMaNhaCungCap(String maNhaCungCap) {
-        this.maNhaCungCap = maNhaCungCap;
+    public void setCtNguyenLieus(List<CT_NguyenLieu> ctNguyenLieus) {
+        this.ctNguyenLieus = ctNguyenLieus;
     }
 
 }

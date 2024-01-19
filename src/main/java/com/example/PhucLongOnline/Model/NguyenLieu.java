@@ -1,53 +1,46 @@
 package com.example.PhucLongOnline.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
-@Table(name="nguyenlieu")
+@Table(name = "nguyenlieu")
 public class NguyenLieu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idnguyenlieu")
+    @Column(name= "idnguyenlieu")
     private int idNguyenLieu;
 
     @Column(name="tennguyenlieu")
     private String tenNguyenLieu;
 
-    @Column(name="hinhanh")
+    @Column(name = "hinhanh")
     private String hinhAnh;
-    
+
     @Column(name="soluong")
-    private Float soLuong;
-    public NguyenLieu(){
-        
+    private Double soLuong;
+
+    @Column(name = "donvi")
+    private String donVi;
+
+    @OneToMany(mappedBy = "nguyenLieu")
+    private List<CT_NguyenLieu> ctNguyenLieus;
+
+    @OneToMany(mappedBy = "nguyenLieu")
+    private List<CT_DonDatHang> ctDonDatHangs;
+
+    @OneToMany(mappedBy = "nguyenLieu")
+    private List<CongThuc> congThucs;
+
+    public int getIdNguyenLieu() {
+        return idNguyenLieu;
     }
 
-    public NguyenLieu(int idNguyenLieu, String tenNguyenLieu, String hinhAnh, Float soLuong) {
+    public void setIdNguyenLieu(int idNguyenLieu) {
         this.idNguyenLieu = idNguyenLieu;
-        this.tenNguyenLieu = tenNguyenLieu;
-        this.hinhAnh = hinhAnh;
-        this.soLuong = soLuong;
-    }
 
-    public Float getSoLuong() {
-        return soLuong;
-    }
-
-    public void setSoLuong(Float soLuong) {
-        this.soLuong = soLuong;
-    }
-
-    public String getHinhAnh() {
-        return hinhAnh;
-    }
-
-    public void setHinhAnh(String hinhAnh) {
-        this.hinhAnh = hinhAnh;
     }
 
     public String getTenNguyenLieu() {
@@ -58,14 +51,47 @@ public class NguyenLieu {
         this.tenNguyenLieu = tenNguyenLieu;
     }
 
-    public int getIdNguyenLieu() {
-        return idNguyenLieu;
+
+    public String getHinhAnh() {
+        return hinhAnh;
     }
 
-    public void setIdNguyenLieu(int idNguyenLieu) {
-        this.idNguyenLieu = idNguyenLieu;
+    public void setHinhAnh(String hinhAnh) {
+        this.hinhAnh = hinhAnh;
     }
 
+    public Double getSoLuong() {
+        return soLuong;
+    }
 
+    public void setSoLuong(Double soLuong) {
+        this.soLuong = soLuong;
+    }
 
+    public String getDonVi() {
+        return donVi;
+    }
+
+    public void setDonVi(String donVi) {
+        this.donVi = donVi;
+    }
+
+    @Override
+    public String toString() {
+        return "NguyenLieu{" +
+                "idNguyenLieu=" + idNguyenLieu +
+                ", tenNguyenLieu='" + tenNguyenLieu + '\'' +
+                ", hinhAnh='" + hinhAnh + '\'' +
+                ", soLuong=" + soLuong +
+                ", donVi='" + donVi + '\'' +
+                '}';
+    }
+
+    public List<CT_NguyenLieu> getCtNguyenLieus() {
+        return ctNguyenLieus;
+    }
+
+    public void setCtNguyenLieus(List<CT_NguyenLieu> ctNguyenLieus) {
+        this.ctNguyenLieus = ctNguyenLieus;
+    }
 }

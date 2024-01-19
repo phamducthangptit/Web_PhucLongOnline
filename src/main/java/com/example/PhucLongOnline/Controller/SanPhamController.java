@@ -175,10 +175,10 @@ public class SanPhamController {
     public String detail(@RequestParam("id") int id, Model model) {
         try{
             SanPham sanPham=sanPhamRepository.getById(id);
-            List<CT_SanPham_Size> list=sanPham.getCtSanPhamSizeList();
+            List<CT_SanPham_Size> list=sanPham.getCtSanPhamSizes();
             List<Size> sizeList =sizeRepository.findAll();
             CT_SanPham_Size ctSanPhamSize=new CT_SanPham_Size();
-            ctSanPhamSize.setGiaHienThoi(0);
+            ctSanPhamSize.setGiaHienThoi(0.0);
             ctSanPhamSize.setSanPham(sanPham);
             model.addAttribute("ctSanPhamSize", ctSanPhamSize);
             model.addAttribute("list", list);
@@ -203,7 +203,7 @@ public class SanPhamController {
             System.out.println("Save thành công");
             model.addAttribute("message", "Save thành công");
             ctSanPhamSize=new CT_SanPham_Size();
-            ctSanPhamSize.setGiaHienThoi(0);
+            ctSanPhamSize.setGiaHienThoi(0.0);
             ctSanPhamSize.setSanPham(sanPham);
             List<CT_SanPham_Size> list;
             try{    
@@ -217,7 +217,7 @@ public class SanPhamController {
                 System.out.println("Lỗi: "+ e);
                 model.addAttribute("message", "Lỗi: "+e);
                 sanPham=sanPhamRepository.getById(sanPham.getIdSanPham());
-                list=sanPham.getCtSanPhamSizeList();
+                list=sanPham.getCtSanPhamSizes();
             }
             model.addAttribute("ctSanPhamSize", ctSanPhamSize);
             model.addAttribute("list", list);
@@ -243,10 +243,10 @@ public class SanPhamController {
             System.out.println("Xóa thành công");
             model.addAttribute("message", "Xóa thành công");
             CT_SanPham_Size ctSanPhamSize =new CT_SanPham_Size();
-            ctSanPhamSize.setGiaHienThoi(0);
+            ctSanPhamSize.setGiaHienThoi(0.0);
             SanPham sanPham=sanPhamRepository.getById(idSP);
             ctSanPhamSize.setSanPham(sanPham);
-            List<CT_SanPham_Size> list=sanPham.getCtSanPhamSizeList();
+            List<CT_SanPham_Size> list=sanPham.getCtSanPhamSizes();
             model.addAttribute("ctSanPhamSize", ctSanPhamSize);
             model.addAttribute("list", list);
             model.addAttribute("sizeList", sizeList);
@@ -265,7 +265,7 @@ public class SanPhamController {
     public String addNguyenLieu(@RequestParam("id")int id,Model model) {
         try{
             CT_SanPham_Size ctSanPhamSize=ctSanPhamSizeRepository.getById(id);
-            List<CongThuc> list = ctSanPhamSize.getCongThuc();
+            List<CongThuc> list = ctSanPhamSize.getCongThucs();
             CongThuc congThuc = new CongThuc();
             congThuc.setCtSanPhamSize(ctSanPhamSize);
             List<NguyenLieu> nguyenLieuList= nguyenLieuRepository.findAll();
@@ -292,7 +292,7 @@ public class SanPhamController {
             System.out.println("Save thành công");
             model.addAttribute("message", "Save thành công");
             CT_SanPham_Size ctSanPhamSize=ctSanPhamSizeRepository.getById(id);
-            List<CongThuc> list = ctSanPhamSize.getCongThuc();
+            List<CongThuc> list = ctSanPhamSize.getCongThucs();
             congThuc = new CongThuc();
             congThuc.setCtSanPhamSize(ctSanPhamSize);
             List<NguyenLieu> nguyenLieuList= nguyenLieuRepository.findAll();
@@ -319,7 +319,7 @@ public class SanPhamController {
             System.out.println("Xóa thành công");
             model.addAttribute("message", "Xóa thành công");
             CT_SanPham_Size ctSanPhamSize=ctSanPhamSizeRepository.getById(id);
-            List<CongThuc> list = ctSanPhamSize.getCongThuc();
+            List<CongThuc> list = ctSanPhamSize.getCongThucs();
             congThuc = new CongThuc();
             congThuc.setCtSanPhamSize(ctSanPhamSize);
             List<NguyenLieu> nguyenLieuList= nguyenLieuRepository.findAll();

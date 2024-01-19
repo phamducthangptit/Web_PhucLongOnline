@@ -8,43 +8,42 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name="ct_banggia")
+@Table(name = "ct_banggia")
 public class CT_BangGia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idctbanggia")
+    @Column(name= "idctbanggia")
     private int idCTBangGia;
-     
-    @Column(name="gia")
-    private float gia;
 
-    @ManyToOne
-	@JoinColumn(name="idsanphamsize")
+    @Column(name="gia")
+    private Double gia;
+
+    @ManyToOne()
+    @JoinColumn(name = "idsanphamsize")
     private CT_SanPham_Size ctSanPhamSize;
 
-    @ManyToOne
-	@JoinColumn(name="idbanggia")
+    @ManyToOne()
+    @JoinColumn(name = "idbanggia")
     private BangGia bangGia;
 
+    public int getIdCTBangGia() {
+        return idCTBangGia;
+    }
 
-
-    public CT_BangGia(){}
-
-    public CT_BangGia(int idCTBangGia, float gia, CT_SanPham_Size ctSanPhamSize, BangGia bangGia) {
+    public void setIdCTBangGia(int idCTBangGia) {
         this.idCTBangGia = idCTBangGia;
+    }
+
+    public Double getGia() {
+        return gia;
+    }
+
+    public void setGia(Double gia) {
         this.gia = gia;
-        this.ctSanPhamSize = ctSanPhamSize;
-        this.bangGia = bangGia;
-    }
 
-    public BangGia getBangGia() {
-        return bangGia;
-    }
-
-    public void setBangGia(BangGia bangGia) {
-        this.bangGia = bangGia;
     }
 
     public CT_SanPham_Size getCtSanPhamSize() {
@@ -55,20 +54,13 @@ public class CT_BangGia {
         this.ctSanPhamSize = ctSanPhamSize;
     }
 
-    public float getGia() {
-        return gia;
+
+    public BangGia getBangGia() {
+        return bangGia;
     }
 
-    public void setGia(float gia) {
-        this.gia = gia;
-    }
-
-    public int getIdCTBangGia() {
-        return idCTBangGia;
-    }
-
-    public void setIdCTBangGia(int idCTBangGia) {
-        this.idCTBangGia = idCTBangGia;
+    public void setBangGia(BangGia bangGia) {
+        this.bangGia = bangGia;
     }
 
 }

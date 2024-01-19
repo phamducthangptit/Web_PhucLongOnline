@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Anime Template">
+    <meta name="keywords" content="Anime, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chi tiết sản phẩm</title>
+
+    <!-- Google Font -->
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap}" rel="stylesheet">
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap}"
+          rel="stylesheet">
+    <!-- Css Styles -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/elegant-icons.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/plyr.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/nice-select.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/slicknav.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js}"></script>
+
+</head>
+
+<body>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<div th:insert="~{header.html}"></div>
+
+<!-- Breadcrumb Begin -->
+<div class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__links" >
+                    <a style="display:inline-block;" href="/home"><i class="fa fa-home"></i>Trang chủ</a>
+                    <a style="display:inline-block;" href="javascript:void(0);" th:text="${movie.get('country')}"></a>
+                    <span style="display:inline-block;" th:text="${movie.get('name')}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+<!-- Anime Section Begin -->
+<section class="anime-details spad">
+    <div class="container">
+        <div class="anime__details__content">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="anime__details__pic set-bg" th:attr="data-setbg='../img/movie/'+${movie.get('image')}">
+                        <div class="comment"><i class="fa fa-comments" th:text="${movie.get('cm_count')}"></i> </div>
+                        <div class="view"><i class="fa fa-eye" th:text="${movie.get('view')}"></i></div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="anime__details__text">
+                        <div class="anime__details__title">
+                            <h3 th:text="${movie.get('name')}"></h3>
+                            <span ></span>
+                        </div>
+                        <!--                            <div class="anime__details__rating">-->
+                        <!--                                <div class="rating">-->
+                        <!--                                    <a href="#"><i class="fa fa-star"></i></a>-->
+                        <!--                                    <a href="#"><i class="fa fa-star"></i></a>-->
+                        <!--                                    <a href="#"><i class="fa fa-star"></i></a>-->
+                        <!--                                    <a href="#"><i class="fa fa-star"></i></a>-->
+                        <!--                                    <a href="#"><i class="fa fa-star-half-o"></i></a>-->
+                        <!--                                </div>-->
+                        <!--                                <span>1.029 Votes</span>-->
+                        <!--                            </div>-->
+                        <div th:if="${movie.get('movie_content').equals('')}">
+                            <p>Đang cập nhật</p>
+                        </div>
+                        <div th:else>
+                            <p th:text="${movie.get('movie_content')}"></p>
+                        </div>
+
+                        <div class="anime__details__widget">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <ul>
+
+                                        <li><span>Nhà sản xuất:</span> <div style="display:inline-block;"th:text="${listCompany}"></div>
+                                        </li>
+                                        <li><span>Ngôn ngữ: </span> <div style="display:inline-block;" th:text="${listLanguage}"></div>
+                                        </li>
+                                        <li><span>Trạng thái:</span> <div style="display:inline-block;" th:text="${movie.get('episode') +'/'+movie.get('episodes') }"></div>
+                                        </li>
+                                        <li ><span>Thể loại:</span><div class="blog__details__tags" style="display:inline-block;">
+                                            <a th:if="${listCategory1.size()!=0}"href="#" th:each="t:${listCategory1}" th:text="${t.get('name')}"></a>
+                                            <a th:if="${listCategory1.size()==0}"href="#" >Đang cập nhật</a>
+                                        </div>
+                                        </li>
+                                        <!--                                            <li ><span>Tags:</span>-->
+                                        <!--                                                <div class="blog__details__tags" style="display:inline-block;">-->
+                                        <!--                                                    <a href="#" th:each="t:${listTags}" th:text="${t}"></a>-->
+                                        <!--                                                </div>-->
+                                        <!--                                            </li>-->
+                                    </ul>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <ul>
+                                        <li><span>Quốc gia: </span><div style="display:inline-block;" th:text="${movie.get('country')}"></div></li>
+                                        <li><span>Lượt xem:</span> <div style="display:inline-block;" th:text="${movie.get('views')}"></div></li>
+                                        <li><span>Lượt bình luận:</span> <div style="display:inline-block;" th:text="${movie.get('cm_count')}"></div></li>
+                                        <!--                                            <li><span>Quality:</span> HD</li>-->
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="anime__details__btn">
+                            <input type="hidden" id="isFl" th:value="${isFollowing}">
+                            <a th:href="@{/add-collection(id=${movie.get('movie_id')})}" class="follow-btn" id="Follow" ><i class="fa fa-heart-o"></i> Theo dõi</a>
+                            <a th:href="@{/rmv-collection(id=${movie.get('movie_id')})}" class="follow-btn" id="unFollow"><i class="fa fa-heart"></i> Bỏ theo dõi</a>
+                            <a th:if="${movie.get('episode') != 0}" th:href="'../movie-watching'+'?id='+${movie.get('movie_id')}+'&episode='" class="watch-btn"><span>Xem ngay</span>
+                                <i class="fa fa-angle-right"></i></a>
+                            <a th:if="${movie.get('episode') == 0}" class="follow-btn"><span>Sớm phát hành</span>
+                            </a>
+                            <a th:if="${user != null && user.role.roleId == 1 && movie.get('episode') < movie.get('episodes')}"href="#" class="follow-btn" id="addEp"><span>Thêm tập</span></a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="section-title">
+                    <h5>Danh sách diễn viên</h5>
+                </div>
+                <div class="row">
+                    <div class="col-md-1" th:each="p:${listPerson}">
+                        <div class="card h-100 d-flex align-items-center border-0" style="background: #0b0c2a;">
+                            <a href="#">
+                                <img th:src="'../../img/actors/'+${p.get('image')}" class="card-img-top" alt="..." style="height: 50px;
+                                    width: 50px;
+                                    border-radius: 50%;">
+                            </a>
+                            <div class="card-body">
+                                <a href="#">
+                                    <h5 class="card-title" style="color: #ffffff;" th:text="${p.get('name')}"></h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = "row">
+            <div class="col-lg-8 col-md-8">
+
+                <div class="anime__details__review" >
+                    <div class="section-title">
+                        <h5>Danh sách bình luận</h5>
+                    </div>
+                    <div id = "commentList">
+                        <div class="anime__review__item"  th:each="cm:${listComment}">
+                            <div class="anime__review__item__pic">
+                                <img th:src="'../img/user/'+${cm.get('avatar')}" alt="">
+                            </div>
+                            <div class="anime__review__item__text">
+                                <div class="row">
+                                    <h6 th:text="${cm.get('name')}+' - '"></h6>
+                                    <p th:text="${cm.get('day_cm')}"></p>
+                                    <div class="rating">
+                                        <a href="javascript:void(0);"
+                                           th:each="number : ${#numbers.sequence(1, 5)}"
+                                        ><i th:class="${number <= cm.get('value') ? 'fa fa-star':'fa fa-star-o'}"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <p th:text="${cm.get('comment')}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div th:if="${listComment.size()!=0}" class="row justify-content-center">
+                    <div id="totalPageEl" th:data-value="${totalPage}"></div>
+                    <input type="hidden" id="currentPage" th:value="${currentPage}" />
+                    <div class="product__pagination" >
+                        <div class="row" id="paginationContainer">
+                            <a th:class="${currentPage == 0 ? 'disabled' : 'page1'}"
+                               th:data-value="${currentPage-1}"><i class="fa fa-angle-double-left"></i></a>
+                            <div th:if="${currentPage > 1}">
+                                <a class="page1"  th:data-value="0">1</a>
+                                <a class="disabled">...</a>
+                            </div>
+                            <div th:each="i : ${pages}">
+                                <a th:class="${currentPage == i ? 'current-page' : ''} +' page1'"
+                                   th:data-value="${i}"  th:text = "${i + 1}">
+                                </a>
+                            </div>
+                            <div th:if="${currentPage < totalPage - 2}">
+                                <a class="disabled">...</a>
+                                <a class="page1" th:data-value="${totalPage-1}"href="#" th:text=" ${totalPage}"></a>
+                            </div>
+                            <a th:class="${currentPage == totalPage - 1 ? 'disabled' : 'page1'}"
+                               th:data-value="${currentPage+1}" ><i class="fa fa-angle-double-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="anime__details__form"th:if="${user != null}">
+                    <div class="section-title" >
+                        <h5>Bình luận tại đây</h5>
+                    </div>
+                    <div class="anime__review__item" >
+                        <div class="anime__review__item__pic">
+                            <img th:src="'../img/user/'+${user.getAvatar()}" alt="">
+                        </div>
+                        <div class="anime__review__item__text">
+                            <div id="userId" th:data-value="${user.getUserId()}"></div>
+                            <form action="#">
+                                <h6> <div th:text="${user.getName()}"></div>
+                                    <div class="rating1">
+                                        <span>Vote: </span>
+                                        <a href="javascript:void(0);" class="star1" data-value="1"><i
+                                                class="fa fa-star"></i></a>
+                                        <a href="javascript:void(0);" class="star1" data-value="2"><i
+                                                class="fa fa-star-o"></i></a>
+                                        <a href="javascript:void(0);" class="star1" data-value="3"><i
+                                                class="fa fa-star-o"></i></a>
+                                        <a href="javascript:void(0);" class="star1" data-value="4"><i
+                                                class="fa fa-star-o"></i></a>
+                                        <a href="javascript:void(0);" class="star1" data-value="5"><i
+                                                class="fa fa-star-o"></i></a>
+                                    </div>
+                                </h6>
+                                <input type="text" id="ratingValue" value="1" style="display: none;">
+                                <textarea placeholder="Your comment" id="txtComment"></textarea>
+                                <button type="submit" id="newComment" disabled><i class="fa fa-location-arrow"></i>
+                                    Bình luận</button>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="login__register" th:if="${user == null}">
+                    <h4 style="color: #ffffff;">Đăng nhập để bình luận</h4>
+                    <br>
+                    <a href="/login" class="primary-btn">Đăng nhập</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <div class="anime__details__sidebar">
+                    <div class="section-title">
+                        <h5>Có thể bạn sẽ thích...</h5>
+                    </div>
+                    <div  th:each="y : ${listYouLike}" class="product__sidebar__view__item set-bg"
+                          th:data-setbg="'img/movie/'+${y.getImage()}">
+                        <div class="ep" th:text="${y.getEpisode()} + '/' + ${y.getEpisodes()}"></div>
+                        <div class="view"><i class="fa fa-eye" th:text="${y.getViews()}"></i></div>
+                        <h5><a th:href="'movie?id='+${y.getMovie_id()}" th:text="${y.getName()}"></a></h5>
+                    </div>
+                </div>
+            </div></div>
+    </div>
+    </div>
+</section>
+<!-- Anime Section End -->
+
+<!-- Footer Section Begin -->
+<div th:insert="~{footer.html}"></div>
+<!-- Search model end -->
+<div class="add-ep"
+     style="display:none;
+         position: fixed;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background: #0b0c2a;
+            z-index: 99999;
+            ">
+    <div class="align-items-center justify-content-center" >
+
+        <div class="blog__details__form" style="padding-top:30px;">
+            <form class="" id="add-ep-form" action="/movie/addEp" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="search-close-switch" id ="add-close-switch" style="margin-left:30px; top:0px;"><i class="icon_close"></i></div>
+                    </div>
+                    <input type="hidden" name ="movie_id" th:value="${movie.get('movie_id')}" />
+                    <div class="col-lg-4">
+                        <div class="col-lg-12">
+                            <label style="color: #ffffff;">Tên:</label>
+                            <input type="text" name ="name" id ="add-name-ep" placeholder="Name" required="required">
+                        </div>
+                        <div class="col-lg-12">
+                            <label style="color: #ffffff;">Tập:</label>
+                            <input type="number" name ="episode"id="add-episode"placeholder="Episode" min="1">
+                        </div>
+                        <div class="col-lg-12">
+                            <label style="color: #ffffff;">Mùa:</label>
+                            <input type="text" name="season" id="add-season-ep" placeholder="Season">
+                        </div>
+                        <div class="col-lg-12">
+                            <label style="color: #ffffff;">Video:</label>
+                            <input type="file" name="videoInput" id="fileInput"  style="background:none;" required="required" >
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4">
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <button type="submit" class="site-btn">Thêm mới</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Js Plugins -->
+<script>
+    $(document).ready(function() {
+        $("#addEp").click(function() {
+            $(".add-ep").fadeIn(300); // Hiển thị form
+        });
+        $("#add-close-switch").click(function() {
+            $(".add-ep").fadeOut(300); // Ẩn form
+        });
+
+
+    $("#add-ep-form").submit(function(e) {
+
+
+    });
+});
+
+
+
+</script>
+
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/player.js}"></script>
+<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+<script th:src="@{/js/mixitup.min.js}"></script>
+<script th:src="@{/js/jquery.slicknav.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/comment.js}"></script>
+<script th:src="@{/js/follow.js}"></script>
+</body>
+
+</html>
