@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Phúc Long Online</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" th:href="@{/img/logo.png}">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/logo.png}">
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/templatemo.css}">
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap}">
+    <link rel="stylesheet" th:href="@{/css/fontawesome.min.css}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.8/xlsx.full.min.js"></script>
+</head>
+
+<body>
+<div th:insert="~{header.html}"></div>
+<div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="w-100 pt-1 mb-5 text-right">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="" method="get" class="modal-content modal-body border-0 p-0">
+            <div class="input-group mb-2">
+                <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+                <button type="submit" class="input-group-text bg-success text-light">
+                    <i class="fa fa-fw fa-search text-white"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Start Content Page -->
+<main><form method="post" th:action="@{/xemDoanhThuThang}" enctype="multipart/form-data">
+    <section class="bg-light">
+        <div class="container pd-5">
+            <div class="card">
+                <div class="card-body">
+                    <div class="container py-5">
+                <h2>Doanh Thu Theo Tháng</h2>
+
+
+                <label for="thangXem"><strong>Chọn Tháng:</strong></label>
+                <select id="thangXem" name="thangXem" required>
+                    <option value="01">Tháng 1</option>
+                    <option value="02">Tháng 2</option>
+                    <option value="03">Tháng 3</option>
+                    <option value="04">Tháng 4</option>
+                    <option value="05">Tháng 5</option>
+                    <option value="06">Tháng 6</option>
+                    <option value="07">Tháng 7</option>
+                    <option value="08">Tháng 8</option>
+                    <option value="09">Tháng 9</option>
+                    <option value="10">Tháng 10</option>
+                    <option value="11">Tháng 11</option>
+                    <option value="12">Tháng 12</option>
+                    <!-- Add options for other months as needed -->
+                </select>
+
+                <label for="namXem"><strong>Chọn Năm:</strong></label>
+                <input type="number" id="namXem" name="namXem" th:value="${namDangXem}" placeholder="Năm" min="2020" required>
+
+                <a class="btn btn-success" onclick="xemDoanhThuThang()">Xem</a>
+                <a class="btn btn-success" style="Float:right" onclick="exportToExcel()">Xuất Excel</a>
+
+
+                <br>
+
+
+
+                <script>
+                    function xemDoanhThuThang() {
+                        var selectedMonth = document.getElementById('thangXem').value;
+                        var selectedYear = document.getElementById('namXem').value;
+
+                        var currentDate = new Date();
+                        var selectedDate = new Date(selectedYear, selectedMonth - 1, 1); // Subtract 1 from month as it is zero-based
+
+                        // Check if the selected date is in the future
+                        if (selectedDate > currentDate) {
+                            alert("Bạn không thể chọn tháng trong tương lai.");
+                            return;
+                        }
+
+                        var formattedSelectedDate = selectedYear + '-' + selectedMonth;
+
+                        var link = document.querySelector('.btn-success');
+                        link.href = 'xemDoanhThuThang?thangXem=' + selectedMonth + '&namXem=' + selectedYear;
+
+                        // Update the display of the selected date
+                        document.getElementById('ngayDangXem').innerText = 'Doanh Thu Tháng: ' + formattedSelectedDate;
+                    }
+                     function exportToExcel() {
+                        const table = document.querySelector('.table');
+
+                        const ws = XLSX.utils.table_to_sheet(table);
+                        const wb = XLSX.utils.book_new();
+                        XLSX.utils.book_append_sheet(wb, ws, 'DoanhThuThang');
+                        XLSX.writeFile(wb, 'DoanhThuThang.xlsx');
+                }
+                </script>
+
+
+                <p> </p>
+
+                <table class="table table-light table-striped table-hover bordered-dark"
+                       style="text-align: center;">
+                    <thead>
+                    <tr>
+                        <th colspan="5">Doanh thu tháng: <span th:text="${thangDangXem + '/' + namDangXem}"></span></th>
+                    </tr>
+                    <tr>
+                        <th>Id Hóa Đơn</th>
+                        <th>Khách Hàng Mua</th>
+                        <th>Ngày Lập</th>
+                        <th>Địa chỉ nhận hàng</th>
+                        <th>Tổng Hóa Đơn</th>
+
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="hoaDon : ${hoaDonList}">
+
+                        <td th:text="${hoaDon.idHoaDon}"></td>
+                        <td th:text="${hoaDon.donHang.taiKhoan.tenDangNhap}"></td>
+                        <td th:text="${#dates.format(hoaDon.ngayLap, 'dd-MM-yyyy')}"></td>
+                        <td th:text="${hoaDon.diaChiNhanHang}"></td>
+
+                        <td th:text="${hoaDon.tongHoaDon + 'đ'}"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">Tổng Doanh Thu Tháng: </td>
+                        <td th:text="${tongDoanhThuThang + 'đ'}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+            </div>
+        </div>
+    </section>
+</form>
+</main>
+
+<div th:insert="~{footer.html}"></div>
+
+<!-- Start Script -->
+<script src="assets/js/jquery-1.11.0.min.js"></script>
+<script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/templatemo.js"></script>
+<script src="assets/js/custom.js"></script>
+<!-- End Script -->
+</body>
+
+</html>

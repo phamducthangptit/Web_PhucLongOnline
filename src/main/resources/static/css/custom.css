@@ -1,3 +1,67 @@
 /*
 Custom Css
 */
+.custom-select {
+    appearance: none; /* Ẩn giao diện mặc định của combobox */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* Thêm một background image (mũi tên chỉ xuống) vào combobox */
+.custom-select::after {
+    content: '▼'; /* Mũi tên chỉ xuống */
+    font-size: 12px;
+    color: #333;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  /* Thiết lập kiểu cho nút kích hoạt dropdown (thẻ link) */
+  .dropdown a {
+
+    color: black;
+    padding: 10px;
+    font-size: 16px;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Thiết lập kiểu cho nội dung dropdown */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  /* Thiết lập kiểu cho các mục trong dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  /* Highlight mục được hover trong dropdown */
+  .dropdown-content a:hover {
+    background-color: #ebf4eb;
+  }
+
+  /* Hiển thị dropdown khi hover chuột lên thẻ link */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
