@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.PhucLongOnline.Database.TaiKhoan;
+import com.example.PhucLongOnline.Model.TaiKhoan;
 import com.example.PhucLongOnline.Repository.TaiKhoanRepository;
 
 @Service
@@ -22,7 +22,7 @@ public class TaiKhoanService {
         }
         else{
             TaiKhoan taikhoan = optionalTaikhoan.get();
-            if(taikhoan.getMatkhau().equals(password)){
+            if(taikhoan.getMatKhau().equals(password)){
                 return "ok";
             }
             else{
