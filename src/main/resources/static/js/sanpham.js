@@ -1,5 +1,6 @@
 $(document).ready(function(){
     var tenDangNhap = document.getElementById("tenDangNhap").value;
+    var loaiSanPham = document.getElementById("loaisanpham").value;
     $.ajax({
         type: 'GET',
         url: 'https://localhost:7062/api/DatHang/danh-sach-loai-san-pham',
@@ -14,22 +15,27 @@ $(document).ready(function(){
 
     // hiển thị số lượng sản phẩm đã có trong giỏ hàng
     LoadSoLuongSanPhamTrongGioHang();
-
     $.ajax({
-            type: 'GET',
-            url: 'https://localhost:7062/api/DatHang/danh-sach-san-pham',
-            contentType: 'application/json',
-            success: function(data){
-                console.log("có: " + data.length);
+        type: 'GET',
+        url: 'https://localhost:7062/api/DatHang/danh-sach-san-pham',
+        contentType: 'application/json',
+        success: function(data){
+            console.log("có: " + data.length);
+            if(loaiSanPham === "tatca"){
                 HienThiDanhSachSanPham(data);
-            },
-            error: function(error){
-                console.log(error);
+            } else {
+                HienThiDanhSachSanPhamTheoLoai(data, loaiSanPham);
             }
+
+        },
+        error: function(error){
+            console.log(error);
+        }
     });
 
+
     $(document).on('click', '.addCart', function () {
-        openPopup(tenVaAnh);
+        openPopup();
         var productId = $(this).data('product-id');
         var tenVaAnh = null;
         $.ajax({
@@ -66,7 +72,7 @@ $(document).ready(function(){
 
     function HienThiTenVaAnh(data){
         var imgElement = document.getElementById("anh-san-pham");
-        imgElement.src = "img-sanpham/" + data.hinhAnh;
+        imgElement.src = "/img/sanpham/" + data.hinhAnh;
 
         var tenSP = document.getElementById("ten-san-pham");
         tenSP.innerText  = data.tenSanPham;
@@ -176,8 +182,6 @@ $(document).ready(function(){
                             }
                         });
                      }
-
-
                 },
                 error: function(error){
                     console.log(error);
@@ -212,7 +216,7 @@ function HienThiDanhSachSanPham(data){
         var cardHTML = '<div class="col-md-4">';
         cardHTML += '<div class="card mb-4 product-wap rounded-0">';
         cardHTML += '<div class="card rounded-0">';
-        cardHTML += '<img class="card-img rounded-0 img-fluid" src="/img-sanpham/' + sanPham.hinhAnh + '">';
+        cardHTML += '<img class="card-img rounded-0 img-fluid" src="/img/sanpham/' + sanPham.hinhAnh + '">';
         cardHTML += '<div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">';
         cardHTML += '<ul class="list-unstyled">';
         cardHTML += '<li><a data-product-id="' + sanPham.idSanPham + '" class="addCart btn btn-success text-white mt-2"><i class="fas fa-cart-plus"></i></a></li>';
@@ -231,13 +235,42 @@ function HienThiDanhSachSanPham(data){
     });
     console.log($('.addCart').length + "bbnbnn");
 }
+function HienThiDanhSachSanPhamTheoLoai(data, loaiSanPham){
+    console.log("vào hàm hiển thị sản phẩm theo loaij");
+    var danhSachSanPhamContainer = $('#danh-sach-san-pham');
+    danhSachSanPhamContainer.empty();
+    $.each(data, function(index, sanPham) {
+        console.log("in danh sach sp theo loaij");
+        if(sanPham.idLoaiSanPham == loaiSanPham){
+        var cardHTML = '<div class="col-md-4">';
+            cardHTML += '<div class="card mb-4 product-wap rounded-0">';
+            cardHTML += '<div class="card rounded-0">';
+            cardHTML += '<img class="card-img rounded-0 img-fluid" src="/img/sanpham/' + sanPham.hinhAnh + '">';
+            cardHTML += '<div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">';
+            cardHTML += '<ul class="list-unstyled">';
+            cardHTML += '<li><a data-product-id="' + sanPham.idSanPham + '" class="addCart btn btn-success text-white mt-2"><i class="fas fa-cart-plus"></i></a></li>';
+            cardHTML += '</ul>';
+            cardHTML += '</div>';
+            cardHTML += '</div>';
+            cardHTML += '<div class="card-body">';
+            cardHTML += '<a class="h3 text-decoration-none" style="color: #28a745; font-weight: bold;">' + sanPham.tenSanPham + '</a>';
+            cardHTML += '<p class="text-center mb-0" style="color: #dc3545;">' + sanPham.giaMin.toLocaleString() + 'đ - ' + sanPham.giaMax.toLocaleString() + 'đ</p>';
+            cardHTML += '</div>';
+            cardHTML += '</div>';
+            cardHTML += '</div>';
+            // Thêm card HTML vào danh sách sản phẩm
+
+            danhSachSanPhamContainer.append(cardHTML);
+    }
+
+    });
+    console.log($('.addCart').length + "bbnbnn");
+}
 function HienThiLoaiSanPham(data){
         var danhSachSanPham = $('#danh-sach-loai-san-pham');
         $.each(data, function(index, lsp){
-            var listItem = $('<li class="list-inline-item"></li>');
-            var link = $('<a class="h3 text-dark text-decoration-none mr-3"></a>').text(lsp.tenLoai);
-
-            listItem.append(link);
-            danhSachSanPham.append(listItem);
+            var cardHTML = '<li class="list-inline-item"></li>';
+            cardHTML += '<a class="h3 text-dark text-decoration-none mr-3" href="/san-pham/' + lsp.idLoaiSanPham + '">' + lsp.tenLoai + '</a>';
+            danhSachSanPham.append(cardHTML);
         });
     }
