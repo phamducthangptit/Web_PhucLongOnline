@@ -5,36 +5,40 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "taikhoan")
+
+@Table(name="taikhoan")
+
 public class TaiKhoan {
     @Id
     @Column(name = "tendangnhap")
     private String tenDangNhap;
+
+
     @Column(name = "matkhau")
     private String matKhau;
+
     @Column(name = "trangthai")
     private int trangThai;
-    @ManyToOne
+
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idquyen")
     private Quyen quyen;
-    @OneToMany(mappedBy = "taiKhoan", cascade = CascadeType.ALL)
-    private List<DonHang> donHang;
-    @OneToOne(mappedBy = "taiKhoan",  cascade = CascadeType.ALL)
+
+    @OneToOne(mappedBy = "taiKhoan")
     private NhanVien nhanVien;
-    @OneToOne(mappedBy = "taiKhoan", cascade = CascadeType.ALL)
+
+    @OneToOne(mappedBy = "taiKhoan")
     private KhachHang khachHang;
+
+    @OneToMany(mappedBy = "taiKhoan")
+    private List<DonHang> donHangs;
+
+    @OneToMany(mappedBy = "taiKhoan")
+    private List<GioHang> gioHangs;
     public TaiKhoan()
     {
 
     }
-    public TaiKhoan(String tenDangNhap, String matKhau, int trangThai) {
-        this.tenDangNhap = tenDangNhap;
-        this.matKhau = matKhau;
-        this.trangThai = trangThai;
-    }
-
-
-
     public String getTenDangNhap() {
         return tenDangNhap;
     }
@@ -67,14 +71,6 @@ public class TaiKhoan {
         this.quyen = quyen;
     }
 
-    public List<DonHang> getDonHang() {
-        return donHang;
-    }
-
-    public void setDonHang(List<DonHang> donHang) {
-        this.donHang = donHang;
-    }
-
     public NhanVien getNhanVien() {
         return nhanVien;
     }
@@ -89,5 +85,21 @@ public class TaiKhoan {
 
     public void setKhachHang(KhachHang khachHang) {
         this.khachHang = khachHang;
+    }
+
+    public List<DonHang> getDonHangs() {
+        return donHangs;
+    }
+
+    public void setDonHangs(List<DonHang> donHangs) {
+        this.donHangs = donHangs;
+    }
+
+    public List<GioHang> getGioHangs() {
+        return gioHangs;
+    }
+
+    public void setGioHangs(List<GioHang> gioHangs) {
+        this.gioHangs = gioHangs;
     }
 }

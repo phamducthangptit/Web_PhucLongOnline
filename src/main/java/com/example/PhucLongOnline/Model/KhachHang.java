@@ -5,8 +5,10 @@ import jakarta.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name = "khachhang")
+
+@Table(name="khachhang")
 public class KhachHang {
+
     @Id
     @Column (name ="tendangnhap")
     private String tenDangNhap;
@@ -30,6 +32,7 @@ public class KhachHang {
     private String hinhAnh;
     @Column(name = "diemtichluy")
     private Float diemTichLuy;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "tendangnhap")
     private TaiKhoan taiKhoan;

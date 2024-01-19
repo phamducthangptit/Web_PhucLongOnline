@@ -3,22 +3,32 @@ package com.example.PhucLongOnline.Model;
 import jakarta.persistence.*;
 
 import java.sql.Date;
-import java.util.List;
+
 
 @Entity
-@Table(name = "hoadon")
+@Table(name="hoadon")
 public class HoaDon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idhoadon")
+    @Column(name= "idhoadon")
     private int idHoaDon;
-    @Column (name = "ngaylap")
+
+    @Column(name="ngaylap")
     private Date ngayLap;
-    @Column (name = "tonghoadon")
-    private Float tongHoaDon;
-    @Column(name = "diachinhanhang")
-    private String diaChiNhanHang;
-    @OneToOne(cascade = CascadeType.ALL)
+
+    @Column(name="tonghoadon")
+    private Double tongHoaDon;
+
+    @Column(name="diachi")
+    private String diaChi;
+
+    @Column(name = "sdt")
+    private String sdt;
+
+    @Column(name="thanhtoanonline")
+    private Integer thanhToanOnline;
+
+    @OneToOne()
     @JoinColumn(name = "iddonhang")
     private DonHang donHang;
     public HoaDon ()
@@ -26,14 +36,15 @@ public class HoaDon {
 
     }
 
-    public HoaDon(int idHoaDon, Date ngayLap, Float tongHoaDon, String diaChiNhanHang, DonHang donHang) {
+    public HoaDon(int idHoaDon, Date ngayLap, Double tongHoaDon, String diaChi, String sdt, Integer thanhToanOnline, DonHang donHang) {
         this.idHoaDon = idHoaDon;
         this.ngayLap = ngayLap;
         this.tongHoaDon = tongHoaDon;
-        this.diaChiNhanHang = diaChiNhanHang;
+        this.diaChi = diaChi;
+        this.sdt = sdt;
+        this.thanhToanOnline = thanhToanOnline;
         this.donHang = donHang;
     }
-
 
     public int getIdHoaDon() {
         return idHoaDon;
@@ -51,20 +62,36 @@ public class HoaDon {
         this.ngayLap = ngayLap;
     }
 
-    public Float getTongHoaDon() {
+    public Double getTongHoaDon() {
         return tongHoaDon;
     }
 
-    public void setTongHoaDon(Float tongHoaDon) {
+    public void setTongHoaDon(Double tongHoaDon) {
         this.tongHoaDon = tongHoaDon;
     }
 
-    public String getDiaChiNhanHang() {
-        return diaChiNhanHang;
+    public String getDiaChi() {
+        return diaChi;
     }
 
-    public void setDiaChiNhanHang(String diaChiNhanHang) {
-        this.diaChiNhanHang = diaChiNhanHang;
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
+    }
+
+    public String getSdt() {
+        return sdt;
+    }
+
+    public void setSdt(String sdt) {
+        this.sdt = sdt;
+    }
+
+    public Integer getThanhToanOnline() {
+        return thanhToanOnline;
+    }
+
+    public void setThanhToanOnline(Integer thanhToanOnline) {
+        this.thanhToanOnline = thanhToanOnline;
     }
 
     public DonHang getDonHang() {

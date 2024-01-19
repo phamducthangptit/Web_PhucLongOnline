@@ -3,7 +3,6 @@ package com.example.PhucLongOnline.Model;
 import jakarta.persistence.*;
 
 import java.sql.Date;
-import java.sql.Time;
 import java.util.List;
 
 @Entity
@@ -23,6 +22,8 @@ public class DonHang {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name ="idhoadon")
     private HoaDon hoaDon;
+    @OneToMany (mappedBy = "donHang",cascade = CascadeType.ALL)
+    List<CT_DonHang> ctDonHangs;
     public DonHang()
     {
 
@@ -73,5 +74,13 @@ public class DonHang {
 
     public void setHoaDon(HoaDon hoaDon) {
         this.hoaDon = hoaDon;
+    }
+
+    public List<CT_DonHang> getCtDonHangs() {
+        return ctDonHangs;
+    }
+
+    public void setCtDonHangs(List<CT_DonHang> ctDonHangs) {
+        this.ctDonHangs = ctDonHangs;
     }
 }

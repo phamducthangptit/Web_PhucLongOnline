@@ -1,12 +1,16 @@
 package com.example.PhucLongOnline.Model;
+
 import jakarta.persistence.*;
 
 import java.util.List;
+
+
 @Entity
 @Table(name = "quyen")
 public class Quyen {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(name = "idquyen")
     private int idQuyen;
     @Column(name = "chucvu")
@@ -38,8 +42,6 @@ public class Quyen {
     public void setChucVu(String chucVu) {
         this.chucVu = chucVu;
     }
-
-
 
     public List<TaiKhoan> getTaiKhoan() {
         return taiKhoan;
