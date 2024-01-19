@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.example.PhucLongOnline.Database.KhachHang;
-import com.example.PhucLongOnline.Database.ResponeObject;
-import com.example.PhucLongOnline.Database.TaiKhoan;
+import com.example.PhucLongOnline.Model.KhachHang;
+import com.example.PhucLongOnline.Model.ResponeObject;
+import com.example.PhucLongOnline.Model.TaiKhoan;
 import com.example.PhucLongOnline.Email.EmailService;
 import com.example.PhucLongOnline.Email.GenerateCode;
 import com.example.PhucLongOnline.Repository.KhachHangRepository;
@@ -87,11 +87,11 @@ public class UserController {
         } else {
             // Cập nhật vào db
             KhachHang khachhang = new KhachHang();
-            khachhang.setTendangnhap(email);
+            khachhang.setTenDangNhap(email);
             khachhang.setHo(firstname);
             khachhang.setTen(lastname);
-            khachhang.setGioitinh(gender);
-            khachhang.setDiachi(address);
+            khachhang.setGioiTinh(gender);
+            khachhang.setDiaChi(address);;
             khachhang.setSdt(sdt);
             session.setAttribute("khachhang", khachhang);
             session.setAttribute("mk", mk);
@@ -115,12 +115,12 @@ public class UserController {
         if (code.equals(codeSend)) {
             try {
                 KhachHang khachhang = (KhachHang) session.getAttribute("khachhang");
-                System.out.println(khachhang.getTendangnhap());
+                System.out.println(khachhang.getTenDangNhap());
                 System.out.println(khachhang.getEmail());
                 TaiKhoan taikhoan = new TaiKhoan();
-                taikhoan.setTendangnhap(khachhang.getTendangnhap());
-                taikhoan.setMatkhau((String) session.getAttribute("mk"));
-                taikhoan.setTrangthai(0);
+                taikhoan.setTenDangNhap((khachhang.getTenDangNhap();
+                taikhoan.setMatKhau((String) session.getAttribute("mk"));
+                taikhoan.setTrangThai(0);
                 taiKhoanRepository.save(taikhoan);
                 khachHangRepository.save(khachhang);
                 return ResponseEntity.status(HttpStatus.OK)
@@ -170,7 +170,7 @@ public class UserController {
         String pass = param.get("password");
         if(code.equals(codeSend)){
             TaiKhoan taikhoan = (TaiKhoan) session.getAttribute("taikhoan");
-            taikhoan.setMatkhau(pass);
+            taikhoan.setMatKhau(pass);
             try {
                 taiKhoanRepository.save(taikhoan);
                 return ResponseEntity.status(HttpStatus.OK)
