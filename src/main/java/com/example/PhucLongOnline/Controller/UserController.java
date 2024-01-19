@@ -118,7 +118,7 @@ public class UserController {
                 System.out.println(khachhang.getTenDangNhap());
                 System.out.println(khachhang.getEmail());
                 TaiKhoan taikhoan = new TaiKhoan();
-                taikhoan.setTenDangNhap((khachhang.getTenDangNhap();
+                taikhoan.setTenDangNhap((khachhang.getTenDangNhap()));
                 taikhoan.setMatKhau((String) session.getAttribute("mk"));
                 taikhoan.setTrangThai(0);
                 taiKhoanRepository.save(taikhoan);
