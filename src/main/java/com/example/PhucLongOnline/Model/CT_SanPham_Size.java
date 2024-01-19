@@ -75,6 +75,7 @@ public class CT_SanPham_Size {
         this.sanPham = sanPham;
     }
 
+
     public Size getSize() {
         return size;
     }
@@ -82,6 +83,7 @@ public class CT_SanPham_Size {
     public void setSize(Size size) {
         this.size = size;
     }
+
 
     public List<GioHang> getGioHangs() {
         return gioHangs;

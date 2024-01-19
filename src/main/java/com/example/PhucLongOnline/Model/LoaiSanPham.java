@@ -1,8 +1,10 @@
 package com.example.PhucLongOnline.Model;
 
+
 import jakarta.persistence.*;
 
 import java.util.List;
+
 
 @Entity
 @Table(name="loaisanpham")
@@ -18,6 +20,7 @@ public class LoaiSanPham {
     @OneToMany(mappedBy = "loaiSanPham")
     private List<SanPham> sanPhams;
 
+
     public int getIdLoaiSanPham() {
         return idLoaiSanPham;
     }
@@ -25,6 +28,7 @@ public class LoaiSanPham {
     public void setIdLoaiSanPham(int idLoaiSanPham) {
         this.idLoaiSanPham = idLoaiSanPham;
     }
+
 
     public String getTenLoai() {
         return tenLoai;
@@ -34,6 +38,7 @@ public class LoaiSanPham {
         this.tenLoai = tenLoai;
     }
 
+
     public List<SanPham> getSanPhams() {
         return sanPhams;
     }
@@ -41,4 +46,5 @@ public class LoaiSanPham {
     public void setSanPhams(List<SanPham> sanPhams) {
         this.sanPhams = sanPhams;
     }
+
 }

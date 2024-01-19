@@ -1,5 +1,6 @@
 package com.example.PhucLongOnline.Model;
 
+
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -26,6 +27,7 @@ public class NhanVien {
     private String diaChi;
 
     @Column(name="ngaysinh")
+
     private Date ngaySinh;
 
     @Column(name = "sdt")
@@ -59,6 +61,7 @@ public class NhanVien {
     @OneToMany(mappedBy = "nhanVien")
     private List<DonDatNguyenLieu> donDatNguyenLieus;
     public NhanVien(String maNhanVien, String ho, String ten, String gioiTinh, Date ngaySinh, String sdt, String email, String mst, String hinhAnh, String hopDong, String soBHXH) {
+
         this.maNhanVien = maNhanVien;
         this.ho = ho;
         this.ten = ten;
@@ -107,7 +110,6 @@ public class NhanVien {
     public void setGioiTinh(String gioiTinh) {
         this.gioiTinh = gioiTinh;
     }
-
 
     public String getDiaChi() {
         return diaChi;

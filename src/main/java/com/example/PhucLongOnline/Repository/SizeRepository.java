@@ -1,11 +1,8 @@
 package com.example.PhucLongOnline.Repository;
-
-
-import com.example.PhucLongOnline.Model.Quyen;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.example.PhucLongOnline.Model.Size;
 @Repository
-public interface QuyenRepository extends JpaRepository<Quyen,Integer> {
-    Quyen findById(int idQuyen);
+public interface SizeRepository  extends JpaRepository <Size, Integer>{
 }
