@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Phúc Long Online</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" th:href="@{/img/logo.png}">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/logo.png}">
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/templatemo.css}">
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap}">
+    <link rel="stylesheet" th:href="@{/css/fontawesome.min.css}">
+
+</head>
+
+<body>
+<div th:insert="~{header.html}"></div>
+
+    <!-- Modal -->
+    <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="w-100 pt-1 mb-5 text-right">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="" method="get" class="modal-content modal-body border-0 p-0">
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+                    <button type="submit" class="input-group-text bg-success text-light">
+                        <i class="fa fa-fw fa-search text-white"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <!-- Start Banner Hero -->
+    <div id="template-mo-zay-hero-carousel" class="carousel slide" data-bs-ride="carousel">
+        <img class="img-fluid"  th:src="@{/img/banner1.jpg}" alt="">
+
+    </div>
+    <!-- End Banner Hero -->
+
+
+    <!-- Start Categories of The Month -->
+    <section class="container py-5">
+        <div class="row text-center pt-3">
+            <div class="col-lg-6 m-auto">
+                <h1 class="h1">Các Loại Sản Phẩm</h1>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href="#"><img th:src="@{/img/cae.png}" class="rounded-circle img-fluid border"></a>
+                <h5 class="text-center mt-3 mb-3">Cà phê</h5>
+               <div class="text-center"><a th:href="@{san-pham/1}" class="btn btn-success">Xem</a></div>
+            </div>
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href="#"><img th:src="@{/img/luckytea.png}" class="rounded-circle img-fluid border"></a>
+                <h2 class="h5 text-center mt-3 mb-3">Trà</h2>
+                <div class="text-center"><a th:href="@{san-pham/2}" class="btn btn-success">Xem</a></div>
+            </div>
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href="#"><img th:src="@{/img/cake.png}" class="rounded-circle img-fluid border"></a>
+                <h2 class="h5 text-center mt-3 mb-3">Bánh Tráng Miệng</h2>
+                <div class="text-center"><a th:href="@{san-pham/3}" class="btn btn-success">Xem</a></div>
+            </div>
+        </div>
+    </section>
+    <!-- End Categories of The Month -->
+
+
+    <!-- Start Featured Product -->
+    <section class="bg-light">
+        <div class="container py-5">
+            <div class="row text-center py-3">
+                <div class="col-lg-6 m-auto">
+                    <h1 class="h1">Sản Phẩm Bán Chạy</h1>
+                   
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="card h-100">
+                        <a href="shop-single.html">
+                            <img th:src="@{/img/cappuccino.png}" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                <li>
+                                    Top 1
+                                </li> 
+                                <li class="text-center">50000 đ</li>
+                            </ul>
+                            <p class="h3 text-dark text-center">Cappuccino</p>
+                        </div>
+                        <p class="text-center"><a class="btn btn-success">Đặt Hàng</a></p> 
+                    </div>
+                
+                </div>
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="card h-100">
+                        <a href="shop-single.html">
+                            <img th:src="@{/img/TraMangCauJelly.png}" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                <li>
+                                    Top 2
+                                </li>
+                                <li class="text-right">65000 đ</li>
+                            </ul>
+                            <p class="h3 text-dark text-center">Trà Sữa Mãng Cầu Jelly Dừa Sợi</p>
+            
+                        </div>
+                        <p class="text-center"><a class="btn btn-success">Đặt Hàng</a></p> 
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="card h-100">
+                        <a href="shop-single.html">
+                            <img th:src="@{/img/tiramisumini.png}" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                <li>
+                                    Top 3
+                                </li>
+                                <li class="text-right">35000 đ</li>
+                            </ul>
+                            <p class="h3 text-dark text-center">Bánh Mì Phúc Long</p>
+                    
+                        </div>
+                        <p class="text-center"><a class="btn btn-success">Đặt Hàng</a></p> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<div th:insert="~{footer.html}"></div>
+
+    <!-- Start Script -->
+    <script src="assets/js/jquery-1.11.0.min.js"></script>
+    <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/templatemo.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <!-- End Script -->
+</body>
+
+</html>
