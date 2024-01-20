@@ -3,9 +3,11 @@ package com.example.PhucLongOnline.Controller;
 import ch.qos.logback.core.net.SyslogOutputStream;
 import com.example.PhucLongOnline.Model.HoaDon;
 import com.example.PhucLongOnline.Model.Quyen;
+import com.example.PhucLongOnline.Model.SanPham;
 import com.example.PhucLongOnline.Model.TaiKhoan;
 import com.example.PhucLongOnline.Repository.HoaDonRepository;
 import com.example.PhucLongOnline.Repository.QuyenRepository;
+import com.example.PhucLongOnline.Repository.SanPhamRepository;
 import com.example.PhucLongOnline.Repository.TaiKhoanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,10 +33,14 @@ public class Controller036 {
     private TaiKhoanRepository taiKhoanRepository;
     @Autowired
     private HoaDonRepository hoaDonRepository;
+    @Autowired
+    private SanPhamRepository sanPhamRepository;
     @GetMapping("home")
-    public String home ()
+    public String home (Model model)
     {
-        return "home.html";
+        List<SanPham> sanPhamList = sanPhamRepository.findTop3();
+        model.addAttribute("sanPhamList", sanPhamList);
+        return "home";
     }
     @GetMapping("danhSachTaiKhoan")
     public String danhSachTaiKhoan(Model model)
@@ -78,7 +84,11 @@ public class Controller036 {
         TaiKhoan taiKhoan =taiKhoanRepository.findByTenDangNhap(tenDangNhap);
         taiKhoan.setMatKhau("123456");
         taiKhoanRepository.save(taiKhoan);
-        return "redirect:/danhSachTaiKhoan";
+        if(taiKhoan.getQuyen().getIdQuyen()== 5)
+        {
+            return "redirect:/danhSachTaiKhoanKH";
+        }
+        else return "redirect:/danhSachTaiKhoan";
     }
 
     @RequestMapping("/thaydoiquyen")
@@ -91,7 +101,11 @@ public class Controller036 {
             taiKhoan.setQuyen(quyen);
             taiKhoanRepository.save(taiKhoan);
         }
-        return "redirect:/danhSachTaiKhoan";
+        if(taiKhoan.getQuyen().getIdQuyen()== 5)
+        {
+            return "redirect:/danhSachTaiKhoanKH";
+        }
+        else return "redirect:/danhSachTaiKhoan";
     }
     @RequestMapping("/thaydoitrangthai")
     public String thayDoiTrangThai(Model model, @RequestParam("tenDN") String tenDN)
@@ -103,7 +117,11 @@ public class Controller036 {
         }
         else taiKhoan.setTrangThai(1);
         taiKhoanRepository.save(taiKhoan);
-        return "redirect:/danhSachTaiKhoan";
+        if(taiKhoan.getQuyen().getIdQuyen()== 5)
+        {
+            return "redirect:/danhSachTaiKhoanKH";
+        }
+        else return "redirect:/danhSachTaiKhoan";
     }
     @GetMapping("/doanhThuNgay")
     public String doanhThuNgay()
