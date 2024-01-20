@@ -101,7 +101,7 @@ $(document).ready(function(){
                     type: 'GET',
                     url: 'https://localhost:7062/api/DatHang/get-gia-theo-san-pham-va-size',
                     contentType: 'application/json',
-                    data: { idSanPham: productId, idSize : 1 },
+                    data: { idSanPham: productId, idSize : 2 },
                     success: function(data){
                         var giaHienThoi = document.getElementById("gia-theo-size");
                         giaHienThoi.innerText = "Giá: " + data.toLocaleString() + "đ";

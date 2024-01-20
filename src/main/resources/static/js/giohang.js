@@ -194,6 +194,7 @@ var danhSachIdDaChon = [];
 function thaydoitrangthaichon(idSanPham) {
     var bochonButton = document.getElementById('bochon_' + idSanPham);
     var chonButton = document.getElementById('chon_' + idSanPham);
+    var soLuongSanPham = document.getElementById('so-luong-' + idSanPham);
 
     if (bochonButton.style.display !== 'none') {
         // Nếu nút "bochon" đang hiển thị, ẩn nút "bochon" và hiển thị nút "chon"
@@ -214,6 +215,7 @@ function thaydoitrangthaichon(idSanPham) {
                     console.log(error);
                 }
             });
+            //check xem đủ nguyên liệu không
             $.ajax({
                 type: 'GET',
                 url: 'https://localhost:7062/api/DatHang/them-san-pham-vao-don-hang',
