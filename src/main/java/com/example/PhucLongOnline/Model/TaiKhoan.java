@@ -49,13 +49,6 @@ public class TaiKhoan {
 
     }
 
-    public TaiKhoan(String tenDangNhap, String matKhau, int trangThai, Quyen quyen) {
-        this.tenDangNhap = tenDangNhap;
-        this.matKhau = matKhau;
-        this.trangThai = trangThai;
-        this.quyen = quyen;
-    }
-
     public String getTenDangNhap() {
         return tenDangNhap;
     }
