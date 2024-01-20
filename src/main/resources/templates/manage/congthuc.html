@@ -207,7 +207,7 @@ https://templatemo.com/tm-559-zay-shop
                                     <button type="submit" th:name="btnStatus" th:value ="btnAdd" class="btn btn-success">Thêm</button>
                                 </div>
                                 <button class="btn btn-success"><a th:href="@{http://localhost:8080/sanpham/addNguyenLieu(id=${idct})}">Tải lại trang</a></button>
-                                <button class="btn btn-success"><a th:href="@{http://localhost:8080/sanpham/detail(id=${congThuc.ctSanPhamSize.sanPham.idSanPham})}">Tải lại trang</a></button>
+                                <button class="btn btn-success"><a th:href="@{http://localhost:8080/sanpham/detail(id=${congThuc.ctSanPhamSize.sanPham.idSanPham})}">Về trang trước</a></button>
                                 <div th:if="${message}" class="input__item" th:text="${message}" style="color:red;"></div>
                         </form>
                 </div>

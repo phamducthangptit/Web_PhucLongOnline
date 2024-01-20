@@ -195,18 +195,19 @@ https://templatemo.com/tm-559-zay-shop
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="loai : ${list}">
-                                <th scope="row"><span th:text="${loai.idLoaiSanPham}"></span></th>
-                                <td><span th:text="${loai.tenLoai}"></span></td>
+                            <tr th:each="option : ${list}">
+                                <th scope="row"><span th:text="${option.idLoaiSanPham}"></span></th>
+                                <td><span th:text="${option.tenLoai}"></span></td>
                                 <td >
-                                    <a th:href="@{edit(id=${loai.idLoaiSanPham})}">
+                                    <a th:href="@{edit(id=${option.idLoaiSanPham})}">
                                         <i class="fa fa-cog fa-lg" style="color: rgb(238, 235, 36);">Sửa</i>
                                     </a>
-                                    <a th:href="@{delete(id=${loai.idLoaiSanPham})}" class="delete-link" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                                    <a th:href="@{delete(id=${option.idLoaiSanPham})}" >
                                         <i class="fa fa-cog fa-lg" style="color: rgb(237, 12, 12);">Xóa</i>
                                     </a>
                                     <!-- Thêm modal xác nhận xóa -->
-                                    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                                    <!-- class="delete-link" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" -->
+                                    <!-- <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -220,7 +221,7 @@ https://templatemo.com/tm-559-zay-shop
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                    <a th:href="@{delete(id=${loai.idLoaiSanPham})}" id="confirmDelete" class="btn btn-danger">OK</a>
+                                                    <a th:href="@{delete(id=${option.idLoaiSanPham})}" id="confirmDelete" class="btn btn-danger">OK</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -230,11 +231,14 @@ https://templatemo.com/tm-559-zay-shop
                                         $(document).ready(function(){
                                             // Lắng nghe sự kiện khi người dùng nhấn OK trong modal xác nhận xóa
                                             $("#confirmDelete").click(function(){
+                                                alert("abcccc");
                                                 // Gửi yêu cầu xóa đến controller
                                                 window.location.href = $(".delete-link").attr("href");
+                                                // var id = document.getElementById("id").value;
+                                                console.log("abcccccc");
                                             });
                                         });
-                                    </script>
+                                    </script> -->
                                 </td>
                             </tr>
                         </tbody>

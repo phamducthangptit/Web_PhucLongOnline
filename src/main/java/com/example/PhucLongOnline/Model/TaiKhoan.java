@@ -22,7 +22,14 @@ public class TaiKhoan {
     @Column(name = "trangthai")
     private int trangThai;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    public TaiKhoan(String tenDangNhap, String matKhau, int trangThai, Quyen quyen) {
+        this.tenDangNhap = tenDangNhap;
+        this.matKhau = matKhau;
+        this.trangThai = trangThai;
+        this.quyen = quyen;
+    }
+
+    @ManyToOne()
     @JoinColumn(name = "idquyen")
     private Quyen quyen;
 
@@ -40,13 +47,6 @@ public class TaiKhoan {
     public TaiKhoan()
     {
 
-    }
-
-    public TaiKhoan(String tenDangNhap, String matKhau, int trangThai, Quyen quyen) {
-        this.tenDangNhap = tenDangNhap;
-        this.matKhau = matKhau;
-        this.trangThai = trangThai;
-        this.quyen = quyen;
     }
 
     public String getTenDangNhap() {
