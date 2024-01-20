@@ -1,5 +1,4 @@
 package com.example.PhucLongOnline.Model;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -48,6 +47,7 @@ public class CongThuc {
         this.donVi = donVi;
     }
 
+
     public NguyenLieu getNguyenLieu() {
         return nguyenLieu;
     }
@@ -63,4 +63,5 @@ public class CongThuc {
     public void setCtSanPhamSize(CT_SanPham_Size ctSanPhamSize) {
         this.ctSanPhamSize = ctSanPhamSize;
     }
+
 }

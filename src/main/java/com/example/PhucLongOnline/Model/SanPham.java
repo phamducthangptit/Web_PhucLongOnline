@@ -1,5 +1,6 @@
 package com.example.PhucLongOnline.Model;
 
+
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class SanPham {
 
     @Column(name="hinhanh")
     private String hinhAnh;
+
 
     @Column(name = "cachphache")
     private String cachPhaChe;

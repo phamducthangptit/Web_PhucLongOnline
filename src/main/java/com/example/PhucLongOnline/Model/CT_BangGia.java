@@ -1,5 +1,13 @@
 package com.example.PhucLongOnline.Model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.persistence.*;
 
 @Entity
@@ -35,6 +43,7 @@ public class CT_BangGia {
 
     public void setGia(Double gia) {
         this.gia = gia;
+
     }
 
     public CT_SanPham_Size getCtSanPhamSize() {
@@ -45,6 +54,7 @@ public class CT_BangGia {
         this.ctSanPhamSize = ctSanPhamSize;
     }
 
+
     public BangGia getBangGia() {
         return bangGia;
     }
@@ -52,4 +62,5 @@ public class CT_BangGia {
     public void setBangGia(BangGia bangGia) {
         this.bangGia = bangGia;
     }
+
 }

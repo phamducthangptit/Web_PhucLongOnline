@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>LOGIN</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" th:href="@{/img/apple-icon.png}">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/templatemo.css}">
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet"
+        th:href="@{https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap}">
+    <link rel="stylesheet" th:href="@{/css/fontawesome.min.css}">
+    
+    
+
+</head>
+
+<body>
+    <!-- Start Top Nav -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+        Đăng nhập
+    </button>
+
+    <!-- Tạo một khối modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <!-- Tạo một khối dialog -->
+        <div class="modal-dialog">
+            <!-- Tạo một khối content -->
+            <div class="modal-content">
+                <!-- Tạo phần header -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!-- Tạo phần body -->
+                <form id="loginForm">
+                    <div class="modal-body">
+                        <!-- Tạo một form để nhập thông tin đăng nhập -->
+
+                        <div class="mb-3">
+                            <input type="username" class="form-control" id="username" placeholder="Email">
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" id="password" placeholder="Password">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="remember">
+                            <label class="form-check-label" for="remember">Ghi nhớ đăng nhập</label>
+                        </div>
+                        <div id="notification"></div>
+                    </div>
+                    <!-- Tạo phần footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="button" class="btn btn-primary" id="loginButton">Đăng nhập</button>
+                        <button type="button" class="btn btn-link" id="forgot">Quên mật khẩu?</button>
+                        <button type="button" class="btn btn-link" id="signup">Đăng ký</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Start Script -->
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:src="@{/js/jquery-migrate-1.2.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/templatemo.js}"></script>
+    <script th:src="@{/js/custom.js}"></script>
+    <script th:src="@{/js/login.js}"></script>
+    <!-- End Script -->
+    
+</body>
+
+</html>

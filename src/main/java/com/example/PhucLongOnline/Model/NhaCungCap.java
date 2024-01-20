@@ -1,5 +1,6 @@
 package com.example.PhucLongOnline.Model;
 
+
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -36,6 +37,7 @@ public class NhaCungCap {
         this.tenNhaCungCap = tenNhaCungCap;
     }
 
+
     public List<CT_NguyenLieu> getCtNguyenLieus() {
         return ctNguyenLieus;
     }
@@ -43,4 +45,5 @@ public class NhaCungCap {
     public void setCtNguyenLieus(List<CT_NguyenLieu> ctNguyenLieus) {
         this.ctNguyenLieus = ctNguyenLieus;
     }
+
 }

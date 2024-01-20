@@ -1,9 +1,11 @@
 package com.example.PhucLongOnline.Model;
 
+
 import jakarta.persistence.*;
 
 import java.sql.Date;
 import java.util.List;
+
 
 @Entity
 @Table(name="banggia")
@@ -11,10 +13,12 @@ public class BangGia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name= "idbanggia")
+
     private int idBangGia;
 
     @Column(name="tenloaigia")
     private String tenLoaiGia;
+
 
     @Column(name = "ngayapdung")
     private Date ngayApDung;
@@ -23,6 +27,7 @@ public class BangGia {
     private List<CT_BangGia> ctBangGias;
 
     public BangGia() {
+
     }
 
     public int getIdBangGia() {
@@ -32,6 +37,7 @@ public class BangGia {
     public void setIdBangGia(int idBangGia) {
         this.idBangGia = idBangGia;
     }
+
 
     public String getTenLoaiGia() {
         return tenLoaiGia;
@@ -56,4 +62,5 @@ public class BangGia {
     public void setCtBangGias(List<CT_BangGia> ctBangGias) {
         this.ctBangGias = ctBangGias;
     }
+
 }

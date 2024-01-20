@@ -1,5 +1,6 @@
 package com.example.PhucLongOnline.Repository;
 
+
 import com.example.PhucLongOnline.Model.CT_NguyenLieu;
 import com.example.PhucLongOnline.Model.NguyenLieu;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -27,3 +28,4 @@ public interface NguyenLieuRepository extends JpaRepository<NguyenLieu,Integer> 
     );
 
 }
+

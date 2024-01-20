@@ -1,5 +1,6 @@
 package com.example.PhucLongOnline.Model;
 
+
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -21,9 +22,11 @@ public class Quyen {
     public Quyen() {
     }
 
+
     public Quyen(int idQuyen, String chucVu) {
         this.idQuyen = idQuyen;
         this.chucVu = chucVu;
+
 
     }
 
@@ -33,6 +36,7 @@ public class Quyen {
 
     public void setIdQuyen(int idQuyen) {
         this.idQuyen = idQuyen;
+
     }
 
     public String getChucVu() {
@@ -43,6 +47,7 @@ public class Quyen {
         this.chucVu = chucVu;
     }
 
+
     public List<TaiKhoan> getTaiKhoan() {
         return taiKhoan;
     }
@@ -50,4 +55,5 @@ public class Quyen {
     public void setTaiKhoan(List<TaiKhoan> taiKhoan) {
         this.taiKhoan = taiKhoan;
     }
+
 }

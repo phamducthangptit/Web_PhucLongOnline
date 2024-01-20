@@ -1,12 +1,15 @@
 package com.example.PhucLongOnline.Model;
 
+
 import jakarta.persistence.*;
 
 import java.util.List;
 
+
 @Entity
 @Table(name="size")
 public class Size {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +21,7 @@ public class Size {
 
     @OneToMany(mappedBy = "size")
     private List<CT_SanPham_Size> ctSanPhamSizes;
+
 
     public int getIdSize() {
         return idSize;
@@ -42,4 +46,5 @@ public class Size {
     public void setCtSanPhamSizes(List<CT_SanPham_Size> ctSanPhamSizes) {
         this.ctSanPhamSizes = ctSanPhamSizes;
     }
+
 }
