@@ -177,7 +177,7 @@ https://templatemo.com/tm-559-zay-shop
                                     <label for="inputname">Tên sản phẩm</label>
                                     <input type="text"  class="form-control mt-1" required th:field="${sanPham.tenSanPham}"  readonly>
                                     <input type="hidden" th:field="*{sanPham.idSanPham}"/>
-                                    <!-- <input type="hidden" th:field="*{giaHienThoi}"/> -->
+                                    <input type="hidden" th:field="*{giaHienThoi}"/>
                                     <input type="hidden" th:field="${sanPham.idSanPham}"/>
                                 </div>
 
@@ -221,12 +221,12 @@ https://templatemo.com/tm-559-zay-shop
                                         <i class="fa fa-cog fa-lg" style="color: rgb(7, 255, 28);">Công thức</i>
                                     </a>
 
-                                    <a th:href="@{deleteSize(id=${ctSanPhamSize.idSanPhamSize},idSP=${sanPham.idSanPham})}" class="delete-link" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                                    <a th:href="@{deleteSize(id=${ctSanPhamSize.idSanPhamSize},idSP=${sanPham.idSanPham})}" >
                                         <i class="fa fa-cog fa-lg" style="color: rgb(248, 12, 12);">Xóa</i>
                                     </a>
 
                                     <!-- Thêm modal xác nhận xóa -->
-                                    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                                    <!-- <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -254,7 +254,7 @@ https://templatemo.com/tm-559-zay-shop
                                                 window.location.href = $(".delete-link").attr("href");
                                             });
                                         });
-                                    </script>
+                                    </script> -->
                                 </td>
                             </tr>
                         </tbody>
