@@ -23,14 +23,14 @@
 
 <div th:if="${session.taikhoan != null}">
     <!-- Kiểm tra giá trị của trường "quyen" -->
-    <th:block th:if="${session.taikhoan.quyen.idquyen =! 5}">
+    <th:div th:if="${session.taikhoan.quyen.idQuyen != 5}">
         <!-- Nếu quyen là 1, chèn header -->
         <div th:insert="~{header.html}"></div>
-    </th:block>
-    <th:block th:if="${session.taikhoan.quyen.idquyen == 5}">
+    </th:div>
+    <th:div th:if="${session.taikhoan.quyen.idQuyen == 5}">
         <!-- Nếu quyen khác 1, chèn headerKhachHang -->
         <div th:insert="~{headerKhachHang.html}"></div>
-    </th:block>
+    </th:div>
 </div>
 <div th:if="${session.taikhoan == null}">
     <div th:insert="~{headerKhachHang.html}"></div>
