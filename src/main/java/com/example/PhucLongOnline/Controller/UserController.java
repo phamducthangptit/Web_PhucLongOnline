@@ -57,6 +57,9 @@ public class UserController {
         String checkLogin = userService.customCheckCredentials(username, password);
         if (checkLogin == "ok") {
             // Thêm đối tượng vào session
+            Optional<TaiKhoan> optionalTaiKhoan = taiKhoanRepository.findById(username);
+            TaiKhoan taiKhoan = optionalTaiKhoan.get();
+            session.setAttribute("taikhoan", taiKhoan);
             return ResponseEntity.status(HttpStatus.OK).body(
                     new ResponeObject("ok", "Đăng nhập thành công", checkLogin));
         } else {
@@ -98,7 +101,7 @@ public class UserController {
             GenerateCode generateCode = new GenerateCode();
             String code = generateCode.generateCode();
             System.out.print(code);
-            // emailService.sendEmail(email, "Mã xác nhận của bạn", code);
+            emailService.sendEmail(email, "Mã xác nhận của bạn", code);
             session.setAttribute("code", code);
             return ResponseEntity.status(HttpStatus.OK).body(
                     new ResponeObject("ok", "Lấy thông tin khách hàng thành công", khachhang));
@@ -151,7 +154,7 @@ public class UserController {
             GenerateCode generateCode = new GenerateCode();
             String code = generateCode.generateCode();
             System.out.println(code);
-            // emailService.sendEmail(email, "Mã xác nhận của bạn là:", code);
+            emailService.sendEmail(email, "Mã xác nhận của bạn là:", code);
             session.setAttribute("code2", code);
             TaiKhoan taikhoan = optionalTaiKhoan.get();
             session.setAttribute("taikhoan", taikhoan);
@@ -180,13 +183,11 @@ public class UserController {
                 return ResponseEntity.status(HttpStatus.OK)
                 .body(new ResponeObject("failed", "Cập nhật thất bại,vui lòng thử lại sau.", ""));
             }
-            
+
         }
         else{
             return ResponseEntity.status(HttpStatus.OK)
             .body(new ResponeObject("failed", "Mã xác nhận không đúng", ""));
         }
-        
     }
-    
 }
