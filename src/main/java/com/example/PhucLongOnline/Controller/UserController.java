@@ -190,4 +190,21 @@ public class UserController {
             .body(new ResponeObject("failed", "Mã xác nhận không đúng", ""));
         }
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate(); // Xóa phiên đăng nhập
+        }
+        return "redirect:/"; // Chuyển hướng về trang chủ
+    }
+
+    @GetMapping("/information")
+    public String information(Model model,HttpSession session) {
+        
+        return "information.html";
+    }
+    
+    
 }
