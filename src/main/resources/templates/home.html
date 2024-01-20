@@ -75,12 +75,12 @@
             <div class="col-12 col-md-4 p-5 mt-3">
                 <a href="#"><img th:src="@{/img/cae.png}" class="rounded-circle img-fluid border"></a>
                 <h5 class="text-center mt-3 mb-3">Cà phê</h5>
-               <div class="text-center"><a th:href="@{san-pham/1}" class="btn btn-success">Xem</a></div>
+               <div class="text-center"><a th:href="@{san-pham/2}" class="btn btn-success">Xem</a></div>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
                 <a href="#"><img th:src="@{/img/luckytea.png}" class="rounded-circle img-fluid border"></a>
                 <h2 class="h5 text-center mt-3 mb-3">Trà</h2>
-                <div class="text-center"><a th:href="@{san-pham/2}" class="btn btn-success">Xem</a></div>
+                <div class="text-center"><a th:href="@{san-pham/1}" class="btn btn-success">Xem</a></div>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
                 <a href="#"><img th:src="@{/img/cake.png}" class="rounded-circle img-fluid border"></a>
@@ -101,6 +101,7 @@
                    
                 </div>
             </div>
+            <div th:if="${sanPhamList.size() >= 3}" >
             <div class="row">
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
@@ -152,6 +153,7 @@
                         <p class="text-center"><a class="btn btn-success">Đặt Hàng</a></p> 
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </section>

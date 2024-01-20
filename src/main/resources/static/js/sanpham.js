@@ -94,14 +94,14 @@ $(document).ready(function(){
                 // Xử lý sự kiện click ở đây (mặc định chọn size đầu tiên)
                 console.log('Size đầu tiên', sizes.idSize);
                 // Đặt màu sắc cho nút được chọn mặc định
-                var sizeButton = sizeList.find('[data-size-id="' + 1 + '"]');
-                sizeChon = 1;
+                var sizeButton = sizeList.find('[data-size-id="' + 2 + '"]'); // sửa size thì sửa đoạn này
+                sizeChon = 2;
                 sizeButton.removeClass('btn-success').addClass('btn-secondary');
                 $.ajax({
                     type: 'GET',
                     url: 'https://localhost:7062/api/DatHang/get-gia-theo-san-pham-va-size',
                     contentType: 'application/json',
-                    data: { idSanPham: productId, idSize : 2 },
+                    data: { idSanPham: productId, idSize : 2 }, // sửa size thì sửa đoạn này
                     success: function(data){
                         var giaHienThoi = document.getElementById("gia-theo-size");
                         giaHienThoi.innerText = "Giá: " + data.toLocaleString() + "đ";
@@ -158,7 +158,7 @@ $(document).ready(function(){
                             type: 'GET',
                             url: 'https://localhost:7062/api/DatHang/them-so-luong-san-pham-vao-gh',
                             contentType: 'application/json',
-                            data: {tenDangNhap: "ducthang", idSanPham: idSP, idSize: sizeChon, soLuong: soLuongSP },
+                            data: {tenDangNhap: tenDangNhap, idSanPham: idSP, idSize: sizeChon, soLuong: soLuongSP },
                             success: function(data){
                                 console.log("thêm số lượng thành công");
                                 LoadSoLuongSanPhamTrongGioHang();

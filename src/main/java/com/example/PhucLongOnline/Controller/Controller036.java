@@ -40,6 +40,7 @@ public class Controller036 {
     {
         List<SanPham> sanPhamList = sanPhamRepository.findTop3();
         model.addAttribute("sanPhamList", sanPhamList);
+        System.out.println(sanPhamList.size());
         return "home";
     }
     @GetMapping("danhSachTaiKhoan")
