@@ -89,9 +89,16 @@ public class BangGiaController {
     public String delete(@RequestParam("id") int id, Model model) {
         try{
             BangGia bangGia=bangGiaRepository.getById(id);
-            bangGiaRepository.delete(bangGia);
-            System.out.println("Xóa thành công");
-            model.addAttribute("message", "Xóa thành công");
+            
+            try{
+                bangGiaRepository.delete(bangGia);
+                System.out.println("Xóa thành công");
+                model.addAttribute("message", "Xóa thành công");
+            }
+            catch(Exception e){
+                System.out.println("Lỗi: "+ e);
+                model.addAttribute("message", "Lỗi: Đã liên kết");
+            }
             bangGia=new BangGia();
             List<BangGia> list=bangGiaRepository.findAll();
             model.addAttribute("list", list);
@@ -110,11 +117,18 @@ public class BangGiaController {
     @PostMapping(path = "/update")
     public String update(@ModelAttribute BangGia bangGia, Model model, @RequestParam("btnStatus")String btnStatus) {
         try{
-            bangGiaRepository.save(bangGia);
+            
+            try{
+                bangGiaRepository.save(bangGia);
+                System.out.println("Save thành công");
+                model.addAttribute("message", "Save thành công");
+            }
+            catch(Exception e){
+                System.out.println("Lỗi: "+ e);
+                model.addAttribute("message", "Lỗi: Trùng khóa");
+            }
             bangGia=new BangGia();
             List<BangGia> list=bangGiaRepository.findAll();
-            System.out.println("Save thành công");
-            model.addAttribute("message", "Lưu thành công");
             model.addAttribute("list", list);
             model.addAttribute("bangGia", bangGia);
             model.addAttribute("btnStatus", "btnAdd");

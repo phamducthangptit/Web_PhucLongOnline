@@ -202,11 +202,11 @@ https://templatemo.com/tm-559-zay-shop
                                     <a th:href="@{edit(id=${size.idSize})}">
                                         <i class="fa fa-cog fa-lg" style="color: rgb(238, 235, 36);">Sửa</i>
                                     </a>
-                                    <a th:href="@{delete(id=${size.idSize})}" class="delete-link" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                                    <a th:href="@{delete(id=${size.idSize})}">
                                         <i class="fa fa-cog fa-lg" style="color: rgb(237, 12, 12);">Xóa</i>
                                     </a>
                                     <!-- Thêm modal xác nhận xóa -->
-                                    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                                    <!-- <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -234,7 +234,7 @@ https://templatemo.com/tm-559-zay-shop
                                                 window.location.href = $(".delete-link").attr("href");
                                             });
                                         });
-                                    </script>
+                                    </script> -->
                                 </td>
                             </tr>
                         </tbody>

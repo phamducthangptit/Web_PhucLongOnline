@@ -1,7 +1,6 @@
 var tenDangNhap;
 $(document).ready(function(){
     tenDangNhap = document.getElementById("tenDangNhap").value;
-
     function LoadSoLuongSanPhamTrongGioHang(){
         console.log("load số lượng");
         // load lại số lượng trong giỏ hàng

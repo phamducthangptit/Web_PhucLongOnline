@@ -139,16 +139,23 @@ public class NhanVienController {
                 }
             nhanVien.setHinhAnh(fileName);
             if (btnStatus.equals("btnAdd")){
-                Quyen quyen=quyenRepository.getById(2);
+                Quyen quyen=quyenRepository.getById(4);
                 TaiKhoan taiKhoan = new TaiKhoan(nhanVien.getMaNhanVien(), "123", 1, quyen);
                 taiKhoanRepository.save(taiKhoan);
             }
-            nhanVienRepository.save(nhanVien);
+            
+            try{
+                nhanVienRepository.save(nhanVien);
+                System.out.println("Save thành công");
+                model.addAttribute("message", "Save thành công");
+            }
+            catch(Exception e){
+                System.out.println("Lỗi: "+ e);
+                model.addAttribute("message", "Lỗi: Trùng khóa");
+            }
             nhanVien = new NhanVien();
             nhanVien.setMaNhanVien(nhanVienService.getNewMaNhanVien());
             List<NhanVien> list=nhanVienRepository.findAll();
-            System.out.println("Save thành công");
-            model.addAttribute("message", "Lưu thành công");
             model.addAttribute("list", list);
             model.addAttribute("nhanVien", nhanVien);
             model.addAttribute("btnStatus", "btnAdd");

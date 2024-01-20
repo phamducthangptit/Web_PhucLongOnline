@@ -188,7 +188,10 @@ https://templatemo.com/tm-559-zay-shop
                                     <label for="inputname">Số lượng</label>
                                     <input type="number" min="0" step="0.1"  class="form-control mt-1" name="soLuong" required th:field="*{soLuong}">
                                 </div>
-                                
+                                <div class="form-group col-md-6 mb-3">
+                                    <label for="inputname">Đơn vị</label>
+                                    <input type="text"  class="form-control mt-1" placeholder="Đơn vị" name="donVi" required th:field="*{donVi}" maxlength="30">
+                                </div>
                                 <div th:switch ="${btnStatus}" class="mb-3">
                                     <button type="submit" th:name="btnStatus" th:value ="btnAdd" th:case="'btnAdd'" class="btn btn-success">Thêm</button>
                                     <button type="submit" th:name="btnStatus" th:value ="btnEdit" th:case="'btnEdit'" class="btn btn-success">Sửa</button>
@@ -205,6 +208,7 @@ https://templatemo.com/tm-559-zay-shop
                                 <th scope="col">Tên nguyên liệu</th>
                                 <th scope="col">Hình ảnh</th>
                                 <th scope="col">Số lượng tồn</th>
+                                <th scope="col">Đơn vị</th>
                                 <th scope="col">Tác vụ</th>
                             </tr>
                         </thead>
@@ -214,15 +218,16 @@ https://templatemo.com/tm-559-zay-shop
                                 <td><span th:text="${nguyenLieu.tenNguyenLieu}"></span></td>
                                 <td><span th:text="${nguyenLieu.hinhAnh}"></span></td>
                                 <td><span th:text="${nguyenLieu.soLuong}"></span></td>
+                                <td><span th:text="${nguyenLieu.donVi}"></span></td>
                                 <td >
                                     <a th:href="@{edit(id=${nguyenLieu.idNguyenLieu})}">
                                         <i class="fa fa-cog fa-lg" style="color: rgb(238, 235, 36);">Sửa</i>
                                     </a>
-                                    <a th:href="@{delete(id=${nguyenLieu.idNguyenLieu})}" class="delete-link" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                                    <a th:href="@{delete(id=${nguyenLieu.idNguyenLieu})}" >
                                         <i class="fa fa-cog fa-lg" style="color: rgb(237, 12, 12);">Xóa</i>
                                     </a>
                                     <!-- Thêm modal xác nhận xóa -->
-                                    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                                    <!-- <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -250,7 +255,7 @@ https://templatemo.com/tm-559-zay-shop
                                                 window.location.href = $(".delete-link").attr("href");
                                             });
                                         });
-                                    </script>
+                                    </script> -->
                                 </td>
                             </tr>
                         </tbody>
