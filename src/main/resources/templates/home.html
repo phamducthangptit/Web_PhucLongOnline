@@ -63,15 +63,19 @@
     <!-- End Banner Hero -->
 
 
+
+
+
+
     <!-- Start Categories of The Month -->
-    <section class="container py-5">
+    <section class="container py-5" th:if="${((session.taikhoan != null && session.taikhoan.quyen.idQuyen == 5) || (session.taikhoan == null))}">
         <div class="row text-center pt-3">
             <div class="col-lg-6 m-auto">
                 <h1 class="h1">Các Loại Sản Phẩm</h1>
 
             </div>
         </div>
-        <div class="row">
+        <div class="row" >
             <div class="col-12 col-md-4 p-5 mt-3">
                 <a href="#"><img th:src="@{/img/cae.png}" class="rounded-circle img-fluid border"></a>
                 <h5 class="text-center mt-3 mb-3">Cà phê</h5>
@@ -94,11 +98,11 @@
 
     <!-- Start Featured Product -->
     <section class="bg-light">
-        <div class="container py-5">
+        <div class="container py-5" th:if="${((session.taikhoan != null && session.taikhoan.quyen.idQuyen == 5) || (session.taikhoan == null))}">
             <div class="row text-center py-3">
                 <div class="col-lg-6 m-auto">
                     <h1 class="h1">Sản Phẩm Bán Chạy</h1>
-                   
+
                 </div>
             </div>
             <div class="row">
@@ -117,7 +121,7 @@
                         </div>
                         <p class="text-center"><a class="btn btn-success">Đặt Hàng</a></p>
                     </div>
-                
+
                 </div>
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
@@ -129,9 +133,9 @@
                                 Top 2
                             </H4>
                             <p class="h3  text-center" th:text="${sanPhamList[1].tenSanPham}"></p>
-            
+
                         </div>
-                        <p class="text-center"><a class="btn btn-success">Đặt Hàng</a></p> 
+                        <p class="text-center"><a class="btn btn-success">Đặt Hàng</a></p>
                     </div>
                 </div>
                 <div class="col-12 col-md-4 mb-4">
@@ -147,9 +151,9 @@
 
 
                             <p class="h3  text-center" th:text="${sanPhamList[2].tenSanPham}"></p>
-                    
+
                         </div>
-                        <p class="text-center"><a class="btn btn-success">Đặt Hàng</a></p> 
+                        <p class="text-center"><a class="btn btn-success">Đặt Hàng</a></p>
                     </div>
                 </div>
             </div>
