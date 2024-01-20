@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh sách đơn hàng</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" th:href="@{/img/apple-icon.png}">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
+
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/templatemo.css}">
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap}">
+    <link rel="stylesheet" th:href="@{/css/fontawesome.min.css}">
+</head>
+
+<body>
+
+
+<!-- Open Content -->
+<section class="bg-light">
+    <div th:insert="~{headerKhachHang.html}"></div>
+    <div class="container pb-5">
+        <!-- col end -->
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-8 mt-5">
+                        <h4 th:text="'Trạng thái đơn hàng ' +  ${trangthaidonhang}"></h4>
+                        <input hidden="hidden" th:value="${trangthaidonhang}" id="trang-thai-don">
+                    </div>
+
+                </div>
+                <form method="get">
+                    <div class="row">
+                        <table class=" table table-light table-striped table-hover bordered-dark">
+                            <thead>
+                            <tr>
+                                <th scope="col" class="text-center align-middle">ID</th>
+                                <th scope="col" class="text-center align-middle">Ngày đặt</th>
+                                <th scope="col" class="text-center align-middle">Trạng thái</th>
+                                <th scope="col" class="text-center align-middle">Thay đổi trạng thái</th>
+                                <th scope="col" class="text-center align-middle">Chi tiết</th>
+                            </tr>
+                            </thead>
+                            <tbody id="danh-sach-don-hang">
+                            <td class="col-md-1 text-center align-middle">
+                            </td>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Close Content -->
+
+<!-- Start Script -->
+<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/js/jquery-migrate-1.2.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/templatemo.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+<script th:src="@{/js/danhsachdonhang.js}"></script>
+<!-- End Slider Script -->
+
+</body>
+
+</html>

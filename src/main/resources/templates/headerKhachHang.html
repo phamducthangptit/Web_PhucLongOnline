@@ -24,6 +24,19 @@
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/lich-su-don-hang}">Lịch sử đơn hàng</a>
                     </li>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <!-- Nút kích hoạt dropdown (thẻ link) -->
+                            <a href="#" class="dropdown-button">Đơn hàng</a>
+                            <!-- Nội dung dropdown với các mục -->
+                            <div class="dropdown-content">
+                                <a th:href="@{/don-hang/chua-xac-nhan}">Chưa xác nhận</a>
+                                <a th:href="@{/don-hang/da-xac-nhan}">Đã xác nhận</a>
+                                <a th:href="@{/don-hang/da-hoan-thanh}">Đã hoàn thành</a>
+                            </div>
+                        </div>
+                    </li>
+
                 </ul>
             </div>
             <div class="navbar align-self-center d-flex">
@@ -44,7 +57,7 @@
                 </a>
                 <a class="nav-icon position-relative text-decoration-none" href="#">
                     <i class="fa fa-fw fa-user text-dark mr-3"></i>
-                    <input hidden="hidden" id="tenDangNhap" value="ducthang">
+                    <input type="hidden" id="tenDangNhap" th:value="${session.taikhoan != null ? session.taikhoan.tenDangNhap : null}" />
                     <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark" ></span>
                 </a>
             </div>
