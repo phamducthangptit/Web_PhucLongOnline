@@ -20,7 +20,21 @@
 </head>
 
 <body>
-<div th:insert="~{header.html}"></div>
+
+<div th:if="${session.taikhoan != null}">
+    <!-- Kiểm tra giá trị của trường "quyen" -->
+    <th:div th:if="${session.taikhoan.quyen.idQuyen != 5}">
+        <!-- Nếu quyen là 1, chèn header -->
+        <div th:insert="~{header.html}"></div>
+    </th:div>
+    <th:div th:if="${session.taikhoan.quyen.idQuyen == 5}">
+        <!-- Nếu quyen khác 1, chèn headerKhachHang -->
+        <div th:insert="~{headerKhachHang.html}"></div>
+    </th:div>
+</div>
+<div th:if="${session.taikhoan == null}">
+    <div th:insert="~{headerKhachHang.html}"></div>
+</div>
 
     <!-- Modal -->
     <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -90,35 +104,31 @@
             <div class="row">
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
-                        <a href="shop-single.html">
-                            <img th:src="@{/img/cappuccino.png}" class="card-img-top" alt="...">
+                        <a href="#">
+                            <img th:src="@{'img/' + ${sanPhamList[0].hinhAnh}}" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
+
+                                <H4 class="text-center">
                                     Top 1
-                                </li> 
-                                <li class="text-center">50000 đ</li>
-                            </ul>
-                            <p class="h3 text-dark text-center">Cappuccino</p>
+                                </H4>
+
+                            <p class="h3 text-center" th:text="${sanPhamList[0].tenSanPham}"></p>
                         </div>
-                        <p class="text-center"><a class="btn btn-success">Đặt Hàng</a></p> 
+                        <p class="text-center"><a class="btn btn-success">Đặt Hàng</a></p>
                     </div>
                 
                 </div>
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
                         <a href="shop-single.html">
-                            <img th:src="@{/img/TraMangCauJelly.png}" class="card-img-top" alt="...">
+                            <img th:src="@{'img/' + ${sanPhamList[1].hinhAnh}}" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
-                                    Top 2
-                                </li>
-                                <li class="text-right">65000 đ</li>
-                            </ul>
-                            <p class="h3 text-dark text-center">Trà Sữa Mãng Cầu Jelly Dừa Sợi</p>
+                            <H4 class="text-center">
+                                Top 2
+                            </H4>
+                            <p class="h3  text-center" th:text="${sanPhamList[1].tenSanPham}"></p>
             
                         </div>
                         <p class="text-center"><a class="btn btn-success">Đặt Hàng</a></p> 
@@ -127,16 +137,16 @@
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
                         <a href="shop-single.html">
-                            <img th:src="@{/img/tiramisumini.png}" class="card-img-top" alt="...">
+                            <img th:src="@{'img/' + ${sanPhamList[2].hinhAnh}}" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
+
+                                <H4 class="text-center">
                                     Top 3
-                                </li>
-                                <li class="text-right">35000 đ</li>
-                            </ul>
-                            <p class="h3 text-dark text-center">Bánh Mì Phúc Long</p>
+                                </H4>
+
+
+                            <p class="h3  text-center" th:text="${sanPhamList[2].tenSanPham}"></p>
                     
                         </div>
                         <p class="text-center"><a class="btn btn-success">Đặt Hàng</a></p> 

@@ -10,6 +10,7 @@ import java.util.List;
 @Table(name="taikhoan")
 
 public class TaiKhoan {
+
     @Id
     @Column(name = "tendangnhap")
     private String tenDangNhap;
@@ -46,6 +47,13 @@ public class TaiKhoan {
     public TaiKhoan()
     {
 
+    }
+
+    public TaiKhoan(String tenDangNhap, String matKhau, int trangThai, Quyen quyen) {
+        this.tenDangNhap = tenDangNhap;
+        this.matKhau = matKhau;
+        this.trangThai = trangThai;
+        this.quyen = quyen;
     }
 
     public String getTenDangNhap() {
