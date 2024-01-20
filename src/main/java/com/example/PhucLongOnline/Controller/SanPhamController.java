@@ -111,9 +111,15 @@ public class SanPhamController {
             System.out.print("id: ");
             System.out.println(id);
             SanPham sanPham=sanPhamRepository.getById(id);
-            sanPhamRepository.delete(sanPham);
-            System.out.println("Xóa thành công");
-            model.addAttribute("message", "Xóa thành công");
+            try{
+                sanPhamRepository.delete(sanPham);
+                System.out.println("Xóa thành công");
+                model.addAttribute("message", "Xóa thành công");
+            }
+            catch(Exception e){
+                System.out.println("Lỗi: "+ e);
+                model.addAttribute("message", "Lỗi: Đã liên kết");
+            }
             sanPham=new SanPham();
             List<SanPham> list=sanPhamRepository.findAll();
             List<LoaiSanPham> loaiSanPhamsList=loaiSanPhamRepository.findAll();
@@ -152,9 +158,15 @@ public class SanPhamController {
                     Files.copy(file.getInputStream(), filePath,StandardCopyOption.REPLACE_EXISTING);
                 }
             sanPham.setHinhAnh(fileName);
-            sanPhamRepository.save(sanPham);
-            System.out.println("Save thành công");
-            model.addAttribute("message", "Save thành công");
+            try{
+                sanPhamRepository.save(sanPham);
+                System.out.println("Save thành công");
+                model.addAttribute("message", "Save thành công");
+            }
+            catch(Exception e){
+                System.out.println("Lỗi: "+ e);
+                model.addAttribute("message", "Lỗi: Trùng khóa");
+            }
             sanPham=new SanPham();
             List<SanPham> list=sanPhamRepository.findAll();
             List<LoaiSanPham> loaiSanPhamsList=loaiSanPhamRepository.findAll();
@@ -199,9 +211,15 @@ public class SanPhamController {
         try{
             
             List<Size> sizeList =sizeRepository.findAll();
-            ctSanPhamSizeRepository.save(ctSanPhamSize);
-            System.out.println("Save thành công");
-            model.addAttribute("message", "Save thành công");
+            try{
+                ctSanPhamSizeRepository.save(ctSanPhamSize);
+                System.out.println("Save thành công");
+                model.addAttribute("message", "Save thành công");
+            }
+            catch (Exception e){
+                System.out.println("Lỗi: Đã tồn tại trong hệ thống");
+                model.addAttribute("message", "Lỗi: Đã tồn tại trong hệ thống");
+            }
             ctSanPhamSize=new CT_SanPham_Size();
             ctSanPhamSize.setGiaHienThoi(0.0);
             ctSanPhamSize.setSanPham(sanPham);
@@ -239,9 +257,15 @@ public class SanPhamController {
             
             List<Size> sizeList =sizeRepository.findAll();
             CT_SanPham_Size temp=ctSanPhamSizeRepository.getById(id);
-            ctSanPhamSizeRepository.delete(temp);
-            System.out.println("Xóa thành công");
-            model.addAttribute("message", "Xóa thành công");
+            try{
+                ctSanPhamSizeRepository.delete(temp);
+                System.out.println("Xóa thành công");
+                model.addAttribute("message", "Xóa thành công");
+            }
+            catch(Exception ex){
+                System.out.println("Lỗi: "+ ex);
+                model.addAttribute("message", "Lỗi: "+ex);
+            }
             CT_SanPham_Size ctSanPhamSize =new CT_SanPham_Size();
             ctSanPhamSize.setGiaHienThoi(0.0);
             SanPham sanPham=sanPhamRepository.getById(idSP);
@@ -287,10 +311,15 @@ public class SanPhamController {
     @PostMapping("/addNguyenLieu")
     public String themNguyenLieu(@RequestParam("id")int id,Model model,@ModelAttribute CongThuc congThuc) {
         try{
-
-            congThucRepository.save(congThuc);
-            System.out.println("Save thành công");
-            model.addAttribute("message", "Save thành công");
+            try{
+                congThucRepository.save(congThuc);
+                System.out.println("Save thành công");
+                model.addAttribute("message", "Save thành công");
+            }
+            catch(Exception ex){
+                System.out.println("Lỗi: "+ ex);
+                model.addAttribute("message", "Lỗi: Trùng khóa");
+            }
             CT_SanPham_Size ctSanPhamSize=ctSanPhamSizeRepository.getById(id);
             List<CongThuc> list = ctSanPhamSize.getCongThucs();
             congThuc = new CongThuc();
@@ -315,9 +344,15 @@ public class SanPhamController {
     public String xoaNguyenLieu(@RequestParam("id")int id,@RequestParam("idCongThuc")int idCongThuc,Model model) {
         try{
             CongThuc congThuc= congThucRepository.getById(idCongThuc);
-            congThucRepository.delete(congThuc);
-            System.out.println("Xóa thành công");
-            model.addAttribute("message", "Xóa thành công");
+            try{
+                congThucRepository.delete(congThuc);
+                System.out.println("Xóa thành công");
+                model.addAttribute("message", "Xóa thành công");
+            }
+            catch(Exception ex){
+                System.out.println("Lỗi: "+ ex);
+                model.addAttribute("message", "Lỗi: "+ex);
+            }
             CT_SanPham_Size ctSanPhamSize=ctSanPhamSizeRepository.getById(id);
             List<CongThuc> list = ctSanPhamSize.getCongThucs();
             congThuc = new CongThuc();

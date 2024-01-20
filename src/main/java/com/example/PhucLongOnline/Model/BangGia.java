@@ -23,7 +23,7 @@ public class BangGia {
     @Column(name = "ngayapdung")
     private Date ngayApDung;
 
-    @OneToMany(mappedBy = "bangGia")
+    @OneToMany(mappedBy = "bangGia", cascade = CascadeType.ALL)
     private List<CT_BangGia> ctBangGias;
 
     public BangGia() {

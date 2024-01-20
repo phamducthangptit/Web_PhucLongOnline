@@ -17,7 +17,7 @@ public class Quyen {
     @Column(name = "chucvu")
     private String chucVu;
 
-    @OneToMany(mappedBy = "quyen", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "quyen")
     private List<TaiKhoan> taiKhoan;
     public Quyen() {
     }

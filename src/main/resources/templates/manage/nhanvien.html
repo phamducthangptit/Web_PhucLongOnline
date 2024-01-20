@@ -196,7 +196,7 @@ https://templatemo.com/tm-559-zay-shop
                                 </div>
                                 <div class="form-group col-md-6 mb-3">
                                     <label for="inputname">Số điện thoại</label>
-                                    <input type="text"  class="form-control mt-1" placeholder="Số điện thoại (10 số)" name="sDT" required th:field="*{sDT}" maxlength="10" />
+                                    <input type="text"  class="form-control mt-1" placeholder="Số điện thoại (10 số)" name="sdt" required th:field="*{sdt}" maxlength="10" />
                                 </div>
                                 <div class="form-group col-md-6 mb-3">
                                     <label for="inputname">Email</label>
@@ -204,7 +204,7 @@ https://templatemo.com/tm-559-zay-shop
                                 </div>
                                 <div class="form-group col-md-6 mb-3">
                                     <label for="inputname">Mã số thuế</label>
-                                    <input type="text"  class="form-control mt-1" placeholder="Mã số thuế" name="mST" required th:field="*{mST}" maxlength="15" />
+                                    <input type="text"  class="form-control mt-1" placeholder="Mã số thuế" name="mst" required th:field="*{mst}" maxlength="15" />
                                 </div>
                                 <div class="form-group col-md-6 mb-3">
                                     <label for="inputname">Mã hợp đồng</label>
@@ -245,17 +245,17 @@ https://templatemo.com/tm-559-zay-shop
                                 <th scope="row"><span th:text="${nhanVien.maNhanVien}"></span></th>
                                 <td><span th:text="${nhanVien.ho + ' '+ nhanVien.ten}"></span></td>
                                 <td><span th:text="${nhanVien.ngaySinh}"></span></td>
-                                <td><span th:text="${nhanVien.sDT}"></span></td>
+                                <td><span th:text="${nhanVien.sdt}"></span></td>
                                 <td><span th:text="${nhanVien.email}"></span></td>
                                 <td >
                                     <a th:href="@{edit(id=${nhanVien.maNhanVien})}">
                                         <i class="fa fa-cog fa-lg" style="color: rgb(238, 235, 36);">Sửa</i>
                                     </a>
-                                    <a th:href="@{delete(id=${nhanVien.maNhanVien})}" class="delete-link" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                                    <a th:href="@{delete(id=${nhanVien.maNhanVien})}" >
                                         <i class="fa fa-cog fa-lg" style="color: rgb(237, 12, 12);">Xóa</i>
                                     </a>
                                     <!-- Thêm modal xác nhận xóa -->
-                                    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                                    <!-- <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -283,7 +283,7 @@ https://templatemo.com/tm-559-zay-shop
                                                 window.location.href = $(".delete-link").attr("href");
                                             });
                                         });
-                                    </script>
+                                    </script> -->
                                 </td>
                             </tr>
                         </tbody>
