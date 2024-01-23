@@ -134,58 +134,7 @@ https://templatemo.com/tm-559-zay-shop
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel" th:text="'Thêm sản phẩm cho NCC: '+ ${listNL.get(0).getNhaCungCap().getTenNhaCungCap()}"></h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form method="post" th:action="@{/them-nl}" enctype="multipart/form-data">
-            <div class="modal-body">
-                <ul class="list-inline">
-                    <li class="list-inline-item">
-                        <h6>Nguyên liệu: </h6>
-                    </li>
-                    <li class="list-inline-item">
-                        <input type="text" name="maNCC" th:value="${listNL.get(0).getNhaCungCap().getMaNhaCungCap()}" style="display:none;"/>
-                        <select name="idNL" style="width:100px;">
-                            <option th:each="c:${listNL1}"
-                                    th:value="${c.getIdNguyenLieu()}"
-                                    th:text="${c.getTenNguyenLieu()}+' - '+ ${c.getIdNguyenLieu()}"
-                            >
-                            </option>
-                        </select>
-                    </li>
-                </ul>
 
-                <ul class="list-inline">
-                    <li class="list-inline-item">
-                        <h6>Ngày:      </h6>
-                    </li>
-                    <li class="list-inline-item">
-                        <input type="date" name="ngay" style="margin-left: 45px;"/>
-                    </li>
-                </ul>
-                <ul class="list-inline">
-                    <li class="list-inline-item">
-                        <h6>Giá:      </h6>
-                    </li>
-                    <li class="list-inline-item">
-                        <input type="number" name="gia" min="0" style="margin-left: 58px;">
-                    </li>
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Thêm</button>
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 <!-- Start Content -->
 <div class="container py-5">
@@ -215,15 +164,15 @@ https://templatemo.com/tm-559-zay-shop
                 </li>
             </ul>
         </div>
+
         <div class="col-lg-10">
             <div class="row">
                 <div class="col-md-10">
-                    <h4 th:text="'Danh sách nguyên liệu của nhà cung cấp '+${listNL.get(0).getNhaCungCap().getTenNhaCungCap()}"></h4>
+
                 </div>
                 <div class="col-md-2 pb-4">
-                    <div class="d-flex" >
-                        <button type="button" class="btn btn-success btn-lg" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal" th:style="${listNL1.size()==0?'display:none;':''}">Thêm mới</button>
+                    <div class="d-flex" id="div-next">
+
                     </div>
                 </div>
             </div>
@@ -231,40 +180,34 @@ https://templatemo.com/tm-559-zay-shop
                 <table class="table" id ="test">
                     <thead class="justify-content-center">
                     <tr>
-                        <th scope="col" class="col-2 text-center align-middle">Hình ảnh</th>
-                        <th scope="col" class="text-center align-middle">Tên</th>
-                        <th scope="col" class="col-3 text-center align-middle">Giá</th>
-                        <th scope="col" class="col-2 text-center align-middle">Ngày áp dụng</th>
-                        <th scope="col" class="col-2 text-center align-middle">Thay đổi</th>
+                        <th scope="col" class="col-2 text-center align-middle">ID đơn</th>
+                        <th scope="col" class="text-center align-middle">Ngày đặt</th>
+                        <th scope="col" class="col-4 text-center align-middle">Tạo phiếu nhập</th>
                     </tr>
                     </thead>
                     <tbody >
-                    <tr th:each="nl:${listNL}" >
-                        <th scope="row" class="text-center align-middle">
-                            <a href="#">
-                                <img th:src="'../img/'+${nl.getNguyenLieu().getHinhAnh()}" class="card-img-top" alt="..." style="height: 70px;
-                                    width: 70px;
-                                    border-radius:50%;">
-                            </a>
+                    <tr th:each="don:${dons}" th:class="${don.getCheck() == 0 ? 'table-success' : 'table-warning'}">
+                        <th scope="row" class="text-center align-middle" th:text="${don.getDonDatNguyenLieu().getIdDonDatNguyenLieu()}">
                         </th>
-                        <td class="align-middle" th:text="${nl.getNguyenLieu().getTenNguyenLieu()}"></td>
-                        <td class="text-center align-middle" th:text="${nl.getGia1()}"></td>
-                        <td class="text-center align-middle" th:text="${nl.getNgay1()}"></td>
+                        <td class="text-center align-middle" th:text="${don.getNgayDat()}"></td>
                         <td class="text-center align-middle">
-                            <a th:href="'http://localhost:8080/ct-nha-cung-cap?maNCC='+${nl.getNhaCungCap().getMaNhaCungCap()}+'&idNL='+${nl.getNguyenLieu().getIdNguyenLieu()}">
-                                <i class="fa fa-pen fa-lg" style="color: black;"></i>
+                            <a class="taoPhieuNhap" th:href="'http://localhost:8080/phieu-nhap?idDon='+${don.getDonDatNguyenLieu().getIdDonDatNguyenLieu()}+'&ngay='+${don.getNgayDat()}"
+                               th:style="${don.getCheck() == 0? 'display:none;':''}" >
+                                <i class="fa fa-plus fa-lg" style="color: black;"></i>
                             </a>
+                            <i class="fa fa-check fa-lg" th:style="${don.getCheck() == 0? '':'display:none;'}+ 'color: black;'"></i>
                         </td>
+
                     </tr>
+
                     </tbody>
                 </table>
             </div>
         </div>
+
+
     </div>
 </div>
-
-<!-- Modal -->
-
 <!-- End Content -->
 
 <!-- Start Brands -->

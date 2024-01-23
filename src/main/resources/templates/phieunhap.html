@@ -134,58 +134,7 @@ https://templatemo.com/tm-559-zay-shop
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel" th:text="'Thêm sản phẩm cho NCC: '+ ${listNL.get(0).getNhaCungCap().getTenNhaCungCap()}"></h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form method="post" th:action="@{/them-nl}" enctype="multipart/form-data">
-            <div class="modal-body">
-                <ul class="list-inline">
-                    <li class="list-inline-item">
-                        <h6>Nguyên liệu: </h6>
-                    </li>
-                    <li class="list-inline-item">
-                        <input type="text" name="maNCC" th:value="${listNL.get(0).getNhaCungCap().getMaNhaCungCap()}" style="display:none;"/>
-                        <select name="idNL" style="width:100px;">
-                            <option th:each="c:${listNL1}"
-                                    th:value="${c.getIdNguyenLieu()}"
-                                    th:text="${c.getTenNguyenLieu()}+' - '+ ${c.getIdNguyenLieu()}"
-                            >
-                            </option>
-                        </select>
-                    </li>
-                </ul>
 
-                <ul class="list-inline">
-                    <li class="list-inline-item">
-                        <h6>Ngày:      </h6>
-                    </li>
-                    <li class="list-inline-item">
-                        <input type="date" name="ngay" style="margin-left: 45px;"/>
-                    </li>
-                </ul>
-                <ul class="list-inline">
-                    <li class="list-inline-item">
-                        <h6>Giá:      </h6>
-                    </li>
-                    <li class="list-inline-item">
-                        <input type="number" name="gia" min="0" style="margin-left: 58px;">
-                    </li>
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Thêm</button>
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 <!-- Start Content -->
 <div class="container py-5">
@@ -215,16 +164,24 @@ https://templatemo.com/tm-559-zay-shop
                 </li>
             </ul>
         </div>
+
         <div class="col-lg-10">
             <div class="row">
                 <div class="col-md-10">
-                    <h4 th:text="'Danh sách nguyên liệu của nhà cung cấp '+${listNL.get(0).getNhaCungCap().getTenNhaCungCap()}"></h4>
+                    <ul class="list-inline shop-top-menu pb-3 pt-1">
+                        <li class="list-inline-item">
+                            <h5>Phiếu nhập nguyên liệu</h5>
+                        </li>
+                        <li class="list-inline-item">
+                            Ngày lập:
+                        </li>
+                        <li class="list-inline-item">
+                            <input type="text" id="ngayDat" name="ngayDatDon"th:value="${currDay}" readonly/>
+                        </li>
+                    </ul>
                 </div>
                 <div class="col-md-2 pb-4">
-                    <div class="d-flex" >
-                        <button type="button" class="btn btn-success btn-lg" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal" th:style="${listNL1.size()==0?'display:none;':''}">Thêm mới</button>
-                    </div>
+
                 </div>
             </div>
             <div class="row">
@@ -233,38 +190,75 @@ https://templatemo.com/tm-559-zay-shop
                     <tr>
                         <th scope="col" class="col-2 text-center align-middle">Hình ảnh</th>
                         <th scope="col" class="text-center align-middle">Tên</th>
-                        <th scope="col" class="col-3 text-center align-middle">Giá</th>
-                        <th scope="col" class="col-2 text-center align-middle">Ngày áp dụng</th>
-                        <th scope="col" class="col-2 text-center align-middle">Thay đổi</th>
+                        <th scope="col" class="col-3 text-center align-middle">Số lượng</th>
+                        <th scope="col" class="col-3 text-center align-middle">Nhà cung cấp</th>
+                        <th scope="col" class="col-1 text-center align-middle">Đơn giá</th>
                     </tr>
                     </thead>
                     <tbody >
-                    <tr th:each="nl:${listNL}" >
+                    <tr th:each="nl:${listNL}" class="ds-nl">
                         <th scope="row" class="text-center align-middle">
+                            <input class ="nl1" type="text" th:value="${nl.get('IdCTDonDatHang')}" style="display:none;"/>
+                            <input class ="nl2" type="text" th:value="${nl.get('IdNguyenLieu')}" style="display:none;"/>
                             <a href="#">
-                                <img th:src="'../img/'+${nl.getNguyenLieu().getHinhAnh()}" class="card-img-top" alt="..." style="height: 70px;
+                                <img th:src="'../img/'+${nl.get('HinhAnh')}" class="card-img-top" alt="..." style="height: 70px;
                                     width: 70px;
                                     border-radius:50%;">
                             </a>
                         </th>
-                        <td class="align-middle" th:text="${nl.getNguyenLieu().getTenNguyenLieu()}"></td>
-                        <td class="text-center align-middle" th:text="${nl.getGia1()}"></td>
-                        <td class="text-center align-middle" th:text="${nl.getNgay1()}"></td>
+                        <td class="align-middle" th:text="${nl.get('TenNguyenLieu')}"></td>
+                        <td class="align-middle">
+                            <div class="row">
+                                <div class="col-md-6" style="text-align:right;">
+                                    <input type="number" name ="soLuong"
+                                           min="0" th:max="${nl.get('SoLuong')}" th:value="${nl.get('SoLuong')}" onchange="sumDon()"
+                                           style="width:80px;">
+                                </div>
+                                <div class="col-md-6" style="text-align:left;">
+                                    <h6 th:text="${nl.get('DonVi')}"></h6>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-center align-middle"
+                            th:text="${nl.get('TenNhaCungCap')}"
+                        >
+                        </td>
                         <td class="text-center align-middle">
-                            <a th:href="'http://localhost:8080/ct-nha-cung-cap?maNCC='+${nl.getNhaCungCap().getMaNhaCungCap()}+'&idNL='+${nl.getNguyenLieu().getIdNguyenLieu()}">
-                                <i class="fa fa-pen fa-lg" style="color: black;"></i>
-                            </a>
+                            <input name="donGia" type="text" th:value="${nl.get('Gia')}" style="display:none;"/>
+                            <span class="donGia"th:id="'dongia-'+${nl.get('IdDonDatNguyenLieu')}" name="donGia"
+                                  th:text="${nl.get('Gia')}"
+                                  th:value="${nl.get('Gia')}"
+                            ></span>
                         </td>
                     </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="text-center align-middle"><h6>Tổng tiền:</h6></td>
+                        <td class="text-center align-middle">
+                            <h6 id="tong-tien"></h6>
+                        </td>
+                    </tr>
+
                     </tbody>
                 </table>
             </div>
+            <div class="row">
+                <div class="col-md-10">
+
+                </div>
+                <div class="col-md-2 pb-4">
+                    <div class="d-flex" >
+                        <button id="btnDat" class="btn btn-success btn-lg" value="1">Tạo phiếu</button>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
     </div>
 </div>
-
-<!-- Modal -->
-
 <!-- End Content -->
 
 <!-- Start Brands -->
@@ -409,7 +403,7 @@ https://templatemo.com/tm-559-zay-shop
 <!-- End Footer -->
 
 <!-- Start Script -->
-
+<script th:src="@{/js/phieunhap.js}"></script>
 <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
 <script th:src="@{/js/jquery-migrate-1.2.1.min.js}"></script>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

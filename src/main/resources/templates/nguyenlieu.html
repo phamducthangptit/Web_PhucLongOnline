@@ -141,37 +141,25 @@ https://templatemo.com/tm-559-zay-shop
     <div class="row">
 
         <div class="col-lg-2">
-            <h1 class="h2 pb-4">Categories</h1>
+            <h1 class="h2 pb-4">Danh mục</h1>
             <ul class="list-unstyled templatemo-accordion">
                 <li class="pb-3">
                     <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                        Gender
+                        Quản lý nhập hàng
                         <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
                     </a>
                     <ul class="collapse show list-unstyled pl-3">
-                        <li><a class="text-decoration-none" href="#">Men</a></li>
-                        <li><a class="text-decoration-none" href="#">Women</a></li>
+                        <li><a class="text-decoration-none" href="http://localhost:8080/nguyen-lieu">Tạo đơn hàng</a></li>
+                        <li><a class="text-decoration-none" href="http://localhost:8080/don-phieu-nhap">Lập phiếu nhập</a></li>
                     </ul>
                 </li>
                 <li class="pb-3">
                     <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                        Sale
+                        Quản lý giá
                         <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
                     </a>
                     <ul id="collapseTwo" class="collapse list-unstyled pl-3">
-                        <li><a class="text-decoration-none" href="#">Sport</a></li>
-                        <li><a class="text-decoration-none" href="#">Luxury</a></li>
-                    </ul>
-                </li>
-                <li class="pb-3">
-                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                        Product
-                        <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
-                    </a>
-                    <ul id="collapseThree" class="collapse list-unstyled pl-3">
-                        <li><a class="text-decoration-none" href="#">Bag</a></li>
-                        <li><a class="text-decoration-none" href="#">Sweather</a></li>
-                        <li><a class="text-decoration-none" href="#">Sunglass</a></li>
+                        <li><a class="text-decoration-none" href="http://localhost:8080/ds-nha-cung-cap">Giá nguyên liệu</a></li>
                     </ul>
                 </li>
             </ul>
@@ -180,17 +168,7 @@ https://templatemo.com/tm-559-zay-shop
         <div class="col-lg-10">
             <div class="row">
                 <div class="col-md-10">
-                    <ul class="list-inline shop-top-menu pb-3 pt-1">
-                        <li class="list-inline-item">
-                            <a class="h3 text-dark text-decoration-none mr-3" href="#">All</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="h3 text-dark text-decoration-none mr-3" href="#">Men's</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="h3 text-dark text-decoration-none" href="#">Women's</a>
-                        </li>
-                    </ul>
+                    <h4>Danh sách nguyên liệu</h4>
                 </div>
                 <div class="col-md-2 pb-4">
                     <div class="d-flex" id="div-next">
@@ -205,7 +183,7 @@ https://templatemo.com/tm-559-zay-shop
                         <th scope="col" class="col-2 text-center align-middle">Hình ảnh</th>
                         <th scope="col" class="text-center align-middle">Tên</th>
                         <th scope="col" class="col-4 text-center align-middle">Số lượng</th>
-                        <th scope="col" class="col-1 text-center align-middle">Xoá</th>
+<!--                        <th scope="col" class="col-1 text-center align-middle">Xoá</th>-->
                         <th scope="col" class="col-1 text-center align-middle">Đặt thêm</th>
                     </tr>
                     </thead>
@@ -221,11 +199,11 @@ https://templatemo.com/tm-559-zay-shop
                         </th>
                         <td class="align-middle" th:text="${nl.getTenNguyenLieu()}"></td>
                         <td class="text-center align-middle" th:text="${nl.getSoLuong()} +' '+${nl.getDonVi()}"></td>
-                        <td class="text-center align-middle">
-                            <a class="delete-actor" href="#" th:style="${nl.getSoLuong() == 0? '':'pointer-events: none;'}" >
-                                <i class="fa fa-trash fa-lg" style="color: black;"></i>
-                            </a>
-                        </td>
+<!--                        <td class="text-center align-middle">-->
+<!--                            <a class="delete-actor" href="#" th:style="${nl.getSoLuong() == 0? '':'pointer-events: none;'}" >-->
+<!--                                <i class="fa fa-trash fa-lg" style="color: black;"></i>-->
+<!--                            </a>-->
+<!--                        </td>-->
                         <td class="align-middle">
                             <div class="form-check text-center">
                                 <input class="form-check-input" type="checkbox" th:value="${nl.getIdNguyenLieu()}">

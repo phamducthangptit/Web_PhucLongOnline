@@ -1,18 +1,15 @@
 package com.example.PhucLongOnline.Controller;
 
 
-import com.example.PhucLongOnline.Model.CT_NguyenLieu;
-import com.example.PhucLongOnline.Model.NguyenLieu;
-import com.example.PhucLongOnline.Model.NhaCungCap;
-import com.example.PhucLongOnline.Repository.CT_NguyenLieuRepository;
-import com.example.PhucLongOnline.Repository.NguyenLieuRepository;
-import com.example.PhucLongOnline.Repository.NhaCungCapRepository;
+import com.example.PhucLongOnline.Model.*;
+import com.example.PhucLongOnline.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +26,18 @@ public class NguyenLieuController {
 
     @Autowired
     private NhaCungCapRepository nhaCungCapRepository;
+
+    @Autowired
+    private DonDatNguyenLieuRepository donDatNguyenLieuRepository;
+
+    @Autowired
+    private CT_DonDatHangRepository ct_donDatHangRepository;
+
+    @Autowired
+    private PhieuNhapHangRepsitory phieuNhapHangRepsitory;
+
+    @Autowired
+    private CT_PhieuNhapHangRepository ct_phieuNhapHangRepository;
     @GetMapping(value={"/nguyen-lieu"})
     public String nguyenLieu(Model model) {
         List<NguyenLieu> nguyenLieuList = nguyenLieuRepository.findAll();
@@ -50,6 +59,11 @@ public class NguyenLieuController {
 //            System.out.println(nl.getCtNguyenLieus());
             result.add((NguyenLieu) nl);
         }
+        LocalDate currentDate = LocalDate.now();
+        String[] tmp = currentDate.toString().split("-");
+        String outputDay = tmp[2]+"-"+tmp[1]+"-"+tmp[0];
+
+        model.addAttribute("currDay", outputDay);
         model.addAttribute("listDNL", result);
         return "datnguyenlieu";
     }
@@ -137,7 +151,9 @@ public class NguyenLieuController {
     public int getDonAPI(@RequestParam(value = "ngay") String ngay,
                          @RequestBody List<Map<String,Object>> data) {
         String maNV = "abc";
-        int maDon = nguyenLieuRepository.insetDDNL(ngay,maNV);
+        String[] tmp = ngay.split("-");
+        String ngayInput = tmp[2]+"-"+tmp[1]+"-"+tmp[0];
+        int maDon = nguyenLieuRepository.insetDDNL(ngayInput,maNV);
         for (Map<String, Object> record : data) {
             int idNL = Integer.parseInt((String) record.get("idNguyenLieu"));
             String maNCC = (String) record.get("maNCC");
@@ -145,5 +161,61 @@ public class NguyenLieuController {
             int result = nguyenLieuRepository.insetCTDDH(maDon,idNL,maNCC,soLuong);
         }
         return 1;
+    }
+
+    @GetMapping("/don-phieu-nhap")
+    public String getDon_PhieuNhap(Model model) {
+        List<DonDatNguyenLieu> donDatNguyenLieus = donDatNguyenLieuRepository.findAll();
+        List<CheckDon> checkDons = new ArrayList<>();
+        for(DonDatNguyenLieu x : donDatNguyenLieus) {
+            int check = 0;
+            List<Map<String,Object>> ctDonDatHangs = ct_donDatHangRepository.getCT_DDH_X(x.getIdDonDatNguyenLieu(),x.getNgayDat().toString().split(" ")[0]);
+            for (Map<String, Object> y : ctDonDatHangs) {
+                if((Double)y.get("SoLuong")>0) {
+                    check = 1;
+                    break;
+                }
+            }
+            CheckDon checkDon = new CheckDon(x,check);
+            checkDon.setNgayDat(x.getNgayDat().toString());
+            checkDons.add(checkDon);
+        }
+
+        model.addAttribute("dons",checkDons);
+        return "donphieunhap";
+    }
+
+    @GetMapping("/phieu-nhap")
+    public String taoPhieuNhap(Model model,
+                               @RequestParam(value = "idDon") int idDon,
+                               @RequestParam(value = "ngay") String ngay) {
+        String[] tmp = ngay.toString().split("-");
+        String inputDay = tmp[2]+"-"+tmp[1]+"-"+tmp[0];
+        List<Map<String,Object>> ctDonDatHangs = ct_donDatHangRepository.getCT_DDH_X(idDon,inputDay);
+        LocalDate currentDate = LocalDate.now();
+        String[] tmp1 = currentDate.toString().split("-");
+        String outputDay = tmp1[2]+"-"+tmp1[1]+"-"+tmp1[0];
+
+        model.addAttribute("currDay", outputDay);
+        model.addAttribute("listNL", ctDonDatHangs);
+        return "phieunhap";
+    }
+    @PostMapping("/phieu-nhap/api")
+    @ResponseBody
+    public String setPhieuNhapAPI(@RequestParam(value = "ngay") String ngay,
+                         @RequestBody List<Map<String,Object>> data) {
+        String maNV = "abc";
+        String[] tmp = ngay.split("-");
+        String ngayInput = tmp[2]+"-"+tmp[1]+"-"+tmp[0];
+        String result = "";
+        int soPhieu = phieuNhapHangRepsitory.insertPN(ngayInput,maNV);
+        for (Map<String, Object> record : data) {
+            int idCTDonDatHang = Integer.parseInt((String) record.get("idCTDonDatHang"));
+            int idNL = Integer.parseInt((String) record.get("idNguyenLieu"));
+            Double soLuong = Double.parseDouble((String) record.get("soLuong"));
+            Double gia = Double.parseDouble((String) record.get("gia"));
+            result = ct_phieuNhapHangRepository.insertCTPN(idCTDonDatHang,soLuong,gia,soPhieu,idNL);
+        }
+        return result;
     }
 }
