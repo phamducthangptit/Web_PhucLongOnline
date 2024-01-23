@@ -35,45 +35,56 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-<!--            <div th:if="${session.taikhoan != null}">-->
-<!--                &lt;!&ndash;            quan li cua hang san pham nguyen lieu &ndash;&gt;-->
-<!--                <th:block th:if="${session.taikhoan.quyen.idquyen == 1}">-->
-<!--                    &lt;!&ndash; Nếu quyen là 1, chèn header &ndash;&gt;-->
-<!--                    <div th:insert="~{header.html}"></div>-->
-<!--                </th:block>-->
-
-<!--                &lt;!&ndash;            quan li kho&ndash;&gt;-->
-<!--                <th:block th:if="${session.taikhoan.quyen.idquyen == 2}">-->
-<!--                    &lt;!&ndash; Nếu quyen là 1, chèn header &ndash;&gt;-->
-<!--                    <div th:insert="~{header.html}"></div>-->
-<!--                </th:block>-->
-<!--                &lt;!&ndash;            ADMIN!&ndash;&gt;-->
-<!--                <th:block th:if="${session.taikhoan.quyen.idquyen == 3}">-->
-<!--                    &lt;!&ndash; Nếu quyen là 1, chèn header &ndash;&gt;-->
-<!--                    <div th:insert="~{header.html}"></div>-->
-<!--                </th:block>-->
-<!--                &lt;!&ndash;            Nhanvien !&ndash;&gt;-->
-<!--                <th:block th:if="${session.taikhoan.quyen.idquyen == 4}">-->
-<!--                    &lt;!&ndash; Nếu quyen khác 1, chèn headerKhachHang &ndash;&gt;-->
-<!--                    <div th:insert="~{headerKhachHang.html}"></div>-->
-<!--                </th:block>-->
-<!--            </div>-->
 
 
             <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{home}">Trang chủ</a>
+                            <a class="nav-link" th:href="@{/home}">Trang chủ</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/san-pham/tat-ca}">Sản phẩm</a>
-                        </li>
-                        <li class="nav-item">
+                        <!--   Quyền 1 : Quản lí cửa hàng
+                               Quyền 2 : Quản lí kho
+                               Quyền 3 : ADMIN
+                               Quyền 4 : Nhân Viên
+                               Quyền 5 : Khách Hàng
+                        -->
+
+                        <li class="nav-item" th:if="${(session.taikhoan != null && (session.taikhoan.quyen.idQuyen == 2) || session.taikhoan.quyen.idQuyen == 1) }">
                             <div class="dropdown">
                                 <!-- Nút kích hoạt dropdown (thẻ link) -->
-                                <a href="#" class="dropdown-button">Doanh Thu</a>
+                                <a href="/sanpham/list" class="dropdown-button">Sản Phẩm</a>
+
+                                <!-- Nội dung dropdown với các mục -->
+                                <div class="dropdown-content" >
+                                    <a href="/loaisanpham/list">Loại Sản Phẩm</a>
+                                    <a href="/size/list" >Size</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 4) }">
+                            <a class="nav-link" th:href="@{/san-pham/tat-ca}">Sản Phẩm</a>
+                        </li>
+                        <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 4) }">
+                            <a class="nav-link" th:href="@{/san-pham/tat-ca}">Duyệt Đơn</a>
+                        </li>
+                        <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 2) }">
+                            <a class="nav-link" th:href="@{/san-pham/tat-ca}">Nhập Hàng</a>
+                        </li>
+                        <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 1) }">
+                            <a class="nav-link" th:href="@{/nhanvien/list}">Nhân Viên</a>
+                        </li>
+                        <li class="nav-item" th:if="${(session.taikhoan != null && (session.taikhoan.quyen.idQuyen == 2) || session.taikhoan.quyen.idQuyen == 1) }">
+                            <a class="nav-link" th:href="@{/nguyenlieu/list}">Nguyên Liệu</a>
+                        </li>
+                        <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 2) }">
+                            <a class="nav-link" th:href="@{/nhacungcap/list}">Nhà Cung Cấp</a>
+                        </li>
+                        <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 1) }">
+                            <div class="dropdown">
+                                <!-- Nút kích hoạt dropdown (thẻ link) -->
+                                <a href="#" class="dropdown-button ">Doanh Thu</a>
 
                                 <!-- Nội dung dropdown với các mục -->
                                 <div class="dropdown-content">
@@ -96,9 +107,12 @@
                                     linkTheoThang.href = linkDoanhThuThang;
                                 </script>
                             </div>
-
                         </li>
-                        <li class="nav-item">
+
+                        <!--            ADMIN!-->
+
+
+                        <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 3)}" >
                             <div class="dropdown">
                                 <!-- Nút kích hoạt dropdown (thẻ link) -->
                                 <a href="#" class="dropdown-button">Tài Khoản</a>
@@ -109,15 +123,25 @@
                                     <a href="danhSachTaiKhoanKH" >Khách Hàng</a>
                                 </div>
                             </div>
+                        </li>
+
                     </ul>
                 </div>
                 <div class="navbar align-self-center d-flex">
 
-
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                    <!--Thông tin cá nhân-->
+                    <a class="nav-icon position-relative text-decoration-none" href="#" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen != 3) }">
                         <i class="fa fa-fw fa-user text-dark mr-3"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
+
                     </a>
+                    <a class="nav-icon position-relative text-decoration-none" href="#" th:if="${(session.taikhoan != null) }">
+                        Đăng Xuất
+
+                    </a>
+                    <a class="nav-icon position-relative text-decoration-none" href="/login" th:if="${(session.taikhoan == null) }">
+                        Đăng Nhập
+                    </a>
+
                 </div>
             </div>
 
