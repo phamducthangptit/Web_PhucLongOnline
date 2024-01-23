@@ -27,6 +27,9 @@ https://templatemo.com/tm-559-zay-shop
 </head>
 
 <body>
+
+<!-- Close Top Nav -->
+
 <div th:insert="~{header.html}"></div>
 
 
@@ -62,12 +65,12 @@ https://templatemo.com/tm-559-zay-shop
 
         <div class="col-lg-10">
             <div class="row">
-                <div class="col-md-9">
-                    <h4>Danh sách nguyên liệu</h4>
+                <div class="col-md-10">
+
                 </div>
-                <div class="col-md-3 pb-4">
+                <div class="col-md-2 pb-4">
                     <div class="d-flex" id="div-next">
-                        <button id="btnNext" class="btn btn-success btn-lg" value="1">Tạo đơn đặt</button>
+
                     </div>
                 </div>
             </div>
@@ -75,35 +78,24 @@ https://templatemo.com/tm-559-zay-shop
                 <table class="table" id ="test">
                     <thead class="justify-content-center">
                     <tr>
-                        <th scope="col" class="col-2 text-center align-middle">Hình ảnh</th>
-                        <th scope="col" class="text-center align-middle">Tên</th>
-                        <th scope="col" class="col-4 text-center align-middle">Số lượng</th>
-<!--                        <th scope="col" class="col-1 text-center align-middle">Xoá</th>-->
-                        <th scope="col" class="col-1 text-center align-middle">Đặt thêm</th>
+                        <th scope="col" class="col-2 text-center align-middle">ID đơn</th>
+                        <th scope="col" class="text-center align-middle">Ngày đặt</th>
+                        <th scope="col" class="col-4 text-center align-middle">Tạo phiếu nhập</th>
                     </tr>
                     </thead>
                     <tbody >
-                    <div id="dataContainer" th:attr="data=${listNL}"></div>
-                    <tr th:each="nl:${listNL}" th:class="${nl.getSoLuong() > 1000 ? '' : 'table-danger'}">
-                        <th scope="row" class="text-center align-middle">
-                            <a href="#">
-                                <img th:src="'../img/'+${nl.getHinhAnh()}" class="card-img-top" alt="..." style="height: 70px;
-                                    width: 70px;
-                                    border-radius:50%;">
-                            </a>
+                    <tr th:each="don:${dons}" th:class="${don.getCheck() == 0 ? 'table-success' : 'table-warning'}">
+                        <th scope="row" class="text-center align-middle" th:text="${don.getDonDatNguyenLieu().getIdDonDatNguyenLieu()}">
                         </th>
-                        <td class="align-middle" th:text="${nl.getTenNguyenLieu()}"></td>
-                        <td class="text-center align-middle" th:text="${nl.getSoLuong()} +' '+${nl.getDonVi()}"></td>
-<!--                        <td class="text-center align-middle">-->
-<!--                            <a class="delete-actor" href="#" th:style="${nl.getSoLuong() == 0? '':'pointer-events: none;'}" >-->
-<!--                                <i class="fa fa-trash fa-lg" style="color: black;"></i>-->
-<!--                            </a>-->
-<!--                        </td>-->
-                        <td class="align-middle">
-                            <div class="form-check text-center">
-                                <input class="form-check-input" type="checkbox" th:value="${nl.getIdNguyenLieu()}">
-                            </div>
+                        <td class="text-center align-middle" th:text="${don.getNgayDat()}"></td>
+                        <td class="text-center align-middle">
+                            <a class="taoPhieuNhap" th:href="'http://localhost:8080/phieu-nhap?idDon='+${don.getDonDatNguyenLieu().getIdDonDatNguyenLieu()}+'&ngay='+${don.getNgayDat()}"
+                               th:style="${don.getCheck() == 0? 'display:none;':''}" >
+                                <i class="fa fa-plus fa-lg" style="color: black;"></i>
+                            </a>
+                            <i class="fa fa-check fa-lg" th:style="${don.getCheck() == 0? '':'display:none;'}+ 'color: black;'"></i>
                         </td>
+
                     </tr>
 
                     </tbody>
@@ -116,12 +108,9 @@ https://templatemo.com/tm-559-zay-shop
 </div>
 <!-- End Content -->
 
-<!-- Start Brands -->
 <div th:insert="~{footer.html}"></div>
-<!-- End Footer -->
-
 <!-- Start Script -->
-<script th:src="@{/js/nguyenlieu.js}"></script>
+
 <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
 <script th:src="@{/js/jquery-migrate-1.2.1.min.js}"></script>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

@@ -70,7 +70,7 @@
                             <a class="nav-link" th:href="@{/san-pham/tat-ca}">Duyệt Đơn</a>
                         </li>
                         <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 2) }">
-                            <a class="nav-link" th:href="@{/san-pham/tat-ca}">Nhập Hàng</a>
+                            <a class="nav-link" th:href="@{/nguyen-lieu}">Nhập Hàng</a>
                         </li>
                         <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 1) }">
                             <a class="nav-link" th:href="@{/nhanvien/list}">Nhân Viên</a>
