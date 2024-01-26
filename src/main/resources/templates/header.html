@@ -1,116 +1,169 @@
-<!DOCTYPE html>
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org">
-<header>
-    <!-- Start Top Nav -->
-    <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
-        <div class="container text-light">
-            <div class="w-100 d-flex justify-content-between">
-                <div>
-                    <i class="fa fa-envelope mx-2"></i>
-                    <a class="navbar-sm-brand text-light text-decoration-none" href="mailto:info@company.com">info@company.com</a>
-                    <i class="fa fa-phone mx-2"></i>
-                    <a class="navbar-sm-brand text-light text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
-                </div>
-                <div>
-                    <a class="text-light" href="https://fb.com/templatemo" target="_blank" rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
-                    <a class="text-light" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
-                    <a class="text-light" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
-                    <a class="text-light" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin fa-sm fa-fw"></i></a>
-                </div>
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js}"></script>
+<!-- Start Top Nav -->
+<nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
+    <div class="container text-light">
+        <div class="w-100 d-flex justify-content-between">
+            <div>
+                <i class="fa fa-envelope mx-2"></i>
+                <a class="navbar-sm-brand text-light text-decoration-none"
+                    href="mailto:info@company.com">info@company.com</a>
+                <i class="fa fa-phone mx-2"></i>
+                <a class="navbar-sm-brand text-light text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
+            </div>
+            <div>
+                <a class="text-light" href="https://fb.com/templatemo" target="_blank" rel="sponsored"><i
+                        class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
+                <a class="text-light" href="https://www.instagram.com/" target="_blank"><i
+                        class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
+                <a class="text-light" href="https://twitter.com/" target="_blank"><i
+                        class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
+                <a class="text-light" href="https://www.linkedin.com/" target="_blank"><i
+                        class="fab fa-linkedin fa-sm fa-fw"></i></a>
             </div>
         </div>
-    </nav>
-    <!-- Close Top Nav -->
+    </div>
+</nav>
+<!-- Close Top Nav -->
 
 
-    <!-- Header -->
-    <nav class="navbar navbar-expand-lg navbar-light shadow">
-        <div class="container d-flex justify-content-between align-items-center">
+<!-- Header -->
+<nav class="navbar navbar-expand-lg navbar-light shadow">
+    <div class="container d-flex justify-content-between align-items-center">
 
-            <a class="navbar-brand text-success logo h1 align-self-center" href="home">
-                <img class="img-fluid" th:src="@{/img/logo.png}" alt="">
-            </a>
+        <a class="navbar-brand text-success logo h1 align-self-center" href="home">
+            <img class="img-fluid" th:src="@{/img/logo.png}" alt="">
+        </a>
 
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+            data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
-                <div class="flex-fill">
-                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{home}">Trang chủ</a>
-                        </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/san-pham/tat-ca}">Sản phẩm</a>
-                        </li>
-                        <li class="nav-item">
-                            <div class="dropdown">
-                                <!-- Nút kích hoạt dropdown (thẻ link) -->
-                                <a href="#" class="dropdown-button">Doanh Thu</a>
 
-                                <!-- Nội dung dropdown với các mục -->
-                                <div class="dropdown-content">
-                                    <a th:href="@{/xemDoanhThuNgay(ngayXem=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')})}">Theo Ngày</a>
-                                    <a href="#" id="linkTheoThang">Theo Tháng</a>
-                                </div>
-                                <script>
-                                    // Lấy tháng và năm hiện tại
-                                    var today = new Date();
-                                    var currentMonth = today.getMonth() + 1; // Tháng bắt đầu từ 0, nên cộng thêm 1
-                                    var currentYear = today.getFullYear();
+        <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
+            id="templatemo_main_nav">
+            <div class="flex-fill">
+                <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/home}">Trang chủ</a>
+                    </li>
 
-                                    // Tạo đường dẫn dựa trên thông tin hiện tại
-                                    var linkDoanhThuThang = '/xemDoanhThuThang?thangXem=' + currentMonth + '&namXem=' + currentYear;
+                    <!--   Quyền 1 : Quản lí cửa hàng
+                               Quyền 2 : Quản lí kho
+                               Quyền 3 : ADMIN
+                               Quyền 4 : Nhân Viên
+                               Quyền 5 : Khách Hàng
+                        -->
 
-                                    // Lấy thẻ <a> bằng id
-                                    var linkTheoThang = document.getElementById('linkTheoThang');
+                    <li class="nav-item"
+                        th:if="${(session.taikhoan != null && (session.taikhoan.quyen.idQuyen == 2) || session.taikhoan.quyen.idQuyen == 1) }">
+                        <div class="dropdown">
+                            <!-- Nút kích hoạt dropdown (thẻ link) -->
+                            <a href="/sanpham/list" class="dropdown-button">Sản Phẩm</a>
 
-                                    // Thiết lập thuộc tính href của thẻ <a> thành đường dẫn động
-                                    linkTheoThang.href = linkDoanhThuThang;
-                                </script>
-                            </div>
-
-                        </li>
-                        <li class="nav-item">
-                            <div class="dropdown">
-                                <!-- Nút kích hoạt dropdown (thẻ link) -->
-                                <a href="#" class="dropdown-button">Tài Khoản</a>
-
-                                <!-- Nội dung dropdown với các mục -->
-                                <div class="dropdown-content">
-                                    <a href="danhSachTaiKhoan">Nhân Viên</a>
-                                    <a href="danhSachTaiKhoanKH" >Khách Hàng</a>
-                                </div>
-                    </ul>
-                </div>
-                <div class="navbar align-self-center d-flex">
-                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
-                            <div class="input-group-text">
-                                <i class="fa fa-fw fa-search"></i>
+                            <!-- Nội dung dropdown với các mục -->
+                            <div class="dropdown-content">
+                                <a href="/loaisanpham/list">Loại Sản Phẩm</a>
+                                <a href="/size/list">Size</a>
                             </div>
                         </div>
-                    </div>
-                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
-                        <i class="fa fa-fw fa-search text-dark mr-2"></i>
-                    </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
-                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
-                    </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
-                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
-                    </a>
-                </div>
+                    </li>
+                    <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 4) }">
+                        <a class="nav-link" th:href="@{/san-pham/tat-ca}">Sản Phẩm</a>
+                    </li>
+                    <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 4) }">
+                        <a class="nav-link" th:href="@{/san-pham/tat-ca}">Duyệt Đơn</a>
+                    </li>
+                    <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 2) }">
+                        <a class="nav-link" th:href="@{/san-pham/tat-ca}">Nhập Hàng</a>
+                    </li>
+                    <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 1) }">
+                        <a class="nav-link" th:href="@{/nhanvien/list}">Nhân Viên</a>
+                    </li>
+                    <li class="nav-item"
+                        th:if="${(session.taikhoan != null && (session.taikhoan.quyen.idQuyen == 2) || session.taikhoan.quyen.idQuyen == 1) }">
+                        <a class="nav-link" th:href="@{/nguyenlieu/list}">Nguyên Liệu</a>
+                    </li>
+                    <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 2) }">
+                        <a class="nav-link" th:href="@{/nhacungcap/list}">Nhà Cung Cấp</a>
+                    </li>
+                    <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 1) }">
+                        <div class="dropdown">
+                            <!-- Nút kích hoạt dropdown (thẻ link) -->
+                            <a href="#" class="dropdown-button ">Doanh Thu</a>
+
+                            <!-- Nội dung dropdown với các mục -->
+                            <div class="dropdown-content">
+                                <a
+                                    th:href="@{/xemDoanhThuNgay(ngayXem=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')})}">Theo
+                                    Ngày</a>
+                                <a href="#" id="linkTheoThang">Theo Tháng</a>
+                            </div>
+                            <script>
+                                // Lấy tháng và năm hiện tại
+                                var today = new Date();
+                                var currentMonth = today.getMonth() + 1; // Tháng bắt đầu từ 0, nên cộng thêm 1
+                                var currentYear = today.getFullYear();
+
+                                // Tạo đường dẫn dựa trên thông tin hiện tại
+                                var linkDoanhThuThang = '/xemDoanhThuThang?thangXem=' + currentMonth + '&namXem=' + currentYear;
+
+                                // Lấy thẻ <a> bằng id
+                                var linkTheoThang = document.getElementById('linkTheoThang');
+
+                                // Thiết lập thuộc tính href của thẻ <a> thành đường dẫn động
+                                linkTheoThang.href = linkDoanhThuThang;
+                            </script>
+                        </div>
+                    </li>
+
+                    <!--            ADMIN!-->
+
+
+                    <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 3)}">
+                        <div class="dropdown">
+                            <!-- Nút kích hoạt dropdown (thẻ link) -->
+                            <a href="#" class="dropdown-button">Tài Khoản</a>
+
+                            <!-- Nội dung dropdown với các mục -->
+                            <div class="dropdown-content">
+                                <a href="danhSachTaiKhoan">Nhân Viên</a>
+                                <a href="danhSachTaiKhoanKH">Khách Hàng</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
+            <div class="navbar align-self-center d-flex">
 
+                <!--Thông tin cá nhân-->
+                <th:div th:if="${session.taikhoan != null}">
+                    <!-- Nếu quyen là 1, chèn header -->
+                    <div class="dropdown">
+                        <a class=" dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                            aria-expanded="false" role="button">
+                            <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                            <span
+                                class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#">Thông tin</a></li>
+                            <li><a class="dropdown-item" href="/forgot">Đổi mật khẩu</a></li>
+                            <li><a class="dropdown-item" id="logout">Đăng xuất</a></li>
+                        </ul>
+                    </div>
+                </th:div>
+                <th:div th:if="${session.taikhoan == null}">
+                    <div><a class="nav-icon position-relative text-decoration-none" href="/login">Đăng nhập</a></div>
+                </th:div>
+            </div>
         </div>
-    </nav>
-    <!-- Close Header -->
-</header>
 
-</html>
+    </div>
+</nav>
+<!-- Close Header -->
+<script th:src="@{/js/login.js}"></script>

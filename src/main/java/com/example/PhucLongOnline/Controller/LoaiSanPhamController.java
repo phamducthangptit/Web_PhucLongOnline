@@ -61,13 +61,16 @@ public class LoaiSanPhamController {
     @GetMapping("/delete")
     public String delete(@RequestParam("id") int id, Model model) {
         try{
-            
-            System.out.print("id: ");
-            System.out.println(id);
             LoaiSanPham loai=loaiSanPhamRepository.getById(id);
-            loaiSanPhamRepository.delete(loai);
-            System.out.println("Xóa thành công");
-            model.addAttribute("message", "Xóa thành công");
+            try{
+                loaiSanPhamRepository.delete(loai);
+                System.out.println("Xóa thành công");
+                model.addAttribute("message", "Xóa thành công");
+            }
+            catch(Exception e){
+                System.out.println("Lỗi: "+ e);
+                model.addAttribute("message", "Lỗi: Đã liên kết");
+            }
             loai=new LoaiSanPham();
             List<LoaiSanPham> list=loaiSanPhamRepository.findAll();
             model.addAttribute("list", list);
@@ -85,7 +88,16 @@ public class LoaiSanPhamController {
     @PostMapping(path = "/update")
     public String updateLoai(@ModelAttribute LoaiSanPham loai, Model model, @RequestParam("btnStatus")String btnStatus) {
         try{
-            loaiSanPhamRepository.save(loai);
+            
+            try{
+                loaiSanPhamRepository.save(loai);
+                System.out.println("Save thành công");
+                model.addAttribute("message", "Save thành công");
+            }
+            catch(Exception e){
+                System.out.println("Lỗi: "+ e);
+                model.addAttribute("message", "Lỗi: Trùng khóa");
+            }
             loai=new LoaiSanPham();
             List<LoaiSanPham> list=loaiSanPhamRepository.findAll();
             System.out.println("Save thành công");

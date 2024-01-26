@@ -70,9 +70,16 @@ public class NguyenLieuController1 {
         try{
             
             NguyenLieu nguyenLieu=nguyenLieuRepository.getById(id);
-            nguyenLieuRepository.delete(nguyenLieu);
-            System.out.println("Xóa thành công");
-            model.addAttribute("message", "Xóa thành công");
+            
+            try{
+                nguyenLieuRepository.delete(nguyenLieu);
+                System.out.println("Xóa thành công");
+                model.addAttribute("message", "Xóa thành công");
+            }
+            catch(Exception e){
+                System.out.println("Lỗi: "+ e);
+                model.addAttribute("message", "Lỗi: Đã liên kết");
+            }
             nguyenLieu=new NguyenLieu();
             List<NguyenLieu> list=nguyenLieuRepository.findAll();
             model.addAttribute("list", list);
@@ -109,9 +116,16 @@ public class NguyenLieuController1 {
                     Files.copy(file.getInputStream(), filePath,StandardCopyOption.REPLACE_EXISTING);
                 }
             nguyenLieu.setHinhAnh(fileName);
-            nguyenLieuRepository.save(nguyenLieu);
-            System.out.println("Save thành công");
-            model.addAttribute("message", "Save thành công");
+            
+            try{
+                nguyenLieuRepository.save(nguyenLieu);
+                System.out.println("Save thành công");
+                model.addAttribute("message", "Save thành công");
+            }
+            catch(Exception e){
+                System.out.println("Lỗi: "+ e);
+                model.addAttribute("message", "Lỗi: Trùng khóa");
+            }
             nguyenLieu=new NguyenLieu();
             List<NguyenLieu> list=nguyenLieuRepository.findAll();
             model.addAttribute("list", list);

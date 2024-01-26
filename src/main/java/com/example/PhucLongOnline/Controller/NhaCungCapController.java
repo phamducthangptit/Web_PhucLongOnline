@@ -71,11 +71,11 @@ public class NhaCungCapController {
     public String delete(@RequestParam("id") String id, Model model) {
         try{
             
-            System.out.print("id: ");
-            System.out.println(id);
             NhaCungCap nhaCungCap=nhaCungCapRepository.getById(id);
             try{
                 nhaCungCapRepository.delete(nhaCungCap);
+                System.out.println("Xóa thành công");
+                model.addAttribute("message", "Xóa thành công");
             }
             catch(Exception e){
                 System.out.println("Lỗi: "+ e);
@@ -106,7 +106,7 @@ public class NhaCungCapController {
             }
             catch(Exception e){
                 System.out.println("Lỗi: "+ e);
-                model.addAttribute("message", "Lỗi: "+e);
+                model.addAttribute("message", "Lỗi: Trùng khóa");
             }
             nhaCungCap=new NhaCungCap();
             List<NhaCungCap> list=nhaCungCapRepository.findAll();

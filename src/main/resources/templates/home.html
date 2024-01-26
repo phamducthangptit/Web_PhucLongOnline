@@ -23,14 +23,14 @@
 
 <div th:if="${session.taikhoan != null}">
     <!-- Kiểm tra giá trị của trường "quyen" -->
-    <th:block th:if="${session.taikhoan.quyen.idquyen == 1}">
+    <th:div th:if="${session.taikhoan.quyen.idQuyen != 5}">
         <!-- Nếu quyen là 1, chèn header -->
         <div th:insert="~{header.html}"></div>
-    </th:block>
-    <th:block th:if="${session.taikhoan.quyen.idquyen != 1}">
+    </th:div>
+    <th:div th:if="${session.taikhoan.quyen.idQuyen == 5}">
         <!-- Nếu quyen khác 1, chèn headerKhachHang -->
         <div th:insert="~{headerKhachHang.html}"></div>
-    </th:block>
+    </th:div>
 </div>
 <div th:if="${session.taikhoan == null}">
     <div th:insert="~{headerKhachHang.html}"></div>
@@ -67,24 +67,28 @@
     <!-- End Banner Hero -->
 
 
+
+
+
+
     <!-- Start Categories of The Month -->
-    <section class="container py-5">
+    <section class="container py-5" th:if="${((session.taikhoan != null && session.taikhoan.quyen.idQuyen == 5) || (session.taikhoan == null))}">
         <div class="row text-center pt-3">
             <div class="col-lg-6 m-auto">
                 <h1 class="h1">Các Loại Sản Phẩm</h1>
 
             </div>
         </div>
-        <div class="row">
+        <div class="row" >
             <div class="col-12 col-md-4 p-5 mt-3">
                 <a href="#"><img th:src="@{/img/cae.png}" class="rounded-circle img-fluid border"></a>
                 <h5 class="text-center mt-3 mb-3">Cà phê</h5>
-               <div class="text-center"><a th:href="@{san-pham/1}" class="btn btn-success">Xem</a></div>
+               <div class="text-center"><a th:href="@{san-pham/2}" class="btn btn-success">Xem</a></div>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
                 <a href="#"><img th:src="@{/img/luckytea.png}" class="rounded-circle img-fluid border"></a>
                 <h2 class="h5 text-center mt-3 mb-3">Trà</h2>
-                <div class="text-center"><a th:href="@{san-pham/2}" class="btn btn-success">Xem</a></div>
+                <div class="text-center"><a th:href="@{san-pham/1}" class="btn btn-success">Xem</a></div>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
                 <a href="#"><img th:src="@{/img/cake.png}" class="rounded-circle img-fluid border"></a>
@@ -98,68 +102,66 @@
 
     <!-- Start Featured Product -->
     <section class="bg-light">
-        <div class="container py-5">
+        <div class="container py-5" th:if="${((session.taikhoan != null && session.taikhoan.quyen.idQuyen == 5) || (session.taikhoan == null))}">
             <div class="row text-center py-3">
                 <div class="col-lg-6 m-auto">
                     <h1 class="h1">Sản Phẩm Bán Chạy</h1>
-                   
+
                 </div>
             </div>
+            <div th:if="${sanPhamList.size() >= 3}" >
             <div class="row">
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
-                        <a href="shop-single.html">
-                            <img th:src="@{/img/cappuccino.png}" class="card-img-top" alt="...">
+                        <a href="#">
+                            <img th:src="@{'img/' + ${sanPhamList[0].hinhAnh}}" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
+
+                                <H4 class="text-center">
                                     Top 1
-                                </li> 
-                                <li class="text-center">50000 đ</li>
-                            </ul>
-                            <p class="h3 text-dark text-center">Cappuccino</p>
+                                </H4>
+
+                            <p class="h3 text-center" th:text="${sanPhamList[0].tenSanPham}"></p>
                         </div>
-                        <p class="text-center"><a class="btn btn-success">Đặt Hàng</a></p> 
+                        <p class="text-center"><a class="btn btn-success">Đặt Hàng</a></p>
                     </div>
-                
+
                 </div>
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
                         <a href="shop-single.html">
-                            <img th:src="@{/img/TraMangCauJelly.png}" class="card-img-top" alt="...">
+                            <img th:src="@{'img/' + ${sanPhamList[1].hinhAnh}}" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
-                                    Top 2
-                                </li>
-                                <li class="text-right">65000 đ</li>
-                            </ul>
-                            <p class="h3 text-dark text-center">Trà Sữa Mãng Cầu Jelly Dừa Sợi</p>
-            
+                            <H4 class="text-center">
+                                Top 2
+                            </H4>
+                            <p class="h3  text-center" th:text="${sanPhamList[1].tenSanPham}"></p>
+
                         </div>
-                        <p class="text-center"><a class="btn btn-success">Đặt Hàng</a></p> 
+                        <p class="text-center"><a class="btn btn-success">Đặt Hàng</a></p>
                     </div>
                 </div>
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
                         <a href="shop-single.html">
-                            <img th:src="@{/img/tiramisumini.png}" class="card-img-top" alt="...">
+                            <img th:src="@{'img/' + ${sanPhamList[2].hinhAnh}}" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
+
+                                <H4 class="text-center">
                                     Top 3
-                                </li>
-                                <li class="text-right">35000 đ</li>
-                            </ul>
-                            <p class="h3 text-dark text-center">Bánh Mì Phúc Long</p>
-                    
+                                </H4>
+
+
+                            <p class="h3  text-center" th:text="${sanPhamList[2].tenSanPham}"></p>
+
                         </div>
-                        <p class="text-center"><a class="btn btn-success">Đặt Hàng</a></p> 
+                        <p class="text-center"><a class="btn btn-success">Đặt Hàng</a></p>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </section>

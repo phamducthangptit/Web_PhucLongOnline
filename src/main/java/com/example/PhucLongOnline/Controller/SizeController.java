@@ -71,9 +71,15 @@ public class SizeController {
             System.out.print("id: ");
             System.out.println(id);
             Size size=sizeRepository.getById(id);
-            sizeRepository.delete(size);
-            System.out.println("Xóa thành công");
-            model.addAttribute("message", "Xóa thành công");
+            try{
+                sizeRepository.delete(size);
+                System.out.println("Xóa thành công");
+                model.addAttribute("message", "Xóa thành công");
+            }
+            catch(Exception e){
+                System.out.println("Xóa thất bại");
+                model.addAttribute("message", "Xóa thất bại: " + e);
+            }
             size=new Size();
             List<Size> list=sizeRepository.findAll();
             model.addAttribute("list", list);
@@ -91,12 +97,18 @@ public class SizeController {
     @PostMapping(path = "/update-size")
     public String createSize(@ModelAttribute Size size, Model model, @RequestParam("btnStatus")String btnStatus) {
         try{
-            
-            sizeRepository.save(size);
+            try{
+                sizeRepository.save(size);
+                System.out.println("Save thành công");
+                model.addAttribute("message", "Save thành công");
+            }
+            catch(Exception e){
+                System.out.println("Lỗi: "+ e);
+                model.addAttribute("message", "Lỗi: Trùng khóa");
+            }
             size=new Size();
             List<Size> list=sizeRepository.findAll();
-            System.out.println("Save thành công");
-            model.addAttribute("message", "Save thành công");
+            
             model.addAttribute("list", list);
             model.addAttribute("size", size);
             model.addAttribute("btnStatus", "btnAdd");
