@@ -69,38 +69,52 @@
                                 <a href="/loaisanpham/list">Loại Sản Phẩm</a>
                                 <a href="/size/list">Size</a>
                             </div>
-                        </div>
-                    </li>
-                    <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 4) }">
-                        <a class="nav-link" th:href="@{/san-pham/tat-ca}">Sản Phẩm</a>
-                    </li>
-                    <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 4) }">
-                        <a class="nav-link" th:href="@{/san-pham/tat-ca}">Duyệt Đơn</a>
-                    </li>
-                    <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 2) }">
-                        <a class="nav-link" th:href="@{/san-pham/tat-ca}">Nhập Hàng</a>
-                    </li>
-                    <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 1) }">
-                        <a class="nav-link" th:href="@{/nhanvien/list}">Nhân Viên</a>
-                    </li>
-                    <li class="nav-item"
-                        th:if="${(session.taikhoan != null && (session.taikhoan.quyen.idQuyen == 2) || session.taikhoan.quyen.idQuyen == 1) }">
-                        <a class="nav-link" th:href="@{/nguyenlieu/list}">Nguyên Liệu</a>
-                    </li>
-                    <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 2) }">
-                        <a class="nav-link" th:href="@{/nhacungcap/list}">Nhà Cung Cấp</a>
-                    </li>
-                    <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 1) }">
-                        <div class="dropdown">
-                            <!-- Nút kích hoạt dropdown (thẻ link) -->
-                            <a href="#" class="dropdown-button ">Doanh Thu</a>
 
-                            <!-- Nội dung dropdown với các mục -->
-                            <div class="dropdown-content">
-                                <a
-                                    th:href="@{/xemDoanhThuNgay(ngayXem=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')})}">Theo
-                                    Ngày</a>
-                                <a href="#" id="linkTheoThang">Theo Tháng</a>
+                        </li>
+                        <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 4) }">
+                            <a class="nav-link" th:href="@{/san-pham/tat-ca}">Sản Phẩm</a>
+                        </li>
+                        <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 4) }">
+                            <a class="nav-link" th:href="@{/san-pham/tat-ca}">Duyệt Đơn</a>
+                        </li>
+                        <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 2) }">
+                            <a class="nav-link" th:href="@{/nguyen-lieu}">Nhập Hàng</a>
+                        </li>
+                        <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 1) }">
+                            <a class="nav-link" th:href="@{/nhanvien/list}">Nhân Viên</a>
+                        </li>
+                        <li class="nav-item" th:if="${(session.taikhoan != null && (session.taikhoan.quyen.idQuyen == 2) || session.taikhoan.quyen.idQuyen == 1) }">
+                            <a class="nav-link" th:href="@{/nguyenlieu/list}">Nguyên Liệu</a>
+                        </li>
+                        <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 2) }">
+                            <a class="nav-link" th:href="@{/nhacungcap/list}">Nhà Cung Cấp</a>
+                        </li>
+                        <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 1) }">
+                            <div class="dropdown">
+                                <!-- Nút kích hoạt dropdown (thẻ link) -->
+                                <a href="#" class="dropdown-button ">Doanh Thu</a>
+
+                                <!-- Nội dung dropdown với các mục -->
+                                <div class="dropdown-content">
+                                    <a th:href="@{/xemDoanhThuNgay(ngayXem=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')})}">Theo Ngày</a>
+                                    <a href="#" id="linkTheoThang">Theo Tháng</a>
+                                </div>
+                                <script>
+                                    // Lấy tháng và năm hiện tại
+                                    var today = new Date();
+                                    var currentMonth = today.getMonth() + 1; // Tháng bắt đầu từ 0, nên cộng thêm 1
+                                    var currentYear = today.getFullYear();
+
+                                    // Tạo đường dẫn dựa trên thông tin hiện tại
+                                    var linkDoanhThuThang = '/xemDoanhThuThang?thangXem=' + currentMonth + '&namXem=' + currentYear;
+
+                                    // Lấy thẻ <a> bằng id
+                                    var linkTheoThang = document.getElementById('linkTheoThang');
+
+                                    // Thiết lập thuộc tính href của thẻ <a> thành đường dẫn động
+                                    linkTheoThang.href = linkDoanhThuThang;
+                                </script>
+
                             </div>
                             <script>
                                 // Lấy tháng và năm hiện tại
