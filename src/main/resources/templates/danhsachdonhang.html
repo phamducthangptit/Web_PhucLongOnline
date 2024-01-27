@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Chi tiết lịch sử đơn</title>
+    <title>Danh sách đơn hàng</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -30,24 +30,24 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-8 mt-5">
-                        <h4>Chi tiết lịch sử đơn</h4>
+                        <h4 th:text="'Trạng thái đơn hàng ' +  ${trangthaidonhang}"></h4>
+                        <input hidden="hidden" th:value="${trangthaidonhang}" id="trang-thai-don">
                     </div>
-                    <input hidden="hidden" id="idDonHang" th:value="${idDonHang}">
+
                 </div>
                 <form method="get">
                     <div class="row">
                         <table class=" table table-light table-striped table-hover bordered-dark">
                             <thead>
                             <tr>
-                                <th scope="col" class="text-center align-middle">Hình ảnh</th>
-                                <th scope="col" class="text-center align-middle">Tên sản phẩm</th>
-                                <th scope="col" class="text-center align-middle">Size</th>
-                                <th scope="col" class="text-center align-middle">Giá bán</th>
-                                <th scope="col" class="text-center align-middle">Số lượng</th>
-                                <th scope="col" class="text-center align-middle">Thành tiền</th>
+                                <th scope="col" class="text-center align-middle">ID</th>
+                                <th scope="col" class="text-center align-middle">Ngày đặt</th>
+                                <th scope="col" class="text-center align-middle">Trạng thái</th>
+                                <th scope="col" class="text-center align-middle">Thay đổi trạng thái</th>
+                                <th scope="col" class="text-center align-middle">Chi tiết</th>
                             </tr>
                             </thead>
-                            <tbody id="hien-thi-lich-su">
+                            <tbody id="danh-sach-don-hang">
                             <td class="col-md-1 text-center align-middle">
                             </td>
                             </tbody>
@@ -67,7 +67,7 @@
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/js/templatemo.js}"></script>
 <script th:src="@{/js/custom.js}"></script>
-<script th:src="@{/js/chitietlichsudonhang.js}"></script>
+<script th:src="@{/js/danhsachdonhang.js}"></script>
 <!-- End Slider Script -->
 
 </body>

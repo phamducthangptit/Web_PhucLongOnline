@@ -101,37 +101,54 @@ $(document).ready(function(){
         // Xử lý sự kiện khi nút + được click
         console.log("nut +");
         var idSPSize = $(this).data('product-id');
-//        console.log(idSanSPSize);
+        var soLuongSanPham = document.getElementById('so-luong-' + idSPSize).value;
+//        alert(soLuongSanPham);
         $.ajax({
-                type: 'GET',
-                url: 'https://localhost:7062/api/DatHang/tang-so-luong-san-pham-trong-gio-hang',
-                contentType: 'application/json',
-                data: {tenDangNhap: tenDangNhap, idSanPhamSize: idSPSize},
-                success: function(data){
-                    LoadSoLuongSanPhamTrongGioHang();
-                    hienThiDanhSachSanPhamTrongGioHang(data);
-                    hienThiCheckBox();
+            type: 'GET',
+            url: 'https://localhost:7062/api/DatHang/check-du-nguyen-lieu',
+            contentType: 'application/json',
+            data: {idSanPhamSize: idSPSize, soLuongMon: soLuongSanPham},
+            success: function(data){
+                if(data.check == 0){
+                    $.ajax({
+                        type: 'GET',
+                        url: 'https://localhost:7062/api/DatHang/tang-so-luong-san-pham-trong-gio-hang',
+                        contentType: 'application/json',
+                        data: {tenDangNhap: tenDangNhap, idSanPhamSize: idSPSize},
+                        success: function(data){
+                            LoadSoLuongSanPhamTrongGioHang();
+                            hienThiDanhSachSanPhamTrongGioHang(data);
+                            hienThiCheckBox();
 
-                },
-                error: function(error){
-                    console.log(error);
+                        },
+                        error: function(error){
+                            console.log(error);
+                        }
+                    });
+                    $.ajax({
+                        type: 'GET',
+                        url: 'https://localhost:7062/api/DatHang/tang-so-luong-san-pham-trong-don-hang',
+                        contentType: 'application/json',
+                        data: {tenDangNhap: tenDangNhap, idSanPhamSize: idSPSize},
+                        success: function(data){
+                            LoadSoLuongSanPhamTrongGioHang();
+                            hienThiCheckBox();
+                            tinhTongSLVaTongTien();
+                        },
+                        error: function(error){
+                            console.log(error);
+                        }
+                    });
                 }
-        });
-        $.ajax({
-                type: 'GET',
-                url: 'https://localhost:7062/api/DatHang/tang-so-luong-san-pham-trong-don-hang',
-                contentType: 'application/json',
-                data: {tenDangNhap: tenDangNhap, idSanPhamSize: idSPSize},
-                success: function(data){
-                    LoadSoLuongSanPhamTrongGioHang();
-//                    hienThiDanhSachSanPhamTrongGioHang(data);
-                    hienThiCheckBox();
-                    tinhTongSLVaTongTien();
-                },
-                error: function(error){
-                    console.log(error);
+                else{
+                    alert("Tạm thời nguyên liệu không đủ làm món này.\nVui lòng giảm số lượng hoặc chọn món khác!");
                 }
+            },
+            error: function(error){
+                console.log(error);
+            }
         });
+
     });
 
     $(document).on('click', '.delete-product', function() {
@@ -194,38 +211,57 @@ var danhSachIdDaChon = [];
 function thaydoitrangthaichon(idSanPham) {
     var bochonButton = document.getElementById('bochon_' + idSanPham);
     var chonButton = document.getElementById('chon_' + idSanPham);
+    var soLuong = document.getElementById('so-luong-' + idSanPham).value;
+    var soLuongSanPham = parseInt(soLuong, 10) - 1;
 
     if (bochonButton.style.display !== 'none') {
         // Nếu nút "bochon" đang hiển thị, ẩn nút "bochon" và hiển thị nút "chon"
-        bochonButton.style.display = 'none';
-        chonButton.style.display = 'inline-block';
-        var bochonSP = document.getElementById('bochonsp_' + idSanPham).value;
-
-        console.log("chọn:" + bochonSP);
-        danhSachIdDaChon.push(bochonSP);
+        //check xem đủ nguyên liệu làm không
         $.ajax({
-                type: 'GET',
-                url: 'https://localhost:7062/api/DatHang/tao-don-hang',
-                contentType: 'application/json',
-                data: {tenDangNhap: tenDangNhap},
-                success: function(data){
-                },
-                error: function(error){
-                    console.log(error);
+            type: 'GET',
+            url: 'https://localhost:7062/api/DatHang/check-du-nguyen-lieu',
+            contentType: 'application/json',
+            data: {idSanPhamSize: idSanPham, soLuongMon: soLuongSanPham},
+            success: function(data){
+                if(data.check == 0){ // đủ nguyên liệu
+                    bochonButton.style.display = 'none';
+                    chonButton.style.display = 'inline-block';
+                    var bochonSP = document.getElementById('bochonsp_' + idSanPham).value;
+
+                    console.log("chọn:" + bochonSP);
+                    danhSachIdDaChon.push(bochonSP);
+                    $.ajax({
+                        type: 'GET',
+                        url: 'https://localhost:7062/api/DatHang/tao-don-hang',
+                        contentType: 'application/json',
+                        data: {tenDangNhap: tenDangNhap},
+                        success: function(data1){
+                        },
+                        error: function(error){
+                            console.log(error);
+                        }
+                    });
+                    $.ajax({
+                        type: 'GET',
+                        url: 'https://localhost:7062/api/DatHang/them-san-pham-vao-don-hang',
+                        contentType: 'application/json',
+                        data: {tenDangNhap: tenDangNhap, idSanPhamSize: idSanPham},
+                        success: function(data2){
+                            tinhTongSLVaTongTien();
+                        },
+                        error: function(error){
+                            console.log(error);
+                        }
+                    });
+                } else {
+                    alert("Tạm thời nguyên liệu không đủ làm món này.\nVui lòng giảm số lượng hoặc chọn món khác!");
                 }
-            });
-            $.ajax({
-                type: 'GET',
-                url: 'https://localhost:7062/api/DatHang/them-san-pham-vao-don-hang',
-                contentType: 'application/json',
-                data: {tenDangNhap: tenDangNhap, idSanPhamSize: idSanPham},
-                success: function(data){
-                    tinhTongSLVaTongTien();
-                },
-                error: function(error){
-                    console.log(error);
-                }
-            });
+            },
+            error: function(error){
+                console.log(error);
+            }
+        });
+
 //            tinhTongSLVaTongTien();
     } else {
         // Nếu nút "chon" đang hiển thị, ẩn nút "chon" và hiển thị nút "bochon"
@@ -286,8 +322,9 @@ function hienThiDanhSachSanPhamTrongGioHang(data){
 
         cardHTML += '<li class="list-inline-item"><span class="btn btn-success btn-minus" data-product-id="' + sanPham.idSanPhamSize + '">-</span></li>';
         cardHTML += '<li class="list-inline-item" id="so-luong-sp"><span class="badge bg-secondary var-value" id="so-luong-sp-' + sanPham.idSanPhamSize + '">' + sanPham.soLuong + '</span></li>';
-        cardHTML += '<input hidden="hidden" id="so-luong-' + sanPham.idSanPhamSize + '" value="' + sanPham.soLuong + '">';
+
         cardHTML += '<li class="list-inline-item"><span class="btn btn-success btn-plus" data-product-id="' + sanPham.idSanPhamSize + '">+</span></li>';
+        cardHTML += '<input hidden="hidden" id="so-luong-' + sanPham.idSanPhamSize + '" value="' + (sanPham.soLuong + 1) + '">';
         cardHTML += '</td>';
 
         cardHTML += '<td class="text-center align-middle">' + (sanPham.giaHienThoi*sanPham.soLuong).toLocaleString() + "đ</td>";
