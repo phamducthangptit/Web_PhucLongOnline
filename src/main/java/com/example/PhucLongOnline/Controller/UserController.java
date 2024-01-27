@@ -204,10 +204,10 @@ public class UserController {
 
     @GetMapping("/logout")
     public ResponseEntity<String> logout(HttpServletRequest request) {
-        // HttpSession session = request.getSession(false);
-        // if (session != null) {
-        //     session.invalidate(); // Xóa phiên đăng nhập
-        // }
+         HttpSession session = request.getSession(false);
+         if (session != null) {
+             session.invalidate(); // Xóa phiên đăng nhập
+         }
         return new ResponseEntity<>("Logout successful", HttpStatus.OK);
     }
 
