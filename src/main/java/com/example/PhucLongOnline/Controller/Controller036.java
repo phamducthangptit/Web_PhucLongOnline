@@ -9,6 +9,7 @@ import com.example.PhucLongOnline.Repository.HoaDonRepository;
 import com.example.PhucLongOnline.Repository.QuyenRepository;
 import com.example.PhucLongOnline.Repository.SanPhamRepository;
 import com.example.PhucLongOnline.Repository.TaiKhoanRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,14 +39,28 @@ public class Controller036 {
     @GetMapping("home")
     public String home (Model model)
     {
+
+
         List<SanPham> sanPhamList = sanPhamRepository.findTop3();
+        if (sanPhamList.size() == 0)
+        {
+            List<SanPham> temp = sanPhamRepository.findAll();
+            sanPhamList.add(temp.get(0));
+            sanPhamList.add(temp.get(1));
+            sanPhamList.add(temp.get(2));
+        }
         model.addAttribute("sanPhamList", sanPhamList);
         System.out.println(sanPhamList.size());
         return "home";
     }
     @GetMapping("danhSachTaiKhoan")
-    public String danhSachTaiKhoan(Model model)
+    public String danhSachTaiKhoan(Model model ,HttpSession session)
     {
+        TaiKhoan taiKhoanNow = (TaiKhoan) session.getAttribute("taikhoan");
+        if (taiKhoanNow == null||taiKhoanNow.getQuyen().getIdQuyen()!=3 )
+        {
+            return "redirect:/home";
+        }
         List<TaiKhoan> taiKhoanList =taiKhoanRepository.findAll();
         List<TaiKhoan> temp =new ArrayList<>(); ;
         for (TaiKhoan taiKhoan : taiKhoanList)
@@ -62,8 +77,13 @@ public class Controller036 {
         return "danhSachTaiKhoan";
     }
     @GetMapping("danhSachTaiKhoanKH")
-    public String danhSachTaiKhoanKH(Model model)
+    public String danhSachTaiKhoanKH(Model model,HttpSession session)
     {
+        TaiKhoan taiKhoanNow = (TaiKhoan) session.getAttribute("taikhoan");
+        if (taiKhoanNow == null||taiKhoanNow.getQuyen().getIdQuyen()!=3 )
+        {
+            return "redirect:/home";
+        }
         List<TaiKhoan> taiKhoanList =taiKhoanRepository.findAll();
         List<TaiKhoan> temp =new ArrayList<>(); ;
         for (TaiKhoan taiKhoan : taiKhoanList)
@@ -80,8 +100,13 @@ public class Controller036 {
         return "danhSachTaiKhoanKH";
     }
     @RequestMapping("/resetMatKhau")
-    public String resetPassword(Model model, @RequestParam("username") String tenDangNhap)
+    public String resetPassword(Model model, @RequestParam("username") String tenDangNhap,HttpSession session)
     {
+        TaiKhoan taiKhoanNow = (TaiKhoan) session.getAttribute("taikhoan");
+        if (taiKhoanNow == null||taiKhoanNow.getQuyen().getIdQuyen()!=3 )
+        {
+            return "redirect:/home";
+        }
         TaiKhoan taiKhoan =taiKhoanRepository.findByTenDangNhap(tenDangNhap);
         taiKhoan.setMatKhau("123456");
         taiKhoanRepository.save(taiKhoan);
@@ -93,8 +118,13 @@ public class Controller036 {
     }
 
     @RequestMapping("/thaydoiquyen")
-    public String thayDoiQuyen(Model model, @RequestParam("tenDN") String tenDN, @RequestParam("idQuyen") int id)
+    public String thayDoiQuyen(Model model, @RequestParam("tenDN") String tenDN, @RequestParam("idQuyen") int id , HttpSession session)
     {
+        TaiKhoan taiKhoanNow = (TaiKhoan) session.getAttribute("taikhoan");
+        if (taiKhoanNow == null||taiKhoanNow.getQuyen().getIdQuyen()!=3 )
+        {
+            return "redirect:/home";
+        }
         TaiKhoan taiKhoan = taiKhoanRepository.findByTenDangNhap(tenDN);
         Quyen quyen = quyenRepository.findById(id);
         if (taiKhoan.getQuyen().getIdQuyen() != id)
@@ -109,8 +139,13 @@ public class Controller036 {
         else return "redirect:/danhSachTaiKhoan";
     }
     @RequestMapping("/thaydoitrangthai")
-    public String thayDoiTrangThai(Model model, @RequestParam("tenDN") String tenDN)
+    public String thayDoiTrangThai(Model model, @RequestParam("tenDN") String tenDN , HttpSession session)
     {
+        TaiKhoan taiKhoanNow = (TaiKhoan) session.getAttribute("taikhoan");
+        if (taiKhoanNow == null ||taiKhoanNow.getQuyen().getIdQuyen()!=3 )
+        {
+            return "redirect:/home";
+        }
         TaiKhoan taiKhoan = taiKhoanRepository.findByTenDangNhap(tenDN);
         if (taiKhoan.getTrangThai()==1)
         {
@@ -124,15 +159,14 @@ public class Controller036 {
         }
         else return "redirect:/danhSachTaiKhoan";
     }
-    @GetMapping("/doanhThuNgay")
-    public String doanhThuNgay()
-    {
-
-        return "doanhThuNgay";
-    }
     @GetMapping ("/xemDoanhThuNgay")
-            public String xemDoanhThuNgay(Model model , @RequestParam("ngayXem") String ngayXem)
+            public String xemDoanhThuNgay(Model model , @RequestParam("ngayXem") String ngayXem ,HttpSession session)
     {
+        TaiKhoan taiKhoanNow = (TaiKhoan) session.getAttribute("taikhoan");
+        if ( taiKhoanNow == null||taiKhoanNow.getQuyen().getIdQuyen()!=1)
+        {
+            return "redirect:/home";
+        }
         System.out.println(ngayXem);
             Date ngayLap = Date.valueOf(ngayXem);
             List<HoaDon> hoaDonList = hoaDonRepository.findAllByNgayLap(ngayLap);
@@ -152,8 +186,13 @@ public class Controller036 {
         return "xemDoanhThuNgay";
     }
     @GetMapping ("xemDoanhThuThang")
-    public String xemDoanhThuThang (Model model, @RequestParam ("thangXem") int thangXem,@RequestParam ("namXem") int namXem)
+    public String xemDoanhThuThang (Model model, @RequestParam ("thangXem") int thangXem,@RequestParam ("namXem") int namXem, HttpSession session)
     {
+        TaiKhoan taiKhoanNow = (TaiKhoan) session.getAttribute("taikhoan");
+        if (taiKhoanNow == null || taiKhoanNow.getQuyen().getIdQuyen()!=1)
+        {
+            return "redirect:/home";
+        }
         Calendar calendar = Calendar.getInstance();
         calendar.set(namXem, thangXem-1, 1); // Lưu ý: Tháng trong Calendar bắt đầu từ 0
         Date startDate = new Date(calendar.getTimeInMillis());
