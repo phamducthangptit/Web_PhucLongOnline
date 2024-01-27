@@ -142,6 +142,12 @@ $(document).ready(function(){
             console.log("them vao gio hang");
             var idSP = document.getElementById("productId").value;
             var quantitySpan = document.getElementById('var-value');
+            var tenDangNhap = document.getElementById("tenDangNhap").value;
+            console.log(tenDangNhap.length);
+            if(tenDangNhap.length == 0){ // nếu chưa đăng nhập thì báo
+                alert("Bạn chưa đăng nhập. Vui lòng đăng nhập để mua hàng");
+                return;
+            }
 
             // Lấy giá trị số lượng từ nội dung của thẻ span
             var soLuongSP = quantitySpan.textContent;
