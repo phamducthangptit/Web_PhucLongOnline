@@ -1,4 +1,13 @@
+function checkValue(input) {
 
+    var minValue = parseInt(input.getAttribute('min'));
+    // Chuyển đổi giá trị nhập vào thành số nguyên
+    var enteredValue = parseInt(input.value);
+
+    if(enteredValue < minValue) {
+      input.value = minValue;
+    }
+  }
 
 function formatMoney(amount) {
     const formatter = new Intl.NumberFormat('vi-VN', {
