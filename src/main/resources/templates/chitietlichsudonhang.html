@@ -23,7 +23,17 @@
 
 <!-- Open Content -->
 <section class="bg-light">
-    <div th:insert="~{headerKhachHang.html}"></div>
+    <div th:if="${session.taikhoan != null}">
+        <!-- Kiểm tra giá trị của trường "quyen" -->
+        <th:div th:if="${session.taikhoan.quyen.idQuyen != 5}">
+            <!-- Nếu quyen là 1, chèn header -->
+            <div th:insert="~{header.html}"></div>
+        </th:div>
+        <th:div th:if="${session.taikhoan.quyen.idQuyen == 5}">
+            <!-- Nếu quyen khác 1, chèn headerKhachHang -->
+            <div th:insert="~{headerKhachHang.html}"></div>
+        </th:div>
+    </div>
     <div class="container pb-5">
         <!-- col end -->
         <div class="card">

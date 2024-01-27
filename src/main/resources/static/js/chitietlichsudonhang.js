@@ -1,6 +1,5 @@
 var tenDangNhap;
 $(document).ready(function(){
-    tenDangNhap = document.getElementById("tenDangNhap").value;
     var idDonHang = document.getElementById("idDonHang").value;
     console.log(idDonHang);
     function LoadSoLuongSanPhamTrongGioHang(){
