@@ -36,35 +36,70 @@
                             </div>
                         </div>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/gio-hang}">Giỏ hàng</a>
+                    </li>
 
                 </ul>
             </div>
-            <div class="navbar align-self-center d-flex">
-                <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
-                        <div class="input-group-text">
-                            <i class="fa fa-fw fa-search"></i>
-                        </div>
-                    </div>
+
+            <th:div th:if="${session.taikhoan != null}">
+                <!-- Nếu quyen là 1, chèn header -->
+                <div class="dropdown">
+                    <a class=" dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"
+                        role="button">
+                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                        <span
+                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                    </a>
+
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#">Thông tin</a></li>
+                        <li><a class="dropdown-item" href="/forgot">Đổi mật khẩu</a></li>
+                        <li><a class="dropdown-item" role="button" id="logout">Đăng xuất</a></li>
+                    </ul>
                 </div>
-                <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
-                    <i class="fa fa-fw fa-search text-dark mr-2"></i>
-                </a>
-                <a class="nav-icon position-relative text-decoration-none" th:href="@{/gio-hang}">
-                    <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1" ></i>
-                    <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark" id="soLuongSPTrongGioHang">0</span>
-                </a>
-                <a class="nav-icon position-relative text-decoration-none" href="#">
-                    <i class="fa fa-fw fa-user text-dark mr-3"></i>
-                    <input type="hidden" id="tenDangNhap" th:value="${session.taikhoan != null ? session.taikhoan.tenDangNhap : null}" />
-                    <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark" ></span>
-                </a>
-                <a class="nav-icon position-relative text-decoration-none" href="/login" th:if="${(session.taikhoan == null) }">
-                    Đăng Nhập
-                </a>
-            </div>
+            </th:div>
+            <th:div th:if="${session.taikhoan == null}">
+                <div><a class="nav-icon position-relative text-decoration-none " data-bs-toggle="modal" data-bs-target="#loginModal" href="#" role="button">Đăng nhập</a></div>
+                </th:div>
         </div>
+    </div>
 
     </div>
 </nav>
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <!-- Tạo một khối dialog -->
+    <div class="modal-dialog">
+        <!-- Tạo một khối content -->
+        <div class="modal-content">
+            <!-- Tạo phần header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!-- Tạo phần body -->
+            <form id="loginForm">
+                <div class="modal-body">
+                    <!-- Tạo một form để nhập thông tin đăng nhập -->
+
+                    <div class="mb-3">
+                        <input type="username" class="form-control" id="username" placeholder="Email">
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                    <div id="notification"></div>
+                </div>
+                <!-- Tạo phần footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="loginButton">Đăng nhập</button>
+                    <button type="button" class="btn btn-link" id="forgot">Quên mật khẩu?</button>
+                    <button type="button" class="btn btn-link" id="signup">Đăng ký</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/login.js}"></script>

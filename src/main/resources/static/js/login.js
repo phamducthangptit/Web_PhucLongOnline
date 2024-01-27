@@ -25,7 +25,7 @@ $(document).ready(function () {
                 // You can redirect or perform other actions based on the response
                 if (data.data === "ok") {
                     alert("Đăng nhập thành công");
-                    window.location.href = "";
+                    window.location.href = "/home";
                 }
                 else {
                     $("#notification").html(data.data);
@@ -45,4 +45,23 @@ $(document).ready(function () {
     $("#forgot").click(function () {
         window.location.href = "/forgot"
     });
+    $("#logout").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "/logout",
+            success: function (data, status, xhr) {
+                // Handle the server response (success)
+                if (xhr.status === 200) {
+                    window.location.href = "/home";
+                }else{
+                    console.error("Unexpected response status: " + xhr.status);
+                }
+            },
+            error: function (error) {
+                // Handle the server response (error)
+                console.error(error);
+                // You can show an error message or perform other actions based on the error
+            }
+        })
+    })
 });

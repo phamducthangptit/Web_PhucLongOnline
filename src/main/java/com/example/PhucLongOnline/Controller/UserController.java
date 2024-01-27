@@ -1,11 +1,14 @@
 package com.example.PhucLongOnline.Controller;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,17 +20,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.PhucLongOnline.Model.KhachHang;
 import com.example.PhucLongOnline.Model.ResponeObject;
+import com.example.PhucLongOnline.Model.SanPham;
 import com.example.PhucLongOnline.Model.TaiKhoan;
 import com.example.PhucLongOnline.Email.EmailService;
 import com.example.PhucLongOnline.Email.GenerateCode;
 import com.example.PhucLongOnline.Repository.KhachHangRepository;
+import com.example.PhucLongOnline.Repository.SanPhamRepository;
 import com.example.PhucLongOnline.Repository.TaiKhoanRepository;
 import com.example.PhucLongOnline.Service.TaiKhoanService;
 import com.example.PhucLongOnline.dto.LoginRequest;
+import com.example.PhucLongOnline.Controller.Controller036;
 
 import jakarta.mail.Session;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 public class UserController {
@@ -43,6 +51,9 @@ public class UserController {
 
     @Autowired
     TaiKhoanRepository taiKhoanRepository;
+
+    @Autowired
+    SanPhamRepository sanPhamRepository;
 
     @GetMapping("/login")
     public String Login(Model model) {
@@ -190,4 +201,21 @@ public class UserController {
             .body(new ResponeObject("failed", "Mã xác nhận không đúng", ""));
         }
     }
+
+    @GetMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletRequest request) {
+        // HttpSession session = request.getSession(false);
+        // if (session != null) {
+        //     session.invalidate(); // Xóa phiên đăng nhập
+        // }
+        return new ResponseEntity<>("Logout successful", HttpStatus.OK);
+    }
+
+    @GetMapping("/information")
+    public String information(Model model,HttpSession session) {
+        
+        return "information.html";
+    }
+    
+    
 }
