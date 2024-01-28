@@ -147,7 +147,7 @@ public class SanPhamController {
                 if(file == null || file.isEmpty()){
                     fileName = "default.png";
                 } else {
-                    fileName = sanPham.getTenSanPham() + "_" +
+                    fileName = sanPham.getIdSanPham() + "_" +
                             currentDateTime.getHour() + "h" +
                             currentDateTime.getMinute() + "m" +
                             currentDateTime.getSecond() + "s" + ".png";
