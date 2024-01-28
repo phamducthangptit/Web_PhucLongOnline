@@ -15,5 +15,4 @@ import java.util.List;
 public interface SanPhamRepository extends JpaRepository<SanPham,Integer> {
     @Query(value = "{call sp_tim_top_3()}", nativeQuery = true)
     List<SanPham> findTop3();
-
 }

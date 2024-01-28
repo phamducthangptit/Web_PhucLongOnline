@@ -1,4 +1,18 @@
+function checkValue(input) {
+    // Lấy giá trị max từ thuộc tính max của input
+    var maxValue = parseInt(input.getAttribute('max'));
+    var minValue = parseInt(input.getAttribute('min'));
+    // Chuyển đổi giá trị nhập vào thành số nguyên
+    var enteredValue = parseInt(input.value);
 
+    // Kiểm tra nếu giá trị nhập vào vượt quá giá trị max
+    if (enteredValue > maxValue) {
+      // Nếu vượt quá, đặt giá trị của input thành giá trị max
+      input.value = maxValue;
+    } else if(enteredValue < minValue) {
+      input.value = minValue;
+    }
+  }
 
 function formatMoney(amount) {
     const formatter = new Intl.NumberFormat('vi-VN', {

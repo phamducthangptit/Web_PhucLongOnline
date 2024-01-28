@@ -3,6 +3,7 @@ package com.example.PhucLongOnline.Controller;
 
 import com.example.PhucLongOnline.Model.*;
 import com.example.PhucLongOnline.Repository.*;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,8 @@ public class NguyenLieuController {
 
     @Autowired
     private CT_PhieuNhapHangRepository ct_phieuNhapHangRepository;
+
+
     @GetMapping(value={"/nguyen-lieu"})
     public String nguyenLieu(Model model) {
         List<NguyenLieu> nguyenLieuList = nguyenLieuRepository.findAll();
@@ -149,8 +152,10 @@ public class NguyenLieuController {
     @PostMapping("/dat-nguyen-lieu/api")
     @ResponseBody
     public int getDonAPI(@RequestParam(value = "ngay") String ngay,
-                         @RequestBody List<Map<String,Object>> data) {
-        String maNV = "abc";
+                         @RequestBody List<Map<String,Object>> data, HttpSession session) {
+        TaiKhoan taiKhoan = (TaiKhoan) session.getAttribute("taikhoan");
+        System.out.println(taiKhoan.getNhanVien().getMaNhanVien());
+        String maNV = taiKhoan.getNhanVien().getMaNhanVien();
         String[] tmp = ngay.split("-");
         String ngayInput = tmp[2]+"-"+tmp[1]+"-"+tmp[0];
         int maDon = nguyenLieuRepository.insetDDNL(ngayInput,maNV);
@@ -203,8 +208,10 @@ public class NguyenLieuController {
     @PostMapping("/phieu-nhap/api")
     @ResponseBody
     public String setPhieuNhapAPI(@RequestParam(value = "ngay") String ngay,
-                         @RequestBody List<Map<String,Object>> data) {
-        String maNV = "abc";
+                                  @RequestBody List<Map<String,Object>> data, HttpSession session) {
+        TaiKhoan taiKhoan = (TaiKhoan) session.getAttribute("taikhoan");
+        System.out.println(taiKhoan.getNhanVien().getMaNhanVien());
+        String maNV = taiKhoan.getNhanVien().getMaNhanVien();
         String[] tmp = ngay.split("-");
         String ngayInput = tmp[2]+"-"+tmp[1]+"-"+tmp[0];
         String result = "";

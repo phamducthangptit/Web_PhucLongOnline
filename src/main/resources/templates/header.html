@@ -69,13 +69,23 @@
                                 <a href="/loaisanpham/list">Loại Sản Phẩm</a>
                                 <a href="/size/list">Size</a>
                             </div>
-
-                        </li>
+                        </div>
                         <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 4) }">
                             <a class="nav-link" th:href="@{/san-pham/tat-ca}">Sản Phẩm</a>
                         </li>
                         <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 4) }">
-                            <a class="nav-link" th:href="@{/san-pham/tat-ca}">Duyệt Đơn</a>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <!-- Nút kích hoạt dropdown (thẻ link) -->
+                            <a href="#" class="dropdown-button">Đơn hàng</a>
+                            <!-- Nội dung dropdown với các mục -->
+                            <div class="dropdown-content">
+                                <a th:href="@{/don-hang/chua-xac-nhan}">Chưa xác nhận</a>
+                                <a th:href="@{/don-hang/da-xac-nhan}">Đã xác nhận</a>
+                                <a th:href="@{/don-hang/da-hoan-thanh}">Đã hoàn thành</a>
+                            </div>
+                        </div>
+                    </li>
                         </li>
                         <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 2) }">
                             <a class="nav-link" th:href="@{/nguyen-lieu}">Nhập Hàng</a>
@@ -134,8 +144,11 @@
                                 // Thiết lập thuộc tính href của thẻ <a> thành đường dẫn động
                                 linkTheoThang.href = linkDoanhThuThang;
                             </script>
-                        </div>
-                    </li>
+
+                        </li>
+
+
+
 
                     <!--            ADMIN!-->
 
