@@ -99,6 +99,9 @@
                         <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 2) }">
                             <a class="nav-link" th:href="@{/nhacungcap/list}">Nhà Cung Cấp</a>
                         </li>
+                        <li class="nav-item" th:if="${session.taikhoan != null && session.taikhoan.quyen.idQuyen == 1}">
+                            <a class="nav-link" th:href="@{/banggia/list}">Bảng giá</a>
+                        </li>
                         <li class="nav-item" th:if="${(session.taikhoan != null && session.taikhoan.quyen.idQuyen == 1) }">
                             <div class="dropdown">
                                 <!-- Nút kích hoạt dropdown (thẻ link) -->
