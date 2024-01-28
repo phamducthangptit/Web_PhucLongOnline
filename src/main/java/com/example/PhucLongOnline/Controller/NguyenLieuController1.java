@@ -105,7 +105,7 @@ public class NguyenLieuController1 {
                 if(file == null || file.isEmpty()){
                     fileName = "default.png";
                 } else {
-                    fileName = nguyenLieu.getTenNguyenLieu() + "_" +
+                    fileName = nguyenLieu.getIdNguyenLieu() + "_" +
                             currentDateTime.getHour() + "h" +
                             currentDateTime.getMinute() + "m" +
                             currentDateTime.getSecond() + "s" + ".png";
