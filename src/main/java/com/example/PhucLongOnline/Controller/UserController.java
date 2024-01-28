@@ -19,12 +19,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.PhucLongOnline.Model.KhachHang;
+import com.example.PhucLongOnline.Model.Quyen;
 import com.example.PhucLongOnline.Model.ResponeObject;
 import com.example.PhucLongOnline.Model.SanPham;
 import com.example.PhucLongOnline.Model.TaiKhoan;
 import com.example.PhucLongOnline.Email.EmailService;
 import com.example.PhucLongOnline.Email.GenerateCode;
 import com.example.PhucLongOnline.Repository.KhachHangRepository;
+import com.example.PhucLongOnline.Repository.QuyenRepository;
 import com.example.PhucLongOnline.Repository.SanPhamRepository;
 import com.example.PhucLongOnline.Repository.TaiKhoanRepository;
 import com.example.PhucLongOnline.Service.TaiKhoanService;
@@ -40,6 +42,7 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class UserController {
 
+
     @Autowired
     TaiKhoanService userService;
 
@@ -54,6 +57,9 @@ public class UserController {
 
     @Autowired
     SanPhamRepository sanPhamRepository;
+
+    @Autowired
+    QuyenRepository quyenRepository;
 
     @GetMapping("/login")
     public String Login(Model model) {
@@ -94,19 +100,21 @@ public class UserController {
         String sdt = params.get("sdt");
         String email = params.get("email");
         String mk = params.get("mk");
-        Optional<KhachHang> optionalKhachhang = khachHangRepository.findById(email);
+        String username = params.get("username");
+        Optional<KhachHang> optionalKhachhang = khachHangRepository.findById(username);
         if (optionalKhachhang.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(
-                    new ResponeObject("failed", "Email đã tồn tại", "Email đã tồn tại"));
+                    new ResponeObject("failed", "Tên đăng nhập đã tồn tại", "Tên đăng nhập đã tồn tại"));
         } else {
             // Cập nhật vào db
             KhachHang khachhang = new KhachHang();
-            khachhang.setTenDangNhap(email);
+            khachhang.setTenDangNhap(username);
             khachhang.setHo(firstname);
             khachhang.setTen(lastname);
             khachhang.setGioiTinh(gender);
             khachhang.setDiaChi(address);;
             khachhang.setSdt(sdt);
+            khachhang.setEmail(email);
             session.setAttribute("khachhang", khachhang);
             session.setAttribute("mk", mk);
             GenerateCode generateCode = new GenerateCode();
@@ -132,9 +140,11 @@ public class UserController {
                 System.out.println(khachhang.getTenDangNhap());
                 System.out.println(khachhang.getEmail());
                 TaiKhoan taikhoan = new TaiKhoan();
+                Quyen quyen = quyenRepository.getById(5);
                 taikhoan.setTenDangNhap((khachhang.getTenDangNhap()));
                 taikhoan.setMatKhau((String) session.getAttribute("mk"));
-                taikhoan.setTrangThai(0);
+                taikhoan.setTrangThai(1);
+                taikhoan.setQuyen(quyen);
                 taiKhoanRepository.save(taikhoan);
                 khachHangRepository.save(khachhang);
                 return ResponseEntity.status(HttpStatus.OK)
@@ -216,6 +226,4 @@ public class UserController {
         
         return "information.html";
     }
-    
-    
 }

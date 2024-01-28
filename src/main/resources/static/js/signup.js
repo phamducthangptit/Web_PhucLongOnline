@@ -41,7 +41,7 @@ $(document).ready(function () {
                 }
                 else{
                     console.log(response.message);
-                    // window.location.href = "/";
+                    window.location.href = "/home";
                 }
             },
             error: function (error) {
@@ -60,6 +60,7 @@ $(document).ready(function () {
         var sdt = $("#sdt").val();
         var email = $("#email").val();
         var mk = $("#password").val();
+        var username =$("#username").val();
         if (firstname.trim() === "") {
             $("#notification").html("Vui lòng điền đầy đủ thông tin");
             return;
@@ -101,7 +102,8 @@ $(document).ready(function () {
             address: address,
             sdt: sdt,
             email: email,
-            mk: mk
+            mk: mk,
+            username:username
         }
         console.log(data)
 

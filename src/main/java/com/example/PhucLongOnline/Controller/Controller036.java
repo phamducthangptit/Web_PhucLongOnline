@@ -36,7 +36,7 @@ public class Controller036 {
     private HoaDonRepository hoaDonRepository;
     @Autowired
     private SanPhamRepository sanPhamRepository;
-    @GetMapping("home")
+    @GetMapping("/home")
     public String home (Model model)
     {
 
